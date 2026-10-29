@@ -2,155 +2,78 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1280"> <!-- Masaüstü/Yatay Görünüm Zorlaması -->
     <title>Global Script - Dünya Alfabeleri</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- YATAY ÜST MENÜ (NAVBAR) -->
+    <!-- ARKA PLAN EĞİK ŞEFFAF YAZILAR -->
+    <div class="bg-floating-words">
+        <span class="word w1">Hangeul</span>
+        <span class="word w2">Español</span>
+        <span class="word w3">Russian</span>
+        <span class="word w4">Göktürk</span>
+        <span class="word w5">Hiragana</span>
+        <span class="word w6">Alphabet</span>
+    </div>
+
+    <!-- ÜST BLURLU DOKULU NAVBAR -->
     <header class="navbar">
         <div class="logo">
             <span class="logo-icon">🌐</span>
             <span class="logo-text">Global<strong>Script</strong></span>
         </div>
-        <div class="nav-steps">
-            <span class="step-tag active" id="step1-tag">1. Giriş</span>
-            <span class="step-tag" id="step2-tag">2. Dil Seçimi</span>
-            <span class="step-tag" id="step3-tag">3. Çalışma Alanı</span>
-        </div>
-        <div class="user-badge" id="userBadge" style="display: none;">
-            👤 <span id="displayName">Kullanıcı</span>
+        <div class="nav-right">
+            <button class="nav-btn">⚙️ Ayarlar</button>
+            <button class="nav-btn profile-btn">👤 Profil</button>
         </div>
     </header>
 
     <main class="main-container">
 
-        <!-- 1. SAYFA: KULLANICI GİRİŞ PANELİ -->
+        <!-- 1. SAYFA: GİRİŞ EKRANI -->
         <section id="page1" class="page-section active">
             <div class="glass-card login-card">
                 <h2>Hoş Geldiniz 👋</h2>
-                <p class="subtitle">Dünya alfabelerini keşfetmek için bilgilerinizi giriniz.</p>
+                <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
                 
                 <form id="loginForm" onsubmit="event.preventDefault(); goToPage2();">
                     <div class="input-group">
                         <label>Adınız</label>
-                        <input type="text" id="fname" placeholder="Örn: Melike" required>
+                        <input type="text" id="fname" placeholder="Örn: Melike" required oninput="generatePasswordSuggestion()">
                     </div>
+                    
                     <div class="input-group">
-                        <label>Soyadınız</label>
-                        <input type="text" id="lname" placeholder="Örn: Yılmaz" required>
+                        <label>Soyadınız <span class="optional">(isteğe bağlı)</span></label>
+                        <input type="text" id="lname" placeholder="Örn: Yılmaz" oninput="generatePasswordSuggestion()">
                     </div>
+                    
                     <div class="input-group">
-                        <label>Şifre</label>
-                        <input type="password" id="pass" placeholder="••••••••" required>
+                        <div class="label-with-action">
+                            <label>Şifre</label>
+                            <span class="suggest-btn" onclick="suggestPassword()">✨ Akıllı Şifre Öner</span>
+                        </div>
+                        <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" required>
                     </div>
+
                     <button type="submit" class="btn-primary">Devam Et ➔</button>
                 </form>
             </div>
         </section>
 
-        <!-- 2. SAYFA: DİL SEÇİMİ, ARAMA VE AMAC BELİRLEME -->
+        <!-- 2. SAYFA (SADECE TASLAK - SIRASI GELİNCE İŞLENECEK) -->
         <section id="page2" class="page-section">
-            <div class="header-block">
-                <h1>Hangi Dili Öğrenmek İstiyorsun?</h1>
-                <p>Aşağıdaki arama çubuğundan dilleri filtreleyebilir, hedefini belirleyebilirsin.</p>
+            <div class="glass-card">
+                <h2>2. Adım: Dil Seçim Sayfası Hazırlanacak</h2>
             </div>
-
-            <!-- Canlı Arama Çubuğu -->
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" onkeyup="filterLanguages()" placeholder="Dil veya alfabe ara... (Örn: Korece, Göktürk)">
-            </div>
-
-            <!-- Dil Kartları Grid Yapısı -->
-            <div class="lang-grid" id="langGrid">
-                
-                <div class="lang-card" onclick="selectLang(this, 'korean')">
-                    <input type="radio" name="selectedLang" value="korean" class="lang-radio">
-                    <div class="lang-flag">🇰🇷</div>
-                    <h3>Korece (Hangeul)</h3>
-                    <p>1443'te tasarlanan, fonetik ve mantıksal alfabe.</p>
-                </div>
-
-                <div class="lang-card" onclick="selectLang(this, 'gokturk')">
-                    <input type="radio" name="selectedLang" value="gokturk" class="lang-radio">
-                    <div class="lang-flag">🏹</div>
-                    <h3>Göktürk Alfabesi</h3>
-                    <p>Türkçenin bilinen en eski yazılı alfabesi (Orhun).</p>
-                </div>
-
-                <div class="lang-card" onclick="selectLang(this, 'japanese')">
-                    <input type="radio" name="selectedLang" value="japanese" class="lang-radio">
-                    <div class="lang-flag">🇯🇵</div>
-                    <h3>Japonca (Hiragana)</h3>
-                    <p>Temel kelime ve ekler için kullanılan hece alfabesi.</p>
-                </div>
-
-                <div class="lang-card" onclick="selectLang(this, 'cyrillic')">
-                    <input type="radio" name="selectedLang" value="cyrillic" class="lang-radio">
-                    <div class="lang-flag">🇷🇺</div>
-                    <h3>Kiril Alfabesi (Rusça)</h3>
-                    <p>Doğu Avrupa ve Asya'da yaygın kullanılan alfabe.</p>
-                </div>
-
-            </div>
-
-            <!-- Öğrenme Amacı & Checkbox Paneli -->
-            <div class="purpose-section">
-                <h3>Öğrenme Amacınız Nedir?</h3>
-                <div class="checkbox-group">
-                    <label class="custom-checkbox">
-                        <input type="checkbox"> <span class="checkmark"></span> Kültürel Merak & Hobi
-                    </label>
-                    <label class="custom-checkbox">
-                        <input type="checkbox"> <span class="checkmark"></span> Seyahat & Gezi
-                    </label>
-                    <label class="custom-checkbox">
-                        <input type="checkbox"> <span class="checkmark"></span> Akademik / Kariyer
-                    </label>
-                </div>
-            </div>
-
-            <div class="action-bar">
-                <button class="btn-secondary" onclick="goToPage1()">⬅ Geri</button>
-                <button class="btn-primary" onclick="goToPage3()">Alfabeyi Çalışmaya Başla ➔</button>
-            </div>
-        </section>
-
-        <!-- 3. SAYFA: ÇALIŞMA ALANI, TARİHÇE VE HARF KARTLARI -->
-        <section id="page3" class="page-section">
-            
-            <div class="history-card">
-                <span class="badge">📜 Tarihçe & Köken</span>
-                <h2 id="historyTitle">Korece (Hangeul) Tarihçesi</h2>
-                <p id="historyText">
-                    Hangeul, 1443 yılında Joseon Hanedanlığı'nın 4. kralı olan Kral Sejong tarafından tasarlanmıştır. 
-                    Halkın Çince karakterleri öğrenmekte zorlanması üzerine, okuma-yazmayı kolaylaştırmak amacıyla icat edilen bilimsel bir alfabedir.
-                </p>
-            </div>
-
-            <div class="workspace-header">
-                <h3>Interaktif Harf Kartları</h3>
-                <p>Harflerin okunuşlarını inceleyin ve öğrendiklerinizi işaretleyin.</p>
-            </div>
-
-            <div class="letters-grid" id="lettersContainer">
-                <!-- JavaScript ile seçilen dile göre harfler dinamik olarak yüklenecek -->
-            </div>
-
-            <div class="action-bar">
-                <button class="btn-secondary" onclick="goToPage2()">⬅ Farklı Dil Seç</button>
-            </div>
-
         </section>
 
     </main>
 
     <script src="script.js"></script>
 </body>
-              </html>
-                              
+</html>
