@@ -1,27 +1,38 @@
-// Girilen isim ve soyisme göre akıllı şifre oluşturma
+// Harf ve sayıları dinamik olarak karıştırarak akıllı şifre öneren fonksiyon
 function suggestPassword() {
     const fname = document.getElementById('fname').value.trim();
     const lname = document.getElementById('lname').value.trim();
     const passInput = document.getElementById('pass');
 
-    let baseName = fname ? fname : "Global";
+    let baseText = fname ? fname : "Global";
     if (lname) {
-        baseName += lname.charAt(0).toUpperCase();
+        baseText += lname.charAt(0).toUpperCase();
     }
 
-    // Türkçe karakterleri temizle ve güvenli harfe çevir
-    baseName = baseName.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
+    // Türkçe karakter düzenlemesi
+    baseText = baseText.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
     
-    // Rastgele 3 haneli sayı + özel simge
-    const randomNum = Math.floor(100 + Math.random() * 900);
-    const symbols = ["!", "*", "@", "#"];
-    const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
-
-    const suggestedPass = baseName.charAt(0).toUpperCase() + baseName.slice(1).toLowerCase() + randomNum + randomSymbol;
+    // Ekstra rastgele harf ve eklemeler havuzu
+    const extraChars = ["X", "K", "Z", "Net", "Pro", "Alpha", "2026"];
+    const randomExtra = extraChars[Math.floor(Math.random() * extraChars.length)];
+    const randomNum = Math.floor(10 + Math.random() * 90);
+    
+    // İsmi ve rastgele harf/sayıları birleştir
+    const formattedName = baseText.charAt(0).toUpperCase() + baseText.slice(1).toLowerCase();
+    const suggestedPass = `${formattedName}_${randomExtra}${randomNum}!`;
     
     passInput.value = suggestedPass;
 }
 
-function goToPage2() {
-    alert("1. Sayfa Tasarımı Başarıyla Onaylandı! 2. Sayfaya Geçebiliriz.");
+// Boş bırakıldığında uyarı verme kontrolü
+function validateAndProceed() {
+    const fname = document.getElementById('fname').value.trim();
+    const pass = document.getElementById('pass').value.trim();
+
+    if (!fname || !pass) {
+        alert("Lütfen burayı doldurun");
+        return;
+    }
+
+    alert("Giriş Başarılı! 2. Sayfaya geçebiliriz.");
 }
