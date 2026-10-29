@@ -5,7 +5,6 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* BEYAZ ARKA PLAN VE YATAY MASAÜSTÜ ZORLAMASI */
 html, body {
     min-width: 1200px;
     min-height: 100vh;
@@ -15,7 +14,7 @@ html, body {
     position: relative;
 }
 
-/* ARKA PLAN EĞİK VE ÜST ÜSTE BİNEN KOYU MAVİ YAZILAR */
+/* ARKA PLAN NAİF KIVRIMLI YAZILAR */
 .bg-floating-words {
     position: fixed;
     top: 0;
@@ -30,23 +29,22 @@ html, body {
 .word {
     position: absolute;
     font-family: 'Caveat', cursive;
-    font-size: 5.5rem;
-    font-weight: 700;
-    color: rgba(30, 41, 59, 0.12); /* Daha belirgin koyu mavi */
+    font-size: 5rem;
+    font-weight: 500;
+    color: rgba(79, 70, 229, 0.08); /* Naif koyu mavi-mor ton */
     user-select: none;
 }
 
-/* Üst üste binip sanatsal durması için konumlar */
 .w1 { top: 10%; left: 5%; transform: rotate(-14deg); }
 .w2 { top: 18%; right: 8%; transform: rotate(16deg); }
-.w3 { bottom: 15%; left: 8%; transform: rotate(-8deg); font-size: 6rem; }
+.w3 { bottom: 15%; left: 8%; transform: rotate(-8deg); font-size: 5.5rem; }
 .w4 { bottom: 10%; right: 12%; transform: rotate(10deg); }
 .w5 { top: 45%; left: 35%; transform: rotate(-20deg); }
 .w6 { top: 50%; right: 30%; transform: rotate(22deg); }
-.w7 { top: 25%; left: 45%; transform: rotate(5deg); font-size: 4.5rem; }
+.w7 { top: 25%; left: 45%; transform: rotate(5deg); font-size: 4rem; }
 .w8 { bottom: 40%; left: 20%; transform: rotate(-15deg); }
 
-/* SADECE ÜST KISIM BLURLU NAVBAR */
+/* ÜST KISIM MOR BLURLU NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
@@ -56,19 +54,20 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 50px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 16px 50px;
+    background: rgba(99, 102, 241, 0.15); /* Mor blurlu doku */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .logo {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 1.3rem;
-    color: #0f172a;
+    font-size: 1.25rem;
+    color: #1e1b4b;
+    font-weight: 500;
 }
 
 .nav-right {
@@ -77,25 +76,25 @@ html, body {
 }
 
 .nav-btn {
-    background: rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    color: #334155;
-    padding: 8px 18px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: #3730a3;
+    padding: 7px 16px;
     border-radius: 10px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .nav-btn:hover {
-    background: rgba(0, 0, 0, 0.06);
-    color: #0f172a;
+    background: rgba(255, 255, 255, 0.7);
+    color: #312e81;
 }
 
 .profile-btn {
-    background: rgba(99, 102, 241, 0.1);
-    border-color: rgba(99, 102, 241, 0.3);
-    color: #4f46e5;
+    background: rgba(99, 102, 241, 0.25);
+    border-color: rgba(99, 102, 241, 0.4);
+    color: #312e81;
 }
 
 /* ANA İÇERİK */
@@ -104,55 +103,56 @@ html, body {
     z-index: 10;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 140px 20px 50px 20px; /* Üst menü sabit olduğu için pay bırakıldı */
+    padding: 140px 20px 50px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 90vh;
 }
 
-/* ÇERÇEVESİZ GİRİŞ ALANI */
 .login-card {
     width: 100%;
     max-width: 440px;
     text-align: left;
-    background: transparent; /* Çerçeve ve arka plan yok */
+    background: transparent;
     padding: 20px;
 }
 
-/* HOŞ GELDİNİZ KISTASI KIVRIMLI YAZI */
+/* NAİF KIVRIMLI HOŞ GELDİNİZ */
 .welcome-title {
     font-family: 'Caveat', cursive;
-    font-size: 3.8rem;
-    font-weight: 700;
-    color: #0f172a;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: #1e1b4b;
     line-height: 1;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .subtitle {
     color: #64748b;
-    font-size: 0.95rem;
-    margin-bottom: 30px;
+    font-size: 0.92rem;
+    font-weight: 300;
+    margin-bottom: 28px;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    position: relative;
 }
 
 .input-group label {
-    font-size: 0.85rem;
+    font-size: 0.83rem;
     color: #334155;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .optional {
     color: #94a3b8;
-    font-size: 0.78rem;
-    font-weight: normal;
+    font-size: 0.75rem;
+    font-weight: 300;
 }
 
 .label-with-action {
@@ -162,51 +162,58 @@ html, body {
 }
 
 .suggest-btn {
-    font-size: 0.8rem;
-    color: #2563eb;
+    font-size: 0.78rem;
+    color: #4f46e5;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
     transition: color 0.2s;
 }
 
 .suggest-btn:hover {
-    color: #1d4ed8;
+    color: #3730a3;
     text-decoration: underline;
 }
 
 .input-group input {
     background: #ffffff;
     border: 1px solid #cbd5e1;
-    padding: 13px 16px;
+    padding: 12px 16px;
     border-radius: 10px;
     color: #0f172a;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     outline: none;
     transition: all 0.2s;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
 .input-group input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+/* HATA MESAJI STİLİ */
+.error-msg {
+    display: none;
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 2px;
 }
 
 .btn-primary {
     width: 100%;
-    background: #0f172a;
+    background: #4f46e5;
     color: white;
     border: none;
-    padding: 14px;
+    padding: 13px;
     border-radius: 10px;
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 500;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
     margin-top: 10px;
 }
 
 .btn-primary:hover {
-    background: #1e293b;
+    background: #4338ca;
     transform: translateY(-1px);
 }
