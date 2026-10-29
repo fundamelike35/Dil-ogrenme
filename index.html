@@ -6,12 +6,12 @@
     <title>Global Script - Dünya Alfabeleri</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ARKA PLAN EĞİK VE ÜST ÜSTE BİNEN ŞEFFAF YAZILAR -->
+    <!-- ARKA PLAN NAİF VE EĞİK ŞEFFAF YAZILAR -->
     <div class="bg-floating-words">
         <span class="word w1">Hangeul</span>
         <span class="word w2">Español</span>
@@ -23,7 +23,7 @@
         <span class="word w8">한국어</span>
     </div>
 
-    <!-- SADECE ÜST KISIM BLURLU NAVBAR -->
+    <!-- ÜST KISIM MOR BLURLU NAVBAR -->
     <header class="navbar">
         <div class="logo">
             <span class="logo-icon">🌐</span>
@@ -37,7 +37,7 @@
 
     <main class="main-container">
 
-        <!-- 1. SAYFA: GİRİŞ EKRANI (ÇERÇEVESİZ) -->
+        <!-- 1. SAYFA: GİRİŞ EKRANI -->
         <section id="page1" class="page-section active">
             <div class="login-card">
                 <h2 class="welcome-title">Hoş Geldiniz</h2>
@@ -46,7 +46,8 @@
                 <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
                     <div class="input-group">
                         <label>Adınız</label>
-                        <input type="text" id="fname" placeholder="Örn: Melike" oninput="generatePasswordSuggestion()">
+                        <input type="text" id="fname" placeholder="Örn: Melike" oninput="generatePasswordSuggestion(); hideError('nameError')">
+                        <span id="nameError" class="error-msg">Lütfen burayı doldurun</span>
                     </div>
                     
                     <div class="input-group">
@@ -59,7 +60,8 @@
                             <label>Şifre</label>
                             <span class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</span>
                         </div>
-                        <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin">
+                        <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
+                        <span id="passError" class="error-msg">Lütfen burayı doldurun</span>
                     </div>
 
                     <button type="submit" class="btn-primary">Devam Et ➔</button>
