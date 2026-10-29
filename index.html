@@ -2,16 +2,16 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280"> <!-- Masaüstü/Yatay Görünüm Zorlaması -->
+    <meta name="viewport" content="width=1280">
     <title>Global Script - Dünya Alfabeleri</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ARKA PLAN EĞİK ŞEFFAF YAZILAR -->
+    <!-- ARKA PLAN EĞİK VE ÜST ÜSTE BİNEN ŞEFFAF YAZILAR -->
     <div class="bg-floating-words">
         <span class="word w1">Hangeul</span>
         <span class="word w2">Español</span>
@@ -19,9 +19,11 @@
         <span class="word w4">Göktürk</span>
         <span class="word w5">Hiragana</span>
         <span class="word w6">Alphabet</span>
+        <span class="word w7">日本語</span>
+        <span class="word w8">한국어</span>
     </div>
 
-    <!-- ÜST BLURLU DOKULU NAVBAR -->
+    <!-- SADECE ÜST KISIM BLURLU NAVBAR -->
     <header class="navbar">
         <div class="logo">
             <span class="logo-icon">🌐</span>
@@ -35,16 +37,16 @@
 
     <main class="main-container">
 
-        <!-- 1. SAYFA: GİRİŞ EKRANI -->
+        <!-- 1. SAYFA: GİRİŞ EKRANI (ÇERÇEVESİZ) -->
         <section id="page1" class="page-section active">
-            <div class="glass-card login-card">
-                <h2>Hoş Geldiniz 👋</h2>
+            <div class="login-card">
+                <h2 class="welcome-title">Hoş Geldiniz</h2>
                 <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
                 
-                <form id="loginForm" onsubmit="event.preventDefault(); goToPage2();">
+                <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
                     <div class="input-group">
                         <label>Adınız</label>
-                        <input type="text" id="fname" placeholder="Örn: Melike" required oninput="generatePasswordSuggestion()">
+                        <input type="text" id="fname" placeholder="Örn: Melike" oninput="generatePasswordSuggestion()">
                     </div>
                     
                     <div class="input-group">
@@ -55,20 +57,13 @@
                     <div class="input-group">
                         <div class="label-with-action">
                             <label>Şifre</label>
-                            <span class="suggest-btn" onclick="suggestPassword()">✨ Akıllı Şifre Öner</span>
+                            <span class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</span>
                         </div>
-                        <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" required>
+                        <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin">
                     </div>
 
                     <button type="submit" class="btn-primary">Devam Et ➔</button>
                 </form>
-            </div>
-        </section>
-
-        <!-- 2. SAYFA (SADECE TASLAK - SIRASI GELİNCE İŞLENECEK) -->
-        <section id="page2" class="page-section">
-            <div class="glass-card">
-                <h2>2. Adım: Dil Seçim Sayfası Hazırlanacak</h2>
             </div>
         </section>
 
