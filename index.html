@@ -1,77 +1,83 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280">
-    <title>Global Script - Dünya Alfabeleri</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2">
+<!-- Ukraynaca -->
+<div class="lang-card" onclick="selectLang(this, 'ukrainian')">
+    <div class="lang-flag">🇺🇦</div>
+    <h3>Ukraynaca</h3>
+    <p>İ, Ї, Є harfli özel Kiril sürümü.</p>
+</div>
 
-</head>
-<body>
+<!-- Beyaz Rusça -->
+<div class="lang-card" onclick="selectLang(this, 'belarusian')">
+    <div class="lang-flag">🇧🇾</div>
+    <h3>Beyaz Rusça</h3>
+    <p>Kısa 'Ў' harfiyle tanınan Kiril dili.</p>
+</div>
 
-    <!-- ARKA PLAN NAİF VE EĞİK ŞEFFAF YAZILAR -->
-    <div class="bg-floating-words">
-        <span class="word w1">Hangeul</span>
-        <span class="word w2">Español</span>
-        <span class="word w3">Russian</span>
-        <span class="word w4">Göktürk</span>
-        <span class="word w5">Hiragana</span>
-        <span class="word w6">Alphabet</span>
-        <span class="word w7">日本語</span>
-        <span class="word w8">한국어</span>
-    </div>
+<!-- Bulgarca -->
+<div class="lang-card" onclick="selectLang(this, 'bulgarian')">
+    <div class="lang-flag">🇧🇬</div>
+    <h3>Bulgarca</h3>
+    <p>Kiril alfabesinin doğduğu tarihi dil.</p>
+</div>
 
-    <!-- ÜST KISIM MOR BLURLU NAVBAR -->
-    <header class="navbar">
-        <div class="logo">
-            <span class="logo-icon">🌐</span>
-            <span class="logo-text">Global<strong>Script</strong></span>
-        </div>
-        <div class="nav-right">
-            <button class="nav-btn">⚙️ Ayarlar</button>
-            <button class="nav-btn profile-btn">👤 Profil</button>
-        </div>
-    </header>
+<!-- Sırpça -->
+<div class="lang-card" onclick="selectLang(this, 'serbian')">
+    <div class="lang-flag">🇷🇸</div>
+    <h3>Sırpça (Vuk Kiril)</h3>
+    <p>Tamamen fonetik Kiril alfabesi.</p>
+</div>
 
-    <main class="main-container">
+<!-- Makedonca -->
+<div class="lang-card" onclick="selectLang(this, 'macedonian')">
+    <div class="lang-flag">🇲🇰</div>
+    <h3>Makedonca</h3>
+    <p>Güney Slav Kiril alfabesi.</p>
+</div>
 
-        <!-- 1. SAYFA: GİRİŞ EKRANI -->
-        <section id="page1" class="page-section active">
-            <div class="login-card">
-                <h2 class="welcome-title">Hoş Geldiniz</h2>
-                <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
-                
-                <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
-                    <div class="input-group">
-                        <label>Adınız</label>
-                        <input type="text" id="fname" placeholder="Örn: Melike" oninput="generatePasswordSuggestion(); hideError('nameError')">
-                        <span id="nameError" class="error-msg">Lütfen burayı doldurun</span>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Soyadınız <span class="optional">(isteğe bağlı)</span></label>
-                        <input type="text" id="lname" placeholder="Örn: Yılmaz" oninput="generatePasswordSuggestion()">
-                    </div>
-                    
-                    <div class="input-group">
-                        <div class="label-with-action">
-                            <label>Şifre</label>
-                            <span class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</span>
-                        </div>
-                        <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
-                        <span id="passError" class="error-msg">Lütfen burayı doldurun</span>
-                    </div>
+<!-- Kazakça -->
+<div class="lang-card" onclick="selectLang(this, 'kazakh')">
+    <div class="lang-flag">🇰🇿</div>
+    <h3>Kazakça</h3>
+    <p>Türkçe sesli Kiril adaptasyonu.</p>
+</div>
 
-                    <button type="submit" class="btn-primary">Devam Et ➔</button>
-                </form>
-            </div>
-        </section>
+<!-- Tatarca -->
+<div class="lang-card" onclick="selectLang(this, 'tatar')">
+    <div class="lang-flag">🏹</div>
+    <h3>Tatarca</h3>
+    <p>İdil-Ural bölgesinin Kiril dili.</p>
+</div>
 
-    </main>
+<!-- Başkırca -->
+<div class="lang-card" onclick="selectLang(this, 'bashkir')">
+    <div class="lang-flag">🏔️</div>
+    <h3>Başkırca</h3>
+    <p>Peltik sesler içeren Kiril dili.</p>
+</div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- Moğolca -->
+<div class="lang-card" onclick="selectLang(this, 'mongolian')">
+    <div class="lang-flag">🇲🇳</div>
+    <h3>Moğolca</h3>
+    <p>1940'tan beri kullanılan Kiril dili.</p>
+</div>
+
+<!-- Abhazca -->
+<div class="lang-card" onclick="selectLang(this, 'abkhaz')">
+    <div class="lang-flag">🌊</div>
+    <h3>Abhazca</h3>
+    <p>60+ zengin sesli Kafkas Kiril dili.</p>
+</div>
+
+<!-- Abazaca -->
+<div class="lang-card" onclick="selectLang(this, 'abaza')">
+    <div class="lang-flag">⛰️</div>
+    <h3>Abazaca</h3>
+    <p>Kafkas alfabesi ve ünsüz zenginliği.</p>
+</div>
+
+<!-- Avarca -->
+<div class="lang-card" onclick="selectLang(this, 'avar')">
+    <div class="lang-flag">🦅</div>
+    <h3>Avarca</h3>
+    <p>Dağıstan'ın gırtlak sesli Kiril dili.</p>
+</div>
