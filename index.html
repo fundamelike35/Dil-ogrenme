@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=99">
+    <link rel="stylesheet" href="style.css?v=2026.5">
 </head>
 <body>
 
@@ -23,7 +23,7 @@
     </div>
 
     <header class="navbar">
-        <div class="logo">
+        <div class="logo" onclick="showPage('page1')">
             <span class="logo-badge">GS</span>
             <span class="logo-text">Global<strong>Script</strong></span>
         </div>
@@ -34,12 +34,13 @@
         </div>
         <div class="nav-right">
             <span class="user-badge" id="navUserBadge" style="display: none;"></span>
+            <button class="nav-logout-btn" id="navLogoutBtn" style="display: none;" onclick="logoutToPage1()">Çıkış</button>
         </div>
     </header>
 
     <main class="main-container">
 
-        <!-- 1. SAYFA: GİRİŞ EKRANI -->
+        <!-- 1. SAYFA: KÜÇÜLTÜLMÜŞ GİRİŞ EKRANI -->
         <section id="page1" class="page-section active">
             <div class="login-card">
                 <h1 class="welcome-title">Hoş Geldiniz</h1>
@@ -63,34 +64,38 @@
                             <span class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</span>
                         </div>
                         <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
-                        <span id="passError" class="error-msg">Lütfen bir şifre belirleyin</span>
+                        <span id="passError" class="error-msg">Lütfen şifre belirleyin</span>
                     </div>
 
                     <button type="submit" class="btn-primary">Devam Et</button>
                 </form>
+
+                <div class="divider">veya</div>
+
+                <button type="button" class="btn-google" onclick="loginWithGoogle()">
+                    <span class="google-icon">G</span> Google ile Giriş Yap
+                </button>
             </div>
         </section>
 
-        <!-- 2. SAYFA: TAM EKRAN DİL SEÇİMİ -->
+        <!-- 2. SAYFA: DİL SEÇİMİ (ÇIKIŞ BUTONU PANEL BAŞLIĞINA TAŞINDI) -->
         <section id="page2" class="page-section">
             <div class="fullscreen-panel">
                 <div class="panel-header">
                     <div>
                         <h2>Hangi Dili Öğrenmek İstiyorsun?</h2>
-                        <p>Arama çubuğuna tıklayarak popüler dilleri görebilir veya harf yazarak alfabetik filtreleyebilirsin.</p>
+                        <p>Arama çubuğuna yazarak veya popüler dillerden seçim yapabilirsin.</p>
                     </div>
-                    <button class="btn-secondary" onclick="showPage('page1')">Çıkış Yap</button>
+                    <button class="btn-secondary" onclick="logoutToPage1()">Çıkış Yap</button>
                 </div>
 
-                <!-- CANLI ARAMA VE GRİ DROPDOWN -->
                 <div class="search-container">
                     <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Dil veya alfabe ara... (Örn: K)" onfocus="handleSearchFocus()" oninput="handleSearchInput()" autocomplete="off">
+                        <input type="text" id="searchInput" placeholder="Dil, alfabe veya özellik ara... (Örn: Hangeul)" onfocus="handleSearchFocus()" oninput="handleSearchInput()" autocomplete="off">
                     </div>
                     <div class="search-dropdown" id="searchDropdown"></div>
                 </div>
 
-                <!-- DİL KARTLARI (JS İLE OTOMATİK DOLDURULUR) -->
                 <div class="lang-grid" id="langGrid"></div>
 
                 <div class="panel-footer">
@@ -100,39 +105,57 @@
             </div>
         </section>
 
-        <!-- 3. SAYFA: DİL TARİHÇESİ VE KÖKEN -->
+        <!-- 3. SAYFA: ZENGİNLEŞTİRİLMİŞ TARİHÇE VE KÖKEN ALANI -->
         <section id="page3" class="page-section">
             <div class="fullscreen-panel">
                 <div class="panel-header">
-                    <span class="mono-badge" id="historyCodeBadge">KR</span>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="mono-badge" id="historyCodeBadge">KR</span>
+                        <h2 id="historyHeaderTitle" style="font-size: 1.2rem; margin:0;">Dil Tarihçesi</h2>
+                    </div>
                     <button class="btn-secondary" onclick="showPage('page2')">Dil Seçimine Dön</button>
                 </div>
 
-                <div class="history-hero">
-                    <h2 id="historyTitle">Korece (Hangeul) Tarihçesi</h2>
-                    <p id="historyText">Hangeul, 1443 yılında Kral Sejong tarafından tasarlanmıştır.</p>
-                </div>
+                <div class="history-layout">
+                    <div class="history-main-box">
+                        <h2 id="historyTitle">Korece (Hangeul) Tarihçesi</h2>
+                        <p id="historyText">Hangeul, 1443 yılında Joseon Hanedanlığı'nın 4. kralı Kral Sejong tarafından tasarlanmıştır.</p>
+                        <div style="margin-top: 10px;">
+                            <h4 style="color: #c084fc; font-size: 0.85rem; margin-bottom: 6px;">Dilin Köken Yapısı</h4>
+                            <p id="historySubText" style="font-size: 0.85rem; color: #a1a1aa;">Bu yazı sistemi, fonetik özellikleri ve insan ses organlarının şekli baz alınarak oluşturulmuş dünyadaki nadir alfabelerden biridir.</p>
+                        </div>
+                    </div>
 
-                <div class="module-preview-box">
-                    <h3>Derslik Modülleri Hazır</h3>
-                    <p>Bu dilin sesli harf stüdyosuna ve pekiştirme alıştırmalarına geçerek kelime dağarcığını geliştirebilirsin.</p>
-                    <button class="btn-primary auto-width" onclick="openClassroom()">Dersliğe Giriş Yap</button>
+                    <div class="history-sidebar">
+                        <div class="history-meta-card">
+                            <h4>Alfabe Tipi</h4>
+                            <p id="historyTypeInfo">Fonetik / Bilimsel Alfabe</p>
+                        </div>
+                        <div class="history-meta-card">
+                            <h4>Yazı Yönü</h4>
+                            <p id="historyDirectionInfo">Soldan Sağa (Yatay)</p>
+                        </div>
+                        <div class="module-preview-box">
+                            <h3>Derslik Modülleri Hazır</h3>
+                            <p>Sesli harf stüdyosu ve pekiştirme testleri seni bekliyor.</p>
+                            <button class="btn-primary auto-width" onclick="openClassroom()">Dersliğe Giriş Yap</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. SAYFA: İNTERAKTİF DERSLİK, SESLİ HARFLER VE İLERLEME HALKASI -->
+        <!-- 4. SAYFA: DERSLİK VE İLERLEME -->
         <section id="page4" class="page-section">
             <div class="fullscreen-panel">
                 <div class="panel-header">
-                    <div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
                         <span class="mono-badge" id="classCodeBadge">KR</span>
-                        <h2 id="classTitle" style="display:inline-block; margin-left:10px;">Korece Dersliği</h2>
+                        <h2 id="classTitle" style="font-size: 1.3rem; margin:0;">Derslik</h2>
                     </div>
                     <button class="btn-secondary" onclick="showPage('page3')">Tarihçeye Dön</button>
                 </div>
 
-                <!-- ÜST İSTATİSTİK VE DAİRESEL İLERLEME HALKASI -->
                 <div class="stats-bar">
                     <div class="progress-ring-card">
                         <div class="circular-progress" id="circularProgress">
@@ -153,19 +176,16 @@
                     </div>
                 </div>
 
-                <!-- DERSLİK MODÜLLERİ -->
                 <div class="classroom-grid">
-                    <!-- SOL: SESLİ HARF STÜDYOSU -->
                     <div class="class-box">
                         <h3>1. Sesli Harf ve Karakter Stüdyosu</h3>
                         <p class="box-desc">Harflere tıklayarak okunuşunu sesli dinle ve öğrendiklerine ekle.</p>
                         <div class="letters-grid" id="lettersContainer"></div>
                     </div>
 
-                    <!-- SAĞ: PEKİŞTİRME ALIŞTIRMASI -->
                     <div class="class-box">
                         <h3>2. Pekiştirme Alıştırması</h3>
-                        <p class="box-desc">Aşağıdaki karakterin doğru okunuşunu seçerek ilerleme yüzdesini artır.</p>
+                        <p class="box-desc">Karakterin doğru okunuşunu seçerek ilerleme yüzdesini artır.</p>
                         <div class="quiz-area" id="quizArea">
                             <div class="quiz-char" id="quizChar">ㄱ</div>
                             <div class="quiz-options" id="quizOptions"></div>
@@ -174,11 +194,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </main>
 
     </main>
 
-    <script src="script.js?v=99"></script>
+    <script src="script.js?v=2026.6"></script>
 </body>
-            </html>
-            
+</html>
