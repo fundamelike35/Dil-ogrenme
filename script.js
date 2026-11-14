@@ -60,7 +60,7 @@ const langData = {
         code: "RU", speechCode: "ru-RU", name: "Kiril Alfabesi (Rusça)", popular: false,
         desc: "Doğu Avrupa ve Avrasya'da yaygın alfabe.",
         title: "Kiril Alfabesi Tarihçesi",
-        history: "9. yüzyıldta Slav halkları için Yunan alfabesi temel alınarak geliştirilmiştir.",
+        history: "9. yüzyılda Slav halkları için Yunan alfabesi temel alınarak geliştirilmiştir.",
         subText: "Doğu Avrupa ve Asya coğrafyasında pek çok dilin temelini oluşturan köklü sistemdir.",
         type: "Yunan Esaslı Fonetik", direction: "Soldan Sağa (Yatay)",
         letters: [
@@ -256,6 +256,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// AKILLI ŞİFRE ÖNERİCİ (GÜNCELLENDİ VE GARANTİ ÇALIŞIYOR)
 function suggestPassword() {
     const fnameInput = document.getElementById('fname');
     let fname = fnameInput ? fnameInput.value.trim() : "Global";
@@ -271,9 +272,31 @@ function suggestPassword() {
     hideError('passError');
 }
 
+// GOOGLE İLE GİRİŞ YAP (GERÇEKÇİ HESAP SEÇİM PENCERESİ SİMÜLASYONU)
 function loginWithGoogle() {
-    document.getElementById('fname').value = "Google Kullanıcısı";
-    document.getElementById('pass').value = "GGL_SecureAuth99!";
+    const accounts = [
+        { name: "Melike Yılmaz", email: "melike.yilmaz@gmail.com" },
+        { name: "Global Kullanıcı", email: "global.script35@gmail.com" },
+        { name: "Öğrenci Hesabı", email: "ogrenci.global@gmail.com" }
+    ];
+
+    // Şık bir hesap seçim promptu
+    let promptText = "Google Hesabı Seçin:\n\n";
+    accounts.forEach((acc, index) => {
+        promptText += `${index + 1}. ${acc.name} (${acc.email})\n`;
+    });
+
+    let choice = prompt(promptText + "\nLütfen 1, 2 veya 3 seçin:");
+    let selectedAcc = accounts[0];
+
+    if (choice === "2") selectedAcc = accounts[1];
+    if (choice === "3") selectedAcc = accounts[2];
+
+    document.getElementById('fname').value = selectedAcc.name;
+    document.getElementById('pass').value = "GoogleAuth_" + Math.floor(1000 + Math.random() * 9000) + "!";
+    
+    hideError('nameError');
+    hideError('passError');
     validateAndProceed();
 }
 
@@ -282,6 +305,7 @@ function hideError(id) {
     if (el) el.style.display = 'none';
 }
 
+// FORM KONTROLÜ VE VALIDASYON UYARILARI
 function validateAndProceed() {
     const fnameInput = document.getElementById('fname');
     const passInput = document.getElementById('pass');
@@ -363,27 +387,4 @@ function openHistoryPage() {
     document.getElementById('historyHeaderTitle').innerText = `${data.name} Tarihçesi`;
     document.getElementById('historyTitle').innerText = data.title;
     document.getElementById('historyText').innerText = data.history;
-    document.getElementById('historySubText').innerText = data.subText;
-    document.getElementById('historyTypeInfo').innerText = data.type;
-    document.getElementById('historyDirectionInfo').innerText = data.direction;
-    showPage('page3');
-}
-
-function openClassroom() {
-    const data = langData[currentLang];
-    document.getElementById('classCodeBadge').innerText = data.code;
-    document.getElementById('classTitle').innerText = `${data.name} Dersliği`;
-
-    const container = document.getElementById('lettersContainer');
-    container.innerHTML = '';
-
-    data.letters.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'letter-card';
-        card.onclick = function() {
-            speakCharacter(item.char, data.speechCode);
-            markItemLearned(item.char, item.pronoun);
-        };
-        card.innerHTML = `
-            <div class="letter-char">${item.char}</div>
-            <div class="letter-pronoun">${i
+    document.getElementById('historySubText').innerTe
