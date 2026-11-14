@@ -2,17 +2,16 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Script - Dünya Alfabeleri</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=99">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2026">
 </head>
 <body>
 
-    <!-- ARKA PLAN EĞİK BEYAZ-DOKULU YAZILAR -->
-    <div class="bg-floating-words" id="bgWords">
+    <div class="bg-floating-words">
         <span class="word w1">Hangeul</span>
         <span class="word w2">Español</span>
         <span class="word w3">Russian</span>
@@ -23,36 +22,34 @@
         <span class="word w8">한국어</span>
     </div>
 
-    <!-- ÜST KISIM BLURLU NAVBAR -->
     <header class="navbar">
         <div class="logo">
-            <span class="logo-icon">🌐</span>
+            <span class="logo-badge">GS</span>
             <span class="logo-text">Global<strong>Script</strong></span>
         </div>
-        <!-- Giriş öncesi gizli, 2. sayfada açılacak adım göstergesi -->
-        <div class="nav-steps" id="navSteps" style="display: none;">
-            <span class="step-tag active" id="step1-tag">1. Giriş</span>
-            <span class="step-tag" id="step2-tag">2. Dil Seçimi</span>
+        <div class="nav-steps" id="navSteps">
+            <span class="step-tag" id="step-lang">1. Dil Seçimi</span>
+            <span class="step-tag" id="step-history">2. Tarihçe</span>
+            <span class="step-tag" id="step-class">3. Derslik</span>
         </div>
         <div class="nav-right">
-            <button class="nav-btn">⚙️ Ayarlar</button>
-            <button class="nav-btn profile-btn">👤 Profil</button>
+            <span class="user-badge" id="navUserBadge" style="display: none;"></span>
         </div>
     </header>
 
     <main class="main-container">
 
         <!-- 1. SAYFA: GİRİŞ EKRANI -->
-        <section id="page1" class="page-section">
+        <section id="page1" class="page-section active">
             <div class="login-card">
-                <h2 class="welcome-title">Hoş Geldiniz</h2>
+                <h1 class="welcome-title">Hoş Geldiniz</h1>
                 <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
                 
-                <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
+                <form onsubmit="event.preventDefault(); validateAndProceed();">
                     <div class="input-group">
                         <label>Adınız</label>
                         <input type="text" id="fname" placeholder="Örn: Melike" oninput="hideError('nameError')">
-                        <span id="nameError" class="error-msg">Lütfen burayı doldurun</span>
+                        <span id="nameError" class="error-msg">Lütfen adınızı girin</span>
                     </div>
                     
                     <div class="input-group">
@@ -66,193 +63,122 @@
                             <span class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</span>
                         </div>
                         <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
-                        <span id="passError" class="error-msg">Lütfen burayı doldurun</span>
+                        <span id="passError" class="error-msg">Lütfen bir şifre belirleyin</span>
                     </div>
 
-                    <button type="submit" class="btn-primary">Devam Et ➔</button>
+                    <button type="submit" class="btn-primary">Devam Et</button>
                 </form>
             </div>
         </section>
 
-        <!-- 2. SAYFA: DİL SEÇİMİ -->
+        <!-- 2. SAYFA: TAM EKRAN DİL SEÇİMİ -->
         <section id="page2" class="page-section">
-            <div class="content-card wide-card">
-                <div class="header-block">
-                    <h2>Hangi Dili Öğrenmek İstiyorsun?</h2>
-                    <p>Aşağıdaki arama çubuğundan dilleri filtreleyebilir, istediğin alfabeyi seçebilirsin.</p>
+            <div class="fullscreen-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Hangi Dili Öğrenmek İstiyorsun?</h2>
+                        <p>Arama çubuğuna tıklayarak popüler dilleri görebilir veya harf yazarak alfabetik filtreleyebilirsin.</p>
+                    </div>
+                    <button class="btn-secondary" onclick="showPage('page1')">Çıkış Yap</button>
                 </div>
 
-                <!-- AKILLI CANLI ARAMA KUTUSU VE AÇILIR LİSTE (DROPDOWN) -->
+                <!-- CANLI ARAMA VE GRİ DROPDOWN -->
                 <div class="search-container">
                     <div class="search-box">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" id="searchInput" placeholder="Dil veya alfabe ara... (Örn: Korece, Kazakça)" onfocus="handleSearchFocus()" oninput="handleSearchInput()" autocomplete="off">
+                        <input type="text" id="searchInput" placeholder="Dil veya alfabe ara... (Örn: K)" onfocus="handleSearchFocus()" oninput="handleSearchInput()" autocomplete="off">
                     </div>
-                    <!-- Otomatik Açılır Liste Kutusu -->
                     <div class="search-dropdown" id="searchDropdown"></div>
                 </div>
 
-                <!-- Dil Kartları Grid Yapısı -->
-                <div class="lang-grid" id="langGrid">
-                    <div class="lang-card selected" data-key="korean" onclick="selectLang(this, 'korean')">
-                        <div class="lang-flag">🇰🇷</div>
-                        <h3>Korece (Hangeul)</h3>
-                        <p>1443'te tasarlanan fonetik alfabe.</p>
-                    </div>
+                <!-- DİL KARTLARI (JS İLE OTOMATİK DOLDURULUR) -->
+                <div class="lang-grid" id="langGrid"></div>
 
-                    <div class="lang-card" data-key="gokturk" onclick="selectLang(this, 'gokturk')">
-                        <div class="lang-flag">🏹</div>
-                        <h3>Göktürk Alfabesi</h3>
-                        <p>Türkçenin en eski yazılı alfabesi.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="japanese" onclick="selectLang(this, 'japanese')">
-                        <div class="lang-flag">🇯🇵</div>
-                        <h3>Japonca</h3>
-                        <p>Hiragana, Katakana ve Kanji sistemi.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="chinese" onclick="selectLang(this, 'chinese')">
-                        <div class="lang-flag">🇨🇳</div>
-                        <h3>Çince (Hanzi)</h3>
-                        <p>Logografik karakter tabanlı yazı sistemi.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="cyrillic" onclick="selectLang(this, 'cyrillic')">
-                        <div class="lang-flag">🇷🇺</div>
-                        <h3>Kiril Alfabesi (Rusça)</h3>
-                        <p>Doğu Avrupa'da yaygın alfabe.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="ancientGreek" onclick="selectLang(this, 'ancientGreek')">
-                        <div class="lang-flag">🏛️</div>
-                        <h3>Antik Yunanca</h3>
-                        <p>Felsefe ve klasik dönem dili.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="modernGreek" onclick="selectLang(this, 'modernGreek')">
-                        <div class="lang-flag">🇬🇷</div>
-                        <h3>Modern Yunanca</h3>
-                        <p>Günümüz Yunanistan'ın resmi dili.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="portuguese" onclick="selectLang(this, 'portuguese')">
-                        <div class="lang-flag">🇵🇹</div>
-                        <h3>Portekizce</h3>
-                        <p>Geniş coğrafyaya yayılmış Latin dili.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="arabic" onclick="selectLang(this, 'arabic')">
-                        <div class="lang-flag">🇸🇦</div>
-                        <h3>Arapça</h3>
-                        <p>Sağdan sola yazılan köklü dil.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="ukrainian" onclick="selectLang(this, 'ukrainian')">
-                        <div class="lang-flag">🇺🇦</div>
-                        <h3>Ukraynaca</h3>
-                        <p>İ, Ї, Є harfli özel Kiril sürümü.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="belarusian" onclick="selectLang(this, 'belarusian')">
-                        <div class="lang-flag">🇧🇾</div>
-                        <h3>Beyaz Rusça</h3>
-                        <p>Kısa 'Ў' harfiyle tanınan Kiril dili.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="bulgarian" onclick="selectLang(this, 'bulgarian')">
-                        <div class="lang-flag">🇧🇬</div>
-                        <h3>Bulgarca</h3>
-                        <p>Kiril alfabesinin doğduğu tarihi dil.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="serbian" onclick="selectLang(this, 'serbian')">
-                        <div class="lang-flag">🇷🇸</div>
-                        <h3>Sırpça (Vuk Kiril)</h3>
-                        <p>Tamamen fonetik Kiril alfabesi.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="macedonian" onclick="selectLang(this, 'macedonian')">
-                        <div class="lang-flag">🇲🇰</div>
-                        <h3>Makedonca</h3>
-                        <p>Güney Slav Kiril alfabesi.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="kazakh" onclick="selectLang(this, 'kazakh')">
-                        <div class="lang-flag">🇰🇿</div>
-                        <h3>Kazakça</h3>
-                        <p>Türkçe sesli Kiril adaptasyonu.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="tatar" onclick="selectLang(this, 'tatar')">
-                        <div class="lang-flag">🏹</div>
-                        <h3>Tatarca</h3>
-                        <p>İdil-Ural bölgesinin Kiril dili.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="bashkir" onclick="selectLang(this, 'bashkir')">
-                        <div class="lang-flag">🏔️</div>
-                        <h3>Başkırca</h3>
-                        <p>Peltik sesler içeren Kiril dili.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="mongolian" onclick="selectLang(this, 'mongolian')">
-                        <div class="lang-flag">🇲🇳</div>
-                        <h3>Moğolca</h3>
-                        <p>1940'tan beri kullanılan Kiril dili.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="abkhaz" onclick="selectLang(this, 'abkhaz')">
-                        <div class="lang-flag">🌊</div>
-                        <h3>Abhazca</h3>
-                        <p>60+ zengin sesli Kafkas Kiril dili.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="abaza" onclick="selectLang(this, 'abaza')">
-                        <div class="lang-flag">⛰️</div>
-                        <h3>Abazaca</h3>
-                        <p>Kafkas alfabesi ve ünsüz zenginliği.</p>
-                    </div>
-
-                    <div class="lang-card" data-key="avar" onclick="selectLang(this, 'avar')">
-                        <div class="lang-flag">🦅</div>
-                        <h3>Avarca</h3>
-                        <p>Dağıstan'ın gırtlak sesli Kiril dili.</p>
-                    </div>
-                </div>
-
-                <div class="action-bar" style="margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
-                    <button class="btn-secondary" onclick="goToPage1()" style="width: auto; padding: 12px 24px;">⬅ Girişe Dön</button>
-                    <button class="btn-primary" onclick="goToWorkspace()" style="width: auto; padding: 12px 30px;">Alfabeyi İncelemeye Başla ➔</button>
+                <div class="panel-footer">
+                    <span class="selected-info" id="selectedLangInfo">Seçili Dil: Korece (Hangeul)</span>
+                    <button class="btn-primary auto-width" onclick="openHistoryPage()">Tarihçeyi ve Dersliği Aç</button>
                 </div>
             </div>
         </section>
 
-        <!-- 3. SAYFA: İNTERAKTİF HARF EKRANI -->
+        <!-- 3. SAYFA: DİL TARİHÇESİ VE KÖKEN -->
         <section id="page3" class="page-section">
-            <div class="content-card wide-card">
-                <div class="history-card">
-                    <span class="badge">📜 Tarihçe & Köken</span>
+            <div class="fullscreen-panel">
+                <div class="panel-header">
+                    <span class="mono-badge" id="historyCodeBadge">KR</span>
+                    <button class="btn-secondary" onclick="showPage('page2')">Dil Seçimine Dön</button>
+                </div>
+
+                <div class="history-hero">
                     <h2 id="historyTitle">Korece (Hangeul) Tarihçesi</h2>
                     <p id="historyText">Hangeul, 1443 yılında Kral Sejong tarafından tasarlanmıştır.</p>
                 </div>
 
-                <div class="workspace-header" style="margin: 25px 0 15px 0;">
-                    <h3>İnteraktif Harf Kartları</h3>
-                    <p>Harflerin okunuşlarını inceleyin.</p>
+                <div class="module-preview-box">
+                    <h3>Derslik Modülleri Hazır</h3>
+                    <p>Bu dilin sesli harf stüdyosuna ve pekiştirme alıştırmalarına geçerek kelime dağarcığını geliştirebilirsin.</p>
+                    <button class="btn-primary auto-width" onclick="openClassroom()">Dersliğe Giriş Yap</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SAYFA: İNTERAKTİF DERSLİK, SESLİ HARFLER VE İLERLEME HALKASI -->
+        <section id="page4" class="page-section">
+            <div class="fullscreen-panel">
+                <div class="panel-header">
+                    <div>
+                        <span class="mono-badge" id="classCodeBadge">KR</span>
+                        <h2 id="classTitle" style="display:inline-block; margin-left:10px;">Korece Dersliği</h2>
+                    </div>
+                    <button class="btn-secondary" onclick="showPage('page3')">Tarihçeye Dön</button>
                 </div>
 
-                <div class="letters-grid" id="lettersContainer" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px;"></div>
+                <!-- ÜST İSTATİSTİK VE DAİRESEL İLERLEME HALKASI -->
+                <div class="stats-bar">
+                    <div class="progress-ring-card">
+                        <div class="circular-progress" id="circularProgress">
+                            <span class="progress-value" id="progressValue">0%</span>
+                        </div>
+                        <div class="progress-info">
+                            <h4>Öğrenme Yüzdesi</h4>
+                            <p>Alıştırmaları tamamladıkça halka dolar.</p>
+                        </div>
+                    </div>
 
-                <div class="action-bar">
-                    <button class="btn-secondary" onclick="goToPage2()" style="width: auto; padding: 12px 24px;">⬅ Dil Seçimine Dön</button>
+                    <div class="word-counter-card">
+                        <div class="counter-number" id="learnedCount">0</div>
+                        <div class="counter-details">
+                            <h4>Öğrenilen Karakter / Kelime</h4>
+                            <div class="learned-tags" id="learnedTagsList">Henüz kelime öğrenilmedi.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DERSLİK MODÜLLERİ -->
+                <div class="classroom-grid">
+                    <!-- SOL: SESLİ HARF STÜDYOSU -->
+                    <div class="class-box">
+                        <h3>1. Sesli Harf ve Karakter Stüdyosu</h3>
+                        <p class="box-desc">Harflere tıklayarak okunuşunu sesli dinle ve öğrendiklerine ekle.</p>
+                        <div class="letters-grid" id="lettersContainer"></div>
+                    </div>
+
+                    <!-- SAĞ: PEKİŞTİRME ALIŞTIRMASI -->
+                    <div class="class-box">
+                        <h3>2. Pekiştirme Alıştırması</h3>
+                        <p class="box-desc">Aşağıdaki karakterin doğru okunuşunu seçerek ilerleme yüzdesini artır.</p>
+                        <div class="quiz-area" id="quizArea">
+                            <div class="quiz-char" id="quizChar">ㄱ</div>
+                            <div class="quiz-options" id="quizOptions"></div>
+                            <div class="quiz-feedback" id="quizFeedback"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <script src="script.js?v=999"></script>
+    <script src="script.js?v=2026"></script>
 </body>
-    </html>
-    
+            </html>
+            
