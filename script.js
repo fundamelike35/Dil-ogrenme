@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function renderLanguageGrid() {
     const grid = document.getElementById('langGrid');
-    if(!grid) return;
+    if (!grid) return;
     grid.innerHTML = '';
 
     const sortedKeys = Object.keys(langData).sort((a, b) => 
@@ -151,8 +151,10 @@ function handleSearchFocus() {
     }
 }
 
+// TÜM HARFLERİ EKSİKSİZ VE ALFABETİK FİLTRELEYEN ARAMA MOTORU
 function handleSearchInput() {
-    const inputVal = document.getElementById('searchInput').value.trim().toLocaleLowerCase('tr');
+    const rawVal = document.getElementById('searchInput').value.trim();
+    const inputVal = rawVal.toLocaleLowerCase('tr');
     const dropdown = document.getElementById('searchDropdown');
     const cards = document.querySelectorAll('.lang-card');
 
@@ -163,15 +165,25 @@ function handleSearchInput() {
     }
 
     const matchedKeys = Object.keys(langData).filter(key => {
-        const nameLower = langData[key].name.toLocaleLowerCase('tr');
-        return nameLower.startsWith(inputVal) || nameLower.includes(inputVal);
-    }).sort((a, b) => langData[a].name.localeCompare(langData[b].name, 'tr'));
+        const item = langData[key];
+        const nameLower = item.name.toLocaleLowerCase('tr');
+        const codeLower = item.code.toLocaleLowerCase('tr');
+        const descLower = item.desc.toLocaleLowerCase('tr');
+        return nameLower.includes(inputVal) || codeLower.includes(inputVal) || descLower.includes(inputVal);
+    }).sort((a, b) => {
+        const nameA = langData[a].name.toLocaleLowerCase('tr');
+        const nameB = langData[b].name.toLocaleLowerCase('tr');
+        const aStarts = nameA.startsWith(inputVal) ? 0 : 1;
+        const bStarts = nameB.startsWith(inputVal) ? 0 : 1;
+        if (aStarts !== bStarts) return aStarts - bStarts;
+        return langData[a].name.localeCompare(langData[b].name, 'tr');
+    });
 
     if (matchedKeys.length === 0) {
-        dropdown.innerHTML = `<div class="dropdown-item" style="color: #a1a1aa;">Dil bulunamadı</div>`;
+        dropdown.innerHTML = `<div class="dropdown-item" style="color: #a1a1aa;">"${rawVal}" için sonuç bulunamadı</div>`;
         dropdown.style.display = 'block';
     } else {
-        let html = `<div class="dropdown-header">Sonuçlar (${matchedKeys.length})</div>`;
+        let html = `<div class="dropdown-header">Eşleşen Diller (${matchedKeys.length})</div>`;
         matchedKeys.forEach(key => {
             html += `
                 <div class="dropdown-item" onclick="selectLangFromDropdown('${key}')">
@@ -227,17 +239,16 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// ŞİFRE ÖNERİCİ (GARANTİ ÇALIŞACAK ŞEKİLDE DÜZELTİLDİ)
 function suggestPassword() {
     const fnameInput = document.getElementById('fname');
     let fname = fnameInput ? fnameInput.value.trim() : "Global";
-    if(!fname) fname = "Global";
+    if (!fname) fname = "Global";
     
     const clean = fname.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
     const num = Math.floor(100 + Math.random() * 900);
     
     const passField = document.getElementById('pass');
-    if(passField) {
+    if (passField) {
         passField.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
     }
     hideError('passError');
@@ -245,10 +256,9 @@ function suggestPassword() {
 
 function hideError(id) {
     const el = document.getElementById(id);
-    if(el) el.style.display = 'none';
+    if (el) el.style.display = 'none';
 }
 
-// FORM KONTROLÜ VE 2. SAYFAYA GEÇİŞ
 function validateAndProceed() {
     const fnameInput = document.getElementById('fname');
     const passInput = document.getElementById('pass');
@@ -259,18 +269,18 @@ function validateAndProceed() {
 
     if (!fname) { 
         const err = document.getElementById('nameError');
-        if(err) err.style.display = 'block'; 
+        if (err) err.style.display = 'block'; 
         valid = false; 
     }
     if (!pass) { 
         const err = document.getElementById('passError');
-        if(err) err.style.display = 'block'; 
+        if (err) err.style.display = 'block'; 
         valid = false; 
     }
     if (!valid) return;
 
     const badge = document.getElementById('navUserBadge');
-    if(badge) {
+    if (badge) {
         badge.innerText = fname;
         badge.style.display = 'inline-block';
     }
@@ -281,23 +291,23 @@ function validateAndProceed() {
 function showPage(pageId) {
     document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
     const target = document.getElementById(pageId);
-    if(target) target.classList.add('active');
+    if (target) target.classList.add('active');
 
     const navSteps = document.getElementById('navSteps');
     const userBadge = document.getElementById('navUserBadge');
     
-    if (navSteps && userBadge) {
-        if (pageId === 'page1') {
-            navSteps.style.display = 'none';
-            userBadge.style.display = 'none';
-        } else {
-            navSteps.style.display = 'flex';
-            userBadge.style.display = 'inline-block';
-            document.querySelectorAll('.step-tag').forEach(t => t.classList.remove('active'));
-            if (pageId === 'page2') document.getElementById('step-lang').classList.add('active');
-            if (pageId === 'page3') document.getElementById('step-history').classList.add('active');
-            if (pageId === 'page4') document.getElementById('step-class').classList.add('active');
-        }
+    if (pageId === 'page1') {
+        document.body.classList.remove('dark-workspace');
+        if (navSteps) navSteps.style.display = 'none';
+        if (userBadge) userBadge.style.display = 'none';
+    } else {
+        document.body.classList.add('dark-workspace');
+        if (navSteps) navSteps.style.display = 'flex';
+        if (userBadge) userBadge.style.display = 'inline-block';
+        document.querySelectorAll('.step-tag').forEach(t => t.classList.remove('active'));
+        if (pageId === 'page2') document.getElementById('step-lang').classList.add('active');
+        if (pageId === 'page3') document.getElementById('step-history').classList.add('active');
+        if (pageId === 'page4') document.getElementById('step-class').classList.add('active');
     }
     window.scrollTo(0, 0);
 }
@@ -307,7 +317,7 @@ function selectLang(cardElement, langKey) {
     cardElement.classList.add('selected');
     currentLang = langKey;
     const info = document.getElementById('selectedLangInfo');
-    if(info) info.innerText = `Seçili Dil: ${langData[langKey].name}`;
+    if (info) info.innerText = `Seçili Dil: ${langData[langKey].name}`;
 }
 
 function openHistoryPage() {
@@ -367,13 +377,13 @@ function updateProgressUI(increment) {
     progressPercent = Math.min(100, progressPercent + increment);
     const ring = document.getElementById('circularProgress');
     const deg = (progressPercent / 100) * 360;
-    if(ring) ring.style.background = `conic-gradient(#7b2cbf ${deg}deg, #2b004f ${deg}deg)`;
+    if (ring) ring.style.background = `conic-gradient(#9333ea ${deg}deg, #27272a ${deg}deg)`;
     
     const val = document.getElementById('progressValue');
-    if(val) val.innerText = `${progressPercent}%`;
+    if (val) val.innerText = `${progressPercent}%`;
 
     const count = document.getElementById('learnedCount');
-    if(count) count.innerText = learnedItems.length;
+    if (count) count.innerText = learnedItems.length;
 
     const listContainer = document.getElementById('learnedTagsList');
     if (listContainer && learnedItems.length > 0) {
@@ -387,8 +397,8 @@ function loadQuizQuestion() {
     const qChar = document.getElementById('quizChar');
     const qFeed = document.getElementById('quizFeedback');
     
-    if(qChar) qChar.innerText = target.char;
-    if(qFeed) qFeed.innerText = '';
+    if (qChar) qChar.innerText = target.char;
+    if (qFeed) qFeed.innerText = '';
 
     let options = [target.pronoun];
     const allPronouns = ["G / K", "N", "A", "Alfa", "Omega", "Elif", "Açık E", "C", "Ö", "İ"];
@@ -399,7 +409,7 @@ function loadQuizQuestion() {
     options.sort(() => Math.random() - 0.5);
 
     const optContainer = document.getElementById('quizOptions');
-    if(!optContainer) return;
+    if (!optContainer) return;
     optContainer.innerHTML = '';
 
     options.forEach(opt => {
@@ -409,7 +419,7 @@ function loadQuizQuestion() {
         btn.onclick = function() {
             const feedback = document.getElementById('quizFeedback');
             if (opt === target.pronoun) {
-                if(feedback) {
+                if (feedback) {
                     feedback.style.color = '#4ade80';
                     feedback.innerText = 'Doğru! İlerleme halkası güncellendi.';
                 }
@@ -418,7 +428,7 @@ function loadQuizQuestion() {
                 updateProgressUI(20);
                 setTimeout(loadQuizQuestion, 1200);
             } else {
-                if(feedback) {
+                if (feedback) {
                     feedback.style.color = '#ff8fa3';
                     feedback.innerText = 'Yanlış cevap, tekrar dene.';
                 }
@@ -426,5 +436,5 @@ function loadQuizQuestion() {
         };
         optContainer.appendChild(btn);
     });
-        }
-        
+    }
+            
