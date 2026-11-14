@@ -256,7 +256,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// AKILLI ŞİFRE ÖNERİCİ (GÜNCELLENDİ VE GARANTİ ÇALIŞIYOR)
+// AKILLI ŞİFRE ÖNERİCİ
 function suggestPassword() {
     const fnameInput = document.getElementById('fname');
     let fname = fnameInput ? fnameInput.value.trim() : "Global";
@@ -272,7 +272,7 @@ function suggestPassword() {
     hideError('passError');
 }
 
-// GOOGLE İLE GİRİŞ YAP (GERÇEKÇİ HESAP SEÇİM PENCERESİ SİMÜLASYONU)
+// GOOGLE İLE GİRİŞ YAP SİMÜLASYONU
 function loginWithGoogle() {
     const accounts = [
         { name: "Melike Yılmaz", email: "melike.yilmaz@gmail.com" },
@@ -280,7 +280,6 @@ function loginWithGoogle() {
         { name: "Öğrenci Hesabı", email: "ogrenci.global@gmail.com" }
     ];
 
-    // Şık bir hesap seçim promptu
     let promptText = "Google Hesabı Seçin:\n\n";
     accounts.forEach((acc, index) => {
         promptText += `${index + 1}. ${acc.name} (${acc.email})\n`;
@@ -305,7 +304,7 @@ function hideError(id) {
     if (el) el.style.display = 'none';
 }
 
-// FORM KONTROLÜ VE VALIDASYON UYARILARI
+// FORM KONTROLÜ VE UYARILAR
 function validateAndProceed() {
     const fnameInput = document.getElementById('fname');
     const passInput = document.getElementById('pass');
@@ -318,12 +317,18 @@ function validateAndProceed() {
         const err = document.getElementById('nameError');
         if (err) err.style.display = 'block'; 
         valid = false; 
+    } else {
+        hideError('nameError');
     }
+
     if (!pass) { 
         const err = document.getElementById('passError');
         if (err) err.style.display = 'block'; 
         valid = false; 
+    } else {
+        hideError('passError');
     }
+
     if (!valid) return;
 
     const badge = document.getElementById('navUserBadge');
@@ -387,4 +392,5 @@ function openHistoryPage() {
     document.getElementById('historyHeaderTitle').innerText = `${data.name} Tarihçesi`;
     document.getElementById('historyTitle').innerText = data.title;
     document.getElementById('historyText').innerText = data.history;
-    document.getElementById('historySubText').innerTe
+    document.getElementById('historySubText').innerText = data.subText;
+    
