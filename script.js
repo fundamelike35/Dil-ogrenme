@@ -2,7 +2,6 @@ let currentLang = 'korean';
 let learnedItems = [];
 let progressPercent = 0;
 
-// GENİŞLETİLMİŞ DİL VE ALFABE VERİTABANI (EMOJİSİZ, KOD ROZETLİ)
 const langData = {
     korean: {
         code: "KR", speechCode: "ko-KR", name: "Korece (Hangeul)", popular: true,
@@ -20,7 +19,7 @@ const langData = {
         code: "OTK", speechCode: "tr-TR", name: "Göktürk Alfabesi", popular: true,
         desc: "Türkçenin bilinen en eski yazılı alfabesi.",
         title: "Göktürk Alfabesi Tarihçesi",
-        history: "Orhun Yazıtları'nda kullanılan Göktürk alfabesi, 38 harften oluşur ve sağdan sola doğru yazılır. Taş ve ahşap üzerine kazımaya uygun keskin hatlara sahiptir.",
+        history: "Orhun Yazıtları'nda kullanılan Göktürk alfabesi, 38 harften oluşur ve sağdan sola doğru yazılır.",
         letters: [
             { char: "𐰀", pronoun: "A / E", word: "𐰏 (Eg)" },
             { char: "𐰁", pronoun: "B", word: "𐰋 (Eb)" },
@@ -31,7 +30,7 @@ const langData = {
         code: "JP", speechCode: "ja-JP", name: "Japonca", popular: true,
         desc: "Hiragana, Katakana ve Kanji yazı sistemi.",
         title: "Japonca Yazı Sistemi Tarihçesi",
-        history: "Japonca; dilbilgisi ekleri için Hiragana, yabancı kelimeler için Katakana ve anlam bildiren Çin kökenli Kanji karakterlerinin birleşiminden oluşur.",
+        history: "Japonca; Hiragana, Katakana hece alfabeleri ve Kanji karakterlerinden oluşur.",
         letters: [
             { char: "あ", pronoun: "A", word: "あめ (Yağmur)" },
             { char: "い", pronoun: "İ", word: "いぬ (Köpek)" },
@@ -42,7 +41,7 @@ const langData = {
         code: "ZH", speechCode: "zh-CN", name: "Çince (Hanzi)", popular: false,
         desc: "Logografik karakter tabanlı köklü yazı sistemi.",
         title: "Çince (Hanzi) Tarihçesi",
-        history: "Dünyanın kesintisiz olarak en uzun süredir kullanılan yazı sistemidir. Her karakter bir heceyi ve belirli bir anlamı temsil eder.",
+        history: "Dünyanın kesintisiz olarak en uzun süredir kullanılan logografik yazı sistemidir.",
         letters: [
             { char: "你", pronoun: "Nǐ", word: "Sen" },
             { char: "好", pronoun: "Hǎo", word: "İyi" },
@@ -53,190 +52,75 @@ const langData = {
         code: "RU", speechCode: "ru-RU", name: "Kiril Alfabesi (Rusça)", popular: false,
         desc: "Doğu Avrupa ve Avrasya'da yaygın alfabe.",
         title: "Kiril Alfabesi Tarihçesi",
-        history: "9. yüzyılda Aziz Kiril ve Metodius'un öğrencileri tarafından Yunan alfabesi temel alınarak Slav dilleri için geliştirilmiştir.",
+        history: "9. yüzyılda Slav halkları için Yunan alfabesi temel alınarak geliştirilmiştir.",
         letters: [
-            { char: "А", pronoun: "A", word: "Анна (Anna)" },
-            { char: "Б", pronoun: "B", word: "Брат (Kardeş)" },
-            { char: "Д", pronoun: "D", word: "Дом (Ev)" }
+            { char: "А", pronoun: "A", word: "Анна" },
+            { char: "Б", pronoun: "B", word: "Брат" },
+            { char: "Д", pronoun: "D", word: "Дом" }
         ]
     },
     ancientGreek: {
         code: "GRC", speechCode: "el-GR", name: "Antik Yunanca", popular: false,
         desc: "Felsefe, bilim ve klasik dönem dili.",
         title: "Antik Yunanca Tarihçesi",
-        history: "Fenike alfabesinden uyarlanarak sesli harflerin eklendiği ilk tam alfabetik sistemdir. Felsefe ve bilimin temel metinleri bu alfabeyle yazılmıştır.",
+        history: "Fenike alfabesinden uyarlanarak sesli harflerin eklendiği ilk tam alfabetik sistemdir.",
         letters: [
             { char: "Α", pronoun: "Alfa", word: "Αρχή" },
-            { char: "Ω", pronoun: "Omega", word: "Ωκεανός" },
-            { char: "Φ", pronoun: "Fi", word: "Φιλοσοφία" }
+            { char: "Ω", pronoun: "Omega", word: "Ωκεανός" }
         ]
     },
     modernGreek: {
         code: "EL", speechCode: "el-GR", name: "Modern Yunanca", popular: false,
         desc: "Günümüz Yunanistan'ının resmi dili.",
         title: "Modern Yunanca Tarihçesi",
-        history: "Antik Yunancanın doğal evrimiyle günümüze ulaşan ve 24 harften oluşan modern Avrupa dilidir.",
+        history: "Antik Yunancanın doğal evrimiyle günümüze ulaşan modern Avrupa dilidir.",
         letters: [
             { char: "Α", pronoun: "Alfa", word: "Αθήνα" },
-            { char: "Β", pronoun: "Vita", word: "Βιβλίο" },
-            { char: "Γ", pronoun: "Gama", word: "Γάτα" }
+            { char: "Β", pronoun: "Vita", word: "Βιβλίο" }
         ]
     },
     portuguese: {
         code: "PT", speechCode: "pt-PT", name: "Portekizce", popular: false,
         desc: "Geniş coğrafyaya yayılmış Latin kökenli dil.",
         title: "Portekizce Alfabesi",
-        history: "Latin alfabesini temel alan ve özel aksan işaretleriyle (ç, ã, õ) zenginleştirilmiş küresel bir dildir.",
+        history: "Latin alfabesini temel alan ve özel aksan işaretleriyle zenginleştirilmiş dildir.",
         letters: [
             { char: "Ç", pronoun: "Se-cedilha", word: "Coração" },
-            { char: "Ã", pronoun: "Genizsi A", word: "Maçã" },
-            { char: "LH", pronoun: "Ly", word: "Filho" }
+            { char: "Ã", pronoun: "Genizsi A", word: "Maçã" }
         ]
     },
     arabic: {
         code: "AR", speechCode: "ar-SA", name: "Arapça", popular: true,
         desc: "Sağdan sola yazılan köklü Sami alfabesi.",
         title: "Arapça Alfabesi Tarihçesi",
-        history: "28 temel harften oluşan, sağdan sola doğru yazılan ve harflerin kelimenin başındaki, ortasındaki ve sonundaki konumuna göre şekil aldığı estetik yazı sistemidir.",
+        history: "28 temel harften oluşan, sağdan sola doğru yazılan estetik yazı sistemidir.",
         letters: [
-            { char: "ا", pronoun: "Elif", word: "أسد (Aslan)" },
-            { char: "ب", pronoun: "Be", word: "باب (Kapı)" },
-            { char: "س", pronoun: "Sin", word: "سلام (Selam)" }
+            { char: "ا", pronoun: "Elif", word: "أسد" },
+            { char: "ب", pronoun: "Be", word: "باب" }
         ]
     },
-    ukrainian: {
-        code: "UK", speechCode: "uk-UA", name: "Ukraynaca", popular: false,
-        desc: "І, Ї, Є harfli özel Kiril sürümü.",
-        title: "Ukraynaca Kiril Alfabesi",
-        history: "Doğu Slav dillerine ait olup kendine özgü І, Ї ve Є harfleriyle diğer Kiril alfabelerinden ayrılır.",
-        letters: [
-            { char: "Ї", pronoun: "Yi", word: "Україна" },
-            { char: "Є", pronoun: "Ye", word: "Європа" },
-            { char: "Г", pronoun: "H", word: "Гора" }
-        ]
-    },
-    belarusian: {
-        code: "BE", speechCode: "be-BY", name: "Beyaz Rusça", popular: false,
-        desc: "Kısa 'Ў' harfiyle tanınan Kiril dili.",
-        title: "Beyaz Rusça Kiril Alfabesi",
-        history: "Kiril alfabesi içerisinde yalnızca Beyaz Rusçada bulunan kısa 'Ў' harfiyle öne çıkan fonetik alfabedir.",
-        letters: [
-            { char: "Ў", pronoun: "Kısa U", word: "Возера" },
-            { char: "І", pronoun: "İ", word: "Імя" }
-        ]
-    },
-    bulgarian: {
-        code: "BG", speechCode: "bg-BG", name: "Bulgarca", popular: false,
-        desc: "Kiril alfabesinin doğduğu tarihi dil.",
-        title: "Bulgarca Kiril Tarihçesi",
-        history: "Birinci Bulgar İmparatorluğu döneminde Preslav Edebiyat Okulu'nda geliştirilen ilk Kiril sisteminin doğrudan mirasçısıdır.",
-        letters: [
-            { char: "Ъ", pronoun: "Er Golyam", word: "България" },
-            { char: "Щ", pronoun: "Şt", word: "Щастие" }
-        ]
-    },
-    serbian: {
-        code: "SR", speechCode: "sr-RS", name: "Sırpça (Vuk Kiril)", popular: false,
-        desc: "Tamamen fonetik Kiril alfabesi.",
-        title: "Sırpça Kiril Alfabesi",
-        history: "19. yüzyılda Vuk Karadžić tarafından 'Yazdığın gibi oku, okuduğun gibi yaz' ilkesiyle 30 harfe sadeleştirilmiştir.",
-        letters: [
-            { char: "Љ", pronoun: "Ly", word: "Љубав" },
-            { char: "Њ", pronoun: "Ny", word: "Њујорк" }
-        ]
-    },
-    macedonian: {
-        code: "MK", speechCode: "mk-MK", name: "Makedonca", popular: false,
-        desc: "Güney Slav Kiril alfabesi.",
-        title: "Makedonca Kiril Alfabesi",
-        history: "31 harften oluşan ve her sesin tek bir harfle karşılandığı modern Güney Slav Kiril alfabesidir.",
-        letters: [
-            { char: "Ѕ", pronoun: "Dz", word: "Ѕвезда" },
-            { char: "Ѓ", pronoun: "Gy", word: "Ѓавол" }
-        ]
-    },
-    kazakh: {
-        code: "KK", speechCode: "kk-KZ", name: "Kazakça", popular: false,
-        desc: "Türkçe sesli Kiril adaptasyonu.",
-        title: "Kazakça Alfabesi Tarihçesi",
-        history: "Türk dillerinin ses zenginliğini karşılamak amacıyla standart Kiril harflerine Ә, Ғ, Қ, Ң, Ө, Ұ, Ү, Һ karakterlerinin eklendiği alfabedir.",
-        letters: [
-            { char: "Ә", pronoun: "Açık E", word: "Әке (Baba)" },
-            { char: "Қ", pronoun: "Gırtlak K", word: "Қазақ" },
-            { char: "Ұ", pronoun: "Kalın U", word: "Ұлт" }
-        ]
-    },
-    tatar: {
-        code: "TT", speechCode: "tt-RU", name: "Tatarca", popular: false,
-        desc: "İdil-Ural bölgesinin Kiril dili.",
-        title: "Tatarca Kiril Alfabesi",
-        history: "İdil-Ural Türkçesinin ses yapısına uyarlanmış Ә, Ө, Ү, Җ, Ң, Һ harflerini içeren alfabedir.",
-        letters: [
-            { char: "Җ", pronoun: "C", word: "Җыр (Şarkı)" },
-            { char: "Ң", pronoun: "Nazal N", word: "Таң (Şafak)" }
-        ]
-    },
-    bashkir: {
-        code: "BA", speechCode: "ba-RU", name: "Başkırca", popular: false,
-        desc: "Peltik sesler içeren Kiril dili.",
-        title: "Başkırca Kiril Alfabesi",
-        history: "Başkurtçaya özgü peltik 'Ҫ' ve 'Ҙ' seslerini karşılayan özel harfleri barındıran Türk dili alfabesidir.",
-        letters: [
-            { char: "Ҙ", pronoun: "Peltik Z", word: "Ҡаҙ (Kaz)" },
-            { char: "Ҫ", pronoun: "Peltik S", word: "Ҫәс (Saç)" }
-        ]
-    },
-    mongolian: {
-        code: "MN", speechCode: "mn-MN", name: "Moğolca", popular: false,
-        desc: "1940'tan beri kullanılan Kiril dili.",
-        title: "Moğolca Kiril Alfabesi",
-        history: "Geleneksel dikey Moğol yazısının yanında 1940'lı yıllardan itibaren Ө ve Ү harflerinin eklenmesiyle kullanılan Kiril sistemidir.",
-        letters: [
-            { char: "Ө", pronoun: "Ö", word: "Өглөө (Sabah)" },
-            { char: "Ү", pronoun: "Ü", word: "Үнэн (Gerçek)" }
-        ]
-    },
-    abkhaz: {
-        code: "AB", speechCode: "ru-RU", name: "Abhazca", popular: false,
-        desc: "60+ zengin sesli Kafkas Kiril dili.",
-        title: "Abhazca Kiril Alfabesi",
-        history: "Kuzeybatı Kafkas dillerinin zengin ünsüz yapısını yansıtmak için 62 harf ve digraftan oluşan özel Kiril sistemidir.",
-        letters: [
-            { char: "Ҟ", pronoun: "Gırtlak K", word: "Ҟабз" },
-            { char: "Ҩ", pronoun: "Labial", word: "Ҩны" }
-        ]
-    },
-    abaza: {
-        code: "ABQ", speechCode: "ru-RU", name: "Abazaca", popular: false,
-        desc: "Kafkas alfabesi ve ünsüz zenginliği.",
-        title: "Abazaca Kiril Alfabesi",
-        history: "Abhazca ile akraba olan ve gırtlak vurguları için Palochka (Ӏ) işaretini yoğun kullanan Kafkas alfabesidir.",
-        letters: [
-            { char: "Гъ", pronoun: "Ğ", word: "Гъаза" },
-            { char: "КӀ", pronoun: "Vurgulu K", word: "КӀа" }
-        ]
-    },
-    avar: {
-        code: "AV", speechCode: "ru-RU", name: "Avarca", popular: false,
-        desc: "Dağıstan'ın gırtlak sesli Kiril dili.",
-        title: "Avarca Kiril Alfabesi",
-        history: "Kuzeydoğu Kafkas dillerinden Avarcanın gırtlak ve yan ünsüzlerini ifade etmek için Kiril alfabesinden uyarlanmıştır.",
-        letters: [
-            { char: "Ӏ", pronoun: "Palochka", word: "ГӀаракь" },
-            { char: "Кь", pronoun: "Lateral K", word: "Кьуру" }
-        ]
-    }
+    ukrainian: { code: "UK", speechCode: "uk-UA", name: "Ukraynaca", popular: false, desc: "Özel Kiril sürümü.", title: "Ukraynaca", history: "Kendine özgü İ, Ї ve Є harfleri barındırır.", letters: [{ char: "Ї", pronoun: "Yi", word: "Україна" }] },
+    belarusian: { code: "BE", speechCode: "be-BY", name: "Beyaz Rusça", popular: false, desc: "Kısa Ў harfli Kiril.", title: "Beyaz Rusça", history: "Kısa Ў harfiyle öne çıkar.", letters: [{ char: "Ў", pronoun: "Kısa U", word: "Возера" }] },
+    bulgarian: { code: "BG", speechCode: "bg-BG", name: "Bulgarca", popular: false, desc: "Tarihi Kiril dili.", title: "Bulgarca", history: "Kiril alfabesinin doğduğu dildir.", letters: [{ char: "Ъ", pronoun: "Er Golyam", word: "България" }] },
+    serbian: { code: "SR", speechCode: "sr-RS", name: "Sırpça", popular: false, desc: "Fonetik Kiril.", title: "Sırpça", history: "Vuk Karadžić tarafından sadeleştirilmiştir.", letters: [{ char: "Љ", pronoun: "Ly", word: "Љубав" }] },
+    macedonian: { code: "MK", speechCode: "mk-MK", name: "Makedonca", popular: false, desc: "Güney Slav Kiril.", title: "Makedonca", history: "31 harfli modern Slav alfabesidir.", letters: [{ char: "Ѕ", pronoun: "Dz", word: "Ѕвезда" }] },
+    kazakh: { code: "KK", speechCode: "kk-KZ", name: "Kazakça", popular: false, desc: "Türkçe sesli Kiril.", title: "Kazakça", history: "Türk ses uyumuna göre uyarlanmıştır.", letters: [{ char: "Ә", pronoun: "Açık E", word: "Әке" }] },
+    tatar: { code: "TT", speechCode: "tt-RU", name: "Tatarca", popular: false, desc: "İdil-Ural Kiril dili.", title: "Tatarca", history: "Özel ses karakterleri barındırır.", letters: [{ char: "Җ", pronoun: "C", word: "Җыр" }] },
+    bashkir: { code: "BA", speechCode: "ba-RU", name: "Başkırca", popular: false, desc: "Peltik sesli Kiril.", title: "Başkırca", history: "Özel peltik sesler içerir.", letters: [{ char: "Ҙ", pronoun: "Peltik Z", word: "Ҡаҙ" }] },
+    mongolian: { code: "MN", speechCode: "mn-MN", name: "Moğolca", popular: false, desc: "Moğol Kiril dili.", title: "Moğolca", history: "1940'tan beri kullanılan sistemdir.", letters: [{ char: "Ө", pronoun: "Ö", word: "Өглөө" }] },
+    abkhaz: { code: "AB", speechCode: "ru-RU", name: "Abhazca", popular: false, desc: "Kafkas Kiril dili.", title: "Abhazca", history: "Zengin ses kümesine sahiptir.", letters: [{ char: "Ҟ", pronoun: "Gırtlak K", word: "Ҟабз" }] },
+    abaza: { code: "ABQ", speechCode: "ru-RU", name: "Abazaca", popular: false, desc: "Kafkas ünsüz dili.", title: "Abazaca", history: "Ünsüz zenginliğiyle bilinir.", letters: [{ char: "Гъ", pronoun: "Ğ", word: "Гъаза" }] },
+    avar: { code: "AV", speechCode: "ru-RU", name: "Avarca", popular: false, desc: "Dağıstan dili.", title: "Avarca", history: "Gırtlak vurguları barındırır.", letters: [{ char: "Ӏ", pronoun: "Palochka", word: "ГӀаракь" }] }
 };
 
-// SAYFA YÜKLENİNCE KARTLARI OLUŞTUR VE 1. SAYFAYI AÇ
 document.addEventListener("DOMContentLoaded", function() {
     renderLanguageGrid();
     showPage('page1');
 });
 
-// DİL KARTLARINI ALFABETİK OLARAK OLUŞTUR
 function renderLanguageGrid() {
     const grid = document.getElementById('langGrid');
+    if(!grid) return;
     grid.innerHTML = '';
 
     const sortedKeys = Object.keys(langData).sort((a, b) => 
@@ -258,7 +142,6 @@ function renderLanguageGrid() {
     });
 }
 
-// ARAMA ÇUBUĞUNA TIKLANINCA POPÜLER ARAMALARI GÖSTER
 function handleSearchFocus() {
     const inputVal = document.getElementById('searchInput').value.trim();
     if (inputVal === "") {
@@ -268,7 +151,6 @@ function handleSearchFocus() {
     }
 }
 
-// HARF YAZILDIĞINDA ANINDA ALFABETİK SÜZME (GRİ KUTUCUK)
 function handleSearchInput() {
     const inputVal = document.getElementById('searchInput').value.trim().toLocaleLowerCase('tr');
     const dropdown = document.getElementById('searchDropdown');
@@ -286,10 +168,10 @@ function handleSearchInput() {
     }).sort((a, b) => langData[a].name.localeCompare(langData[b].name, 'tr'));
 
     if (matchedKeys.length === 0) {
-        dropdown.innerHTML = `<div class="dropdown-item" style="color: #a1a1aa;">Eşleşen dil bulunamadı</div>`;
+        dropdown.innerHTML = `<div class="dropdown-item" style="color: #a1a1aa;">Dil bulunamadı</div>`;
         dropdown.style.display = 'block';
     } else {
-        let html = `<div class="dropdown-header">Eşleşen Diller (${matchedKeys.length})</div>`;
+        let html = `<div class="dropdown-header">Sonuçlar (${matchedKeys.length})</div>`;
         matchedKeys.forEach(key => {
             html += `
                 <div class="dropdown-item" onclick="selectLangFromDropdown('${key}')">
@@ -345,50 +227,77 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// ŞİFRE ÖNERİCİ VE GİRİŞ DOĞRULAMA
+// ŞİFRE ÖNERİCİ (GARANTİ ÇALIŞACAK ŞEKİLDE DÜZELTİLDİ)
 function suggestPassword() {
-    const fname = document.getElementById('fname').value.trim() || "Global";
+    const fnameInput = document.getElementById('fname');
+    let fname = fnameInput ? fnameInput.value.trim() : "Global";
+    if(!fname) fname = "Global";
+    
     const clean = fname.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
     const num = Math.floor(100 + Math.random() * 900);
-    document.getElementById('pass').value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
+    
+    const passField = document.getElementById('pass');
+    if(passField) {
+        passField.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
+    }
     hideError('passError');
 }
 
 function hideError(id) {
-    document.getElementById(id).style.display = 'none';
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'none';
 }
 
+// FORM KONTROLÜ VE 2. SAYFAYA GEÇİŞ
 function validateAndProceed() {
-    const fname = document.getElementById('fname').value.trim();
-    const pass = document.getElementById('pass').value.trim();
+    const fnameInput = document.getElementById('fname');
+    const passInput = document.getElementById('pass');
+    
+    const fname = fnameInput ? fnameInput.value.trim() : "";
+    const pass = passInput ? passInput.value.trim() : "";
     let valid = true;
 
-    if (!fname) { document.getElementById('nameError').style.display = 'block'; valid = false; }
-    if (!pass) { document.getElementById('passError').style.display = 'block'; valid = false; }
+    if (!fname) { 
+        const err = document.getElementById('nameError');
+        if(err) err.style.display = 'block'; 
+        valid = false; 
+    }
+    if (!pass) { 
+        const err = document.getElementById('passError');
+        if(err) err.style.display = 'block'; 
+        valid = false; 
+    }
     if (!valid) return;
 
     const badge = document.getElementById('navUserBadge');
-    badge.innerText = fname;
-    badge.style.display = 'inline-block';
+    if(badge) {
+        badge.innerText = fname;
+        badge.style.display = 'inline-block';
+    }
 
     showPage('page2');
 }
 
-// SAYFA GEÇİŞLERİ
 function showPage(pageId) {
     document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
+    const target = document.getElementById(pageId);
+    if(target) target.classList.add('active');
 
     const navSteps = document.getElementById('navSteps');
-    if (pageId === 'page1') {
-        navSteps.style.display = 'none';
-        document.getElementById('navUserBadge').style.display = 'none';
-    } else {
-        navSteps.style.display = 'flex';
-        document.querySelectorAll('.step-tag').forEach(t => t.classList.remove('active'));
-        if (pageId === 'page2') document.getElementById('step-lang').classList.add('active');
-        if (pageId === 'page3') document.getElementById('step-history').classList.add('active');
-        if (pageId === 'page4') document.getElementById('step-class').classList.add('active');
+    const userBadge = document.getElementById('navUserBadge');
+    
+    if (navSteps && userBadge) {
+        if (pageId === 'page1') {
+            navSteps.style.display = 'none';
+            userBadge.style.display = 'none';
+        } else {
+            navSteps.style.display = 'flex';
+            userBadge.style.display = 'inline-block';
+            document.querySelectorAll('.step-tag').forEach(t => t.classList.remove('active'));
+            if (pageId === 'page2') document.getElementById('step-lang').classList.add('active');
+            if (pageId === 'page3') document.getElementById('step-history').classList.add('active');
+            if (pageId === 'page4') document.getElementById('step-class').classList.add('active');
+        }
     }
     window.scrollTo(0, 0);
 }
@@ -397,10 +306,10 @@ function selectLang(cardElement, langKey) {
     document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
     cardElement.classList.add('selected');
     currentLang = langKey;
-    document.getElementById('selectedLangInfo').innerText = `Seçili Dil: ${langData[langKey].name}`;
+    const info = document.getElementById('selectedLangInfo');
+    if(info) info.innerText = `Seçili Dil: ${langData[langKey].name}`;
 }
 
-// TARİHÇE SAYFASINI AÇ
 function openHistoryPage() {
     const data = langData[currentLang];
     document.getElementById('historyCodeBadge').innerText = data.code;
@@ -409,7 +318,6 @@ function openHistoryPage() {
     showPage('page3');
 }
 
-// DERSLİK SAYFASINI AÇ VE SESLİ HARF + ALIŞTIRMAYI HAZIRLA
 function openClassroom() {
     const data = langData[currentLang];
     document.getElementById('classCodeBadge').innerText = data.code;
@@ -437,7 +345,6 @@ function openClassroom() {
     showPage('page4');
 }
 
-// SESLİ HARF SİMÜLASYONU (SPEECHSYNTHESIS API)
 function speakCharacter(text, langCode) {
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -448,7 +355,6 @@ function speakCharacter(text, langCode) {
     }
 }
 
-// ÖĞRENİLEN KELİME SAYACI VE DAİRESEL İLERLEME HALKASI
 function markItemLearned(char, pronoun) {
     const label = `${char} (${pronoun})`;
     if (!learnedItems.includes(label)) {
@@ -459,8 +365,66 @@ function markItemLearned(char, pronoun) {
 
 function updateProgressUI(increment) {
     progressPercent = Math.min(100, progressPercent + increment);
-
-    // Dairesel Halka Güncellemesi
     const ring = document.getElementById('circularProgress');
     const deg = (progressPercent / 100) * 360;
-    ring.style.background = `conic-gradient(#a855f7 ${deg}deg, #271042 
+    if(ring) ring.style.background = `conic-gradient(#7b2cbf ${deg}deg, #2b004f ${deg}deg)`;
+    
+    const val = document.getElementById('progressValue');
+    if(val) val.innerText = `${progressPercent}%`;
+
+    const count = document.getElementById('learnedCount');
+    if(count) count.innerText = learnedItems.length;
+
+    const listContainer = document.getElementById('learnedTagsList');
+    if (listContainer && learnedItems.length > 0) {
+        listContainer.innerHTML = learnedItems.map(item => `<span class="learned-pill">${item}</span>`).join('');
+    }
+}
+
+function loadQuizQuestion() {
+    const data = langData[currentLang];
+    const target = data.letters[Math.floor(Math.random() * data.letters.length)];
+    const qChar = document.getElementById('quizChar');
+    const qFeed = document.getElementById('quizFeedback');
+    
+    if(qChar) qChar.innerText = target.char;
+    if(qFeed) qFeed.innerText = '';
+
+    let options = [target.pronoun];
+    const allPronouns = ["G / K", "N", "A", "Alfa", "Omega", "Elif", "Açık E", "C", "Ö", "İ"];
+    while (options.length < 3) {
+        const rand = allPronouns[Math.floor(Math.random() * allPronouns.length)];
+        if (!options.includes(rand)) options.push(rand);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    const optContainer = document.getElementById('quizOptions');
+    if(!optContainer) return;
+    optContainer.innerHTML = '';
+
+    options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-btn';
+        btn.innerText = opt;
+        btn.onclick = function() {
+            const feedback = document.getElementById('quizFeedback');
+            if (opt === target.pronoun) {
+                if(feedback) {
+                    feedback.style.color = '#4ade80';
+                    feedback.innerText = 'Doğru! İlerleme halkası güncellendi.';
+                }
+                speakCharacter(target.char, data.speechCode);
+                markItemLearned(target.char, target.pronoun);
+                updateProgressUI(20);
+                setTimeout(loadQuizQuestion, 1200);
+            } else {
+                if(feedback) {
+                    feedback.style.color = '#ff8fa3';
+                    feedback.innerText = 'Yanlış cevap, tekrar dene.';
+                }
+            }
+        };
+        optContainer.appendChild(btn);
+    });
+        }
+        
