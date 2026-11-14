@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // ARAMA ALANI ODAKLANINCA POPÜLER ARAMALARI GÖSTER
 function handleSearchFocus() {
-    const dropdown = document.getElementById('searchDropdown');
     const inputVal = document.getElementById('searchInput').value.trim();
     if(inputVal === "") {
         showPopularDropdown();
@@ -41,20 +40,23 @@ function handleSearchFocus() {
     }
 }
 
-// HARF YAZILDIĞINDA ALFABETİK SÜZME
+// HARF YAZILDIĞINDA KAPSAMLI VE ANINDA FİLTRELEME
 function handleSearchInput() {
     const inputVal = document.getElementById('searchInput').value.trim().toLowerCase();
     const dropdown = document.getElementById('searchDropdown');
+    const cards = document.querySelectorAll('.lang-card');
 
     if (inputVal === "") {
         showPopularDropdown();
-        filterGridCards("");
+        cards.forEach(card => card.style.display = 'block');
         return;
     }
 
-    // Harfle başlayan dilleri bul ve alfabetik sırala
+    // Harf ile başlayan veya içeren dilleri filtrele ve alfabetik sırala
     const matchedKeys = Object.keys(langData).filter(key => {
-        return langData[key].name.toLowerCase().startsWith(inputVal) || langData[key].name.toLowerCase().includes(inputVal);
+        const langName = langData[key].name.toLowerCase();
+        const langHistory = langData[key].history.toLowerCase();
+        return langName.includes(inputVal) || langHistory.includes(inputVal);
     }).sort((a, b) => langData[a].name.localeCompare(langData[b].name, 'tr'));
 
     if (matchedKeys.length === 0) {
@@ -72,7 +74,15 @@ function handleSearchInput() {
         dropdown.style.display = 'block';
     }
 
-    filterGridCards(inputVal);
+    // Grid içerisindeki kartları anınında süz
+    cards.forEach(card => {
+        const cardKey = card.getAttribute('data-key');
+        if (matchedKeys.includes(cardKey)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
 }
 
 // POPÜLER ARAMALAR LİSTESİ
@@ -96,7 +106,6 @@ function selectLangFromDropdown(langKey) {
     document.getElementById('searchInput').value = langData[langKey].name;
     document.getElementById('searchDropdown').style.display = 'none';
     
-    // Kartı seçili yap
     const targetCard = document.querySelector(`.lang-card[data-key="${langKey}"]`);
     if (targetCard) {
         selectLang(targetCard, langKey);
@@ -108,22 +117,10 @@ function selectLangFromDropdown(langKey) {
 document.addEventListener('click', function(e) {
     const container = document.querySelector('.search-container');
     if (container && !container.contains(e.target)) {
-        document.getElementById('searchDropdown').style.display = 'none';
+        const dropdown = document.getElementById('searchDropdown');
+        if(dropdown) dropdown.style.display = 'none';
     }
 });
-
-// KARTLARI FİLTRELEME
-function filterGridCards(query) {
-    const cards = document.querySelectorAll('.lang-card');
-    cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        if (text.includes(query.toLowerCase())) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
 
 // ŞİFRE ÖNERİCİ
 function suggestPassword() {
@@ -169,7 +166,6 @@ function showPage(pageId) {
     activePage.classList.add('active');
     activePage.style.setProperty('display', 'flex', 'important');
 
-    // Giriş sayfasında navbar adımlarını gizle, iç sayfalarda göster
     const navSteps = document.getElementById('navSteps');
     if (pageId === 'page1') {
         navSteps.style.display = 'none';
@@ -204,7 +200,7 @@ function renderWorkspace() {
         card.innerHTML = `
             <div style="font-size: 2.2rem; font-weight: bold; color: #ffffff; margin-bottom: 5px;">${item.char}</div>
             <div style="font-size: 0.85rem; color: #e9d5ff; margin-bottom: 3px;">Okunuş: ${item.pronoun}</div>
-            <div style="font-size: 0.8rem; color: #cbd5e1;">Örnek: ${item.example}</div>
+            <div style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 8px;">Örnek: ${item.example}</div>
         `;
         container.appendChild(card);
     });
