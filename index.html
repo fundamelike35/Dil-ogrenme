@@ -47,20 +47,20 @@
         }
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-align: left;
         }
 
         .input-group label {
             display: block;
             font-size: 0.85rem;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             color: #e9d5ff;
         }
 
         .input-group input {
             width: 100%;
-            padding: 10px 12px;
+            padding: 9px 12px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
@@ -78,7 +78,7 @@
             display: none;
             color: #ff8fa3;
             font-size: 0.75rem;
-            margin-top: 4px;
+            margin-top: 3px;
         }
 
         .btn-primary {
@@ -91,7 +91,7 @@
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
             transition: opacity 0.2s;
         }
 
@@ -101,10 +101,9 @@
 
         .divider {
             text-align: center;
-            margin: 15px 0;
+            margin: 12px 0;
             font-size: 0.8rem;
             color: #c084fc;
-            position: relative;
         }
 
         .btn-google {
@@ -132,6 +131,92 @@
             color: #ea4335;
             font-weight: bold;
         }
+
+        /* ŞIK GOOGLE HESAP SEÇİM PENCERESİ (MODAL) */
+        .google-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .google-modal-content {
+            background: #2d004d;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            width: 90%;
+            max-width: 320px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: left;
+        }
+
+        .google-modal-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        .account-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .account-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .account-avatar {
+            width: 35px; height: 35px;
+            background: #9333ea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .account-info .name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .account-info .email {
+            font-size: 0.72rem;
+            color: #d8b4fe;
+        }
+
+        .modal-close {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            color: #d8b4fe;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
     </style>
 </head>
 <body>
@@ -148,6 +233,11 @@
             </div>
             
             <div class="input-group">
+                <label>Soyadınız</label>
+                <input type="text" id="lname" placeholder="Örn: Yılmaz">
+            </div>
+
+            <div class="input-group">
                 <label>Şifre</label>
                 <input type="password" id="pass" placeholder="Şifrenizi girin" oninput="hideError('passError')">
                 <span id="passError" class="error-msg">Lütfen şifre belirleyin</span>
@@ -158,9 +248,34 @@
 
         <div class="divider">veya</div>
 
-        <button type="button" class="btn-google" onclick="loginWithGoogle()">
+        <button type="button" class="btn-google" onclick="openGoogleModal()">
             <span class="google-icon">G</span> Google ile Giriş Yap
         </button>
+    </div>
+
+    <!-- GOOGLE HESAP SEÇİM PENCERESİ (MODAL) -->
+    <div id="googleModal" class="google-modal">
+        <div class="google-modal-content">
+            <div class="google-modal-header">Google ile Devam Et</div>
+            
+            <div class="account-item" onclick="selectGoogleAccount('Melike', 'Yılmaz', 'melike.yilmaz@gmail.com')">
+                <div class="account-avatar">M</div>
+                <div class="account-info">
+                    <div class="name">Melike Yılmaz</div>
+                    <div class="email">melike.yilmaz@gmail.com</div>
+                </div>
+            </div>
+
+            <div class="account-item" onclick="selectGoogleAccount('Global', 'Kullanıcı', 'global.script35@gmail.com')">
+                <div class="account-avatar">G</div>
+                <div class="account-info">
+                    <div class="name">Global Kullanıcı</div>
+                    <div class="email">global.script35@gmail.com</div>
+                </div>
+            </div>
+
+            <button type="button" class="modal-close" onclick="closeGoogleModal()">İptal</button>
+        </div>
     </div>
 
     <script>
@@ -189,33 +304,29 @@
 
             if (!valid) return;
 
-            alert("Başarılı! Validasyon geçti.");
+            alert("Başarılı! Form doğrulandı ve geçiş yapılıyor.");
         }
 
-        function loginWithGoogle() {
-            const accounts = [
-                { name: "Melike Yılmaz", email: "melike.yilmaz@gmail.com" },
-                { name: "Global Kullanıcı", email: "global.script@gmail.com" }
-            ];
+        // Google Modal Açma / Kapatma Fonksiyonları
+        function openGoogleModal() {
+            document.getElementById('googleModal').style.display = 'flex';
+        }
 
-            let promptText = "Google Hesabı Seçin:\n\n";
-            accounts.forEach((acc, index) => {
-                promptText += `${index + 1}. ${acc.name} (${acc.email})\n`;
-            });
+        function closeGoogleModal() {
+            document.getElementById('googleModal').style.display = 'none';
+        }
 
-            let choice = prompt(promptText + "\nLütfen 1 veya 2 seçin:");
-            if (choice === null) return;
-
-            let selected = accounts[0];
-            if (choice === "2") selected = accounts[1];
-
-            document.getElementById('fname').value = selected.name.split(' ')[0];
-            document.getElementById('pass').value = "GoogleAuth123!";
+        // Hesaba tıklandığında formu otomatik doldurma
+        function selectGoogleAccount(name, surname, email) {
+            document.getElementById('fname').value = name;
+            document.getElementById('lname').value = surname;
+            document.getElementById('pass').value = "GoogleAuth_" + Math.floor(1000 + Math.random() * 9000) + "!";
             
             hideError('nameError');
             hideError('passError');
+            closeGoogleModal();
             
-            alert(selected.name + " ile giriş yapıldı!");
+            alert(name + " " + surname + " (" + email + ") hesabı ile başarıyla giriş yapıldı!");
         }
     </script>
 </body>
