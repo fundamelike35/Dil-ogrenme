@@ -4,10 +4,425 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Script - Giriş</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:ital,wght@1,600&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Harici Style Bağlantısı -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #18032c, #3b075e, #63144c, #1e1b4b);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Kumlu / Pürüzlü Film Grain Dokusu */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.11'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Arka plandaki döküm alfabeler (Gölgesiz ve dağınık) */
+        .bg-floating-words {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .word {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.20);
+            font-family: 'Caveat', cursive;
+            font-style: italic;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        .w1 { top: 9%; left: 5%; font-size: 2.8rem; transform: rotate(-12deg); }
+        .w2 { top: 20%; right: 7%; font-size: 2.5rem; transform: rotate(14deg); }
+        .w3 { bottom: 13%; left: 8%; font-size: 2.3rem; transform: rotate(-8deg); }
+        .w4 { bottom: 15%; right: 9%; font-size: 2.6rem; transform: rotate(7deg); }
+        .w5 { top: 44%; left: 16%; font-size: 2.1rem; transform: rotate(-16deg); }
+        .w6 { top: 55%; right: 14%; font-size: 2.2rem; transform: rotate(12deg); }
+        .w7 { top: 24%; left: 40%; font-size: 3.1rem; transform: rotate(3deg); }
+        .w8 { bottom: 29%; left: 20%; font-size: 2.7rem; transform: rotate(-13deg); }
+
+        /* Navbar: Kompakt, yeşil-mavi-mor geçişli ve dokulu */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 20px;
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.28), rgba(59, 130, 246, 0.28), rgba(147, 51, 234, 0.28));
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            z-index: 10;
+        }
+
+        .logo-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Ana İçerik ve Kompakt Giriş Kartı */
+        .main-container {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 340px;
+            background: rgba(43, 0, 79, 0.88);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .welcome-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #f3c6ff;
+        }
+
+        .subtitle {
+            font-size: 0.82rem;
+            color: #d8b4fe;
+            margin-bottom: 18px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.82rem;
+            margin-bottom: 4px;
+            color: #e9d5ff;
+        }
+
+        .optional {
+            font-size: 0.72rem;
+            color: #c084fc;
+            font-weight: normal;
+        }
+
+        .label-with-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .label-with-action label {
+            margin-bottom: 0;
+        }
+
+        .suggest-btn {
+            background: none;
+            border: none;
+            color: #c77dff;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 2px;
+        }
+
+        .suggest-btn:hover {
+            color: #e0aaff;
+        }
+
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 9px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .password-wrapper input {
+            padding-right: 38px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #d8b4fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            z-index: 3;
+        }
+
+        .toggle-password svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            pointer-events: none;
+        }
+
+        .toggle-password:hover {
+            color: #ffffff;
+        }
+
+        .input-group input:focus {
+            border-color: #c084fc;
+        }
+
+        .error-msg {
+            display: none;
+            color: #ff8fa3;
+            font-size: 0.73rem;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 11px;
+            background: linear-gradient(135deg, #9333ea, #7e22ce);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 12px 0;
+            font-size: 0.78rem;
+            color: #c084fc;
+        }
+
+        .btn-google {
+            width: 100%;
+            padding: 10px;
+            background: #ffffff !important;
+            border: none;
+            border-radius: 8px;
+            color: #333 !important;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-google:hover {
+            background: #f1f1f1 !important;
+        }
+
+        .google-icon {
+            color: #ea4335;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* GOOGLE HESAP SEÇİM PENCERESİ (MODAL) */
+        .google-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .google-modal-content {
+            background: #2d004d;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            width: 90%;
+            max-width: 330px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            text-align: left;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .google-modal-header {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        .account-list {
+            margin-bottom: 12px;
+        }
+
+        .account-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 6px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .account-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .account-avatar {
+            width: 32px; height: 32px;
+            background: #9333ea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        .account-info .name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .account-info .email {
+            font-size: 0.7rem;
+            color: #d8b4fe;
+        }
+
+        .add-account-section {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .add-toggle-btn {
+            background: none;
+            border: none;
+            color: #c084fc;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            text-align: left;
+            padding: 4px 0;
+        }
+
+        .add-toggle-btn:hover {
+            color: #e0aaff;
+        }
+
+        .new-account-form {
+            display: none;
+            margin-top: 8px;
+        }
+
+        .new-account-form input {
+            width: 100%;
+            padding: 7px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.82rem;
+            outline: none;
+            margin-bottom: 6px;
+        }
+
+        .btn-add-submit {
+            width: 100%;
+            padding: 7px;
+            background: #9333ea;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        .modal-close {
+            margin-top: 10px;
+            width: 100%;
+            padding: 7px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            color: #d8b4fe;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+    </style>
 </head>
 <body>
 
@@ -23,7 +438,7 @@
         <span class="word w8">Français</span>
     </div>
 
-    <!-- Üst Navbar (Yeşil-Mavi-Mor Geçişli ve Dokulu) -->
+    <!-- Üst Navbar -->
     <header class="navbar">
         <div class="logo-text">
             <span>🌐</span> Global<strong>Script</strong>
@@ -69,5 +484,88 @@
             <div class="divider">veya</div>
 
             <button type="button" id="googleLoginBtn" class="btn-google">
-                <span class="
-                    
+                <span class="google-icon">G</span> Google ile Giriş Yap
+            </button>
+        </div>
+    </main>
+
+    <!-- GOOGLE HESAP SEÇİM PENCERESİ (MODAL) -->
+    <div id="googleModal" class="google-modal" role="dialog" aria-modal="true">
+        <div class="google-modal-content">
+            <div class="google-modal-header">Google ile Devam Et</div>
+            
+            <div class="account-list" id="accountList">
+                <div class="account-item" data-name="Melike" data-surname="Yılmaz" data-email="melike.yilmaz@gmail.com">
+                    <div class="account-avatar">M</div>
+                    <div class="account-info">
+                        <div class="name">Melike Yılmaz</div>
+                        <div class="email">melike.yilmaz@gmail.com</div>
+                    </div>
+                </div>
+
+                <div class="account-item" data-name="Global" data-surname="Kullanıcı" data-email="global.script35@gmail.com">
+                    <div class="account-avatar">G</div>
+                    <div class="account-info">
+                        <div class="name">Global Kullanıcı</div>
+                        <div class="email">global.script35@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yeni Hesap Ekleme Alanı -->
+            <div class="add-account-section">
+                <button type="button" id="toggleNewAccBtn" class="add-toggle-btn">+ Başka bir hesap ekle</button>
+                <div id="newAccountForm" class="new-account-form">
+                    <input type="text" id="newFirstName" placeholder="Adınız">
+                    <input type="text" id="newLastName" placeholder="Soyadınız">
+                    <input type="email" id="newEmail" placeholder="E-posta adresiniz">
+                    <button type="button" id="addNewAccSubmitBtn" class="btn-add-submit">Hesabı Ekle ve Giriş Yap</button>
+                </div>
+            </div>
+
+            <button type="button" id="closeModalBtn" class="modal-close">İptal</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('loginForm');
+            const fnameInput = document.getElementById('fname');
+            const lnameInput = document.getElementById('lname');
+            const passInput = document.getElementById('pass');
+            const nameError = document.getElementById('nameError');
+            const passError = document.getElementById('passError');
+            const suggestPassBtn = document.getElementById('suggestPassBtn');
+            const togglePassBtn = document.getElementById('togglePassBtn');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            const googleLoginBtn = document.getElementById('googleLoginBtn');
+            const googleModal = document.getElementById('googleModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const accountList = document.getElementById('accountList');
+            const toggleNewAccBtn = document.getElementById('toggleNewAccBtn');
+            const newAccountForm = document.getElementById('newAccountForm');
+            const addNewAccSubmitBtn = document.getElementById('addNewAccSubmitBtn');
+
+            const EYE_OPEN_PATH = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+            const EYE_CLOSED_PATH = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2z"/>';
+
+            // Validasyon gizleme
+            fnameInput.addEventListener('input', () => nameError.style.display = 'none');
+            passInput.addEventListener('input', () => passError.style.display = 'none');
+
+            // Şifre Göster / Gizle
+            togglePassBtn.addEventListener('click', () => {
+                if (passInput.type === 'password') {
+                    passInput.type = 'text';
+                    eyeIcon.innerHTML = EYE_OPEN_PATH;
+                } else {
+                    passInput.type = 'password';
+                    eyeIcon.innerHTML = EYE_CLOSED_PATH;
+                }
+            });
+
+            // Akıllı Şifre Öner
+            suggestPassBtn.addEventListener('click', () => {
+                let fname = fnameInput.value.trim() || "Global";
+                const clean = fname.replace(/ı/g, 'i
