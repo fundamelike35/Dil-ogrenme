@@ -14,7 +14,7 @@
         }
 
         body {
-            /* Mor, lila, lacivert ve dozunda koyu pembe tonlarında derin geçiş */
+            /* Mor, lila, lacivert ve dozunda koyu pembe tonlarında harman */
             background: linear-gradient(135deg, #18032c, #3b075e, #63144c, #1e1b4b);
             color: #ffffff;
             min-height: 100vh;
@@ -27,18 +27,17 @@
             overflow-x: hidden;
         }
 
-        /* İstediğin o belirgin pürüzlü doku (Noise Overlay) */
+        /* İstediğin o gerçek kumlu/pürüzlü doku (Noise/Grain Overlay - Nokta nokta değil) */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1.2px, transparent 1.2px);
-            background-size: 18px 18px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.07"/></svg>');
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Arka plandaki tüm alfabeler ve diller (Kıvrımlı stilize font) */
+        /* Arka plandaki döküm alfabeler - Gölgesiz ve dağınık */
         .bg-floating-words {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -49,23 +48,22 @@
 
         .word {
             position: absolute;
-            color: rgba(255, 255, 255, 0.22); /* Daha net görünürlük */
+            color: rgba(255, 255, 255, 0.15);
             font-family: 'Caveat', cursive;
             font-style: italic;
             font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .w1 { top: 10%; left: 6%; font-size: 2.8rem; transform: rotate(-7deg); }
-        .w2 { top: 18%; right: 8%; font-size: 2.6rem; transform: rotate(9deg); }
-        .w3 { bottom: 15%; left: 8%; font-size: 2.4rem; transform: rotate(-9deg); }
-        .w4 { bottom: 12%; right: 10%; font-size: 2.7rem; transform: rotate(6deg); }
-        .w5 { top: 45%; left: 20%; font-size: 2.2rem; transform: rotate(-14deg); }
-        .w6 { top: 52%; right: 18%; font-size: 2.3rem; transform: rotate(11deg); }
-        .w7 { top: 28%; left: 38%; font-size: 3.2rem; transform: rotate(4deg); }
-        .w8 { bottom: 30%; left: 14%; font-size: 2.8rem; transform: rotate(-11deg); }
+        .w1 { top: 8%; left: 5%; font-size: 2.8rem; transform: rotate(-12deg); }
+        .w2 { top: 22%; right: 7%; font-size: 2.5rem; transform: rotate(14deg); }
+        .w3 { bottom: 12%; left: 8%; font-size: 2.3rem; transform: rotate(-8deg); }
+        .w4 { bottom: 16%; right: 9%; font-size: 2.6rem; transform: rotate(7deg); }
+        .w5 { top: 44%; left: 18%; font-size: 2.1rem; transform: rotate(-16deg); }
+        .w6 { top: 55%; right: 15%; font-size: 2.2rem; transform: rotate(12deg); }
+        .w7 { top: 25%; left: 42%; font-size: 3.1rem; transform: rotate(3deg); }
+        .w8 { bottom: 28%; left: 22%; font-size: 2.7rem; transform: rotate(-13deg); }
 
-        /* Navbar: İki tık küçük, yeşil, mavi, mor geçişli ve dokulu yapı */
+        /* Navbar: Kompakt, yeşil, mavi, mor geçişli ve dokulu */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -73,10 +71,18 @@
             align-items: center;
             justify-content: space-between;
             padding: 8px 20px;
-            background: linear-gradient(90deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.3), rgba(147, 51, 234, 0.3));
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.25), rgba(59, 130, 246, 0.25), rgba(147, 51, 234, 0.25));
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             z-index: 10;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
+            pointer-events: none;
         }
 
         .logo-text {
@@ -103,10 +109,10 @@
 
         .login-card {
             width: 100%;
-            max-width: 340px; /* Kompakt ideal boyut */
+            max-width: 340px;
             background: rgba(43, 0, 79, 0.88);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.22);
             border-radius: 16px;
             padding: 24px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
@@ -203,7 +209,6 @@
             width: 18px;
             height: 18px;
             fill: currentColor;
-            transition: color 0.2s;
         }
 
         .toggle-password:hover {
@@ -217,8 +222,8 @@
         .error-msg {
             display: none;
             color: #ff8fa3;
-            font-size: 0.75rem;
-            margin-top: 4px;
+            font-size: 0.72rem;
+            margin-top: 3px;
             font-weight: 600;
         }
 
@@ -420,7 +425,7 @@
 </head>
 <body>
 
-    <!-- Arka Planda İstediğin Tüm Alfabeler -->
+    <!-- Arka Planda İstediğin Tüm Alfabeler (Gölgesiz ve dağınık) -->
     <div class="bg-floating-words">
         <span class="word w1">한국어</span>
         <span class="word w2">Español</span>
@@ -439,7 +444,7 @@
         </div>
     </header>
 
-    <div class="main-container">
+    <main class="main-container">
         <div class="login-card">
             <h1 class="welcome-title">Hoş Geldiniz</h1>
             <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
@@ -482,7 +487,7 @@
                 <span class="google-icon">G</span> Google ile Giriş Yap
             </button>
         </div>
-    </div>
+    </main>
 
     <!-- GOOGLE HESAP SEÇİM PENCERESİ (MODAL) -->
     <div id="googleModal" class="google-modal">
@@ -523,7 +528,6 @@
     </div>
 
     <script>
-        // Hata mesajını gizleme fonksiyonu
         function hideError(id) {
             const err = document.getElementById(id);
             if (err) err.style.display = 'none';
@@ -561,16 +565,4 @@
             if (passField && eyeIcon) {
                 passField.type = 'text';
                 eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
-                passField.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
-            }
-            hideError('passError');
-        }
-
-        // FORM VALIDASYONU (Uyarıların kesin görünmesi sağlandı)
-        function validateAndProceed() {
-            const fnameInput = document.getElementById('fname');
-            const passInput = document.getElementById('pass');
-            const nameError = document.getElementById('nameError');
-            const passError = document.getElementById('passError');
-            
-            const fname = fnameInput ?
+                passField.value = `${clean
