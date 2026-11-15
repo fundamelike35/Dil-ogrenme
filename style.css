@@ -198,22 +198,27 @@ body.dark-workspace .bg-floating-words {
     flex: 1;
 }
 
-.page-section.active {
+#page1 {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 70px);
+    padding: 15px;
+    box-sizing: border-box;
 }
-/* DAHA DA KÜÇÜLTÜLMÜŞ ZARİF GİRİŞ KARTI */
+
 .login-card {
-    width: 88%;
+    width: 100%;
     max-width: 320px;
-    background: rgba(43, 0, 79, 0.75);
+    background: rgba(43, 0, 79, 0.85);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 14px;
-    padding: 18px 20px;
+    padding: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    margin: auto; /* Dikey ve yatayda kusursuz ortalama sağlar */
 }
+
 
 .welcome-title {
     font-family: 'Caveat', cursive;
