@@ -14,8 +14,8 @@
         }
 
         body {
-            /* Cherry Pink ve koyu lila/mor dokulu harman */
-            background: linear-gradient(135deg, #4a044e, #831843, #500724);
+            /* Arka plan: Mor, lila, lacivert ve dozunda koyu pembe harmanı */
+            background: linear-gradient(135deg, #0f051d, #2e0854, #4a044e, #1e1b4b);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -27,18 +27,18 @@
             overflow-x: hidden;
         }
 
-        /* Arka plana pürüzlü doku (Noise/Grain efekti) */
+        /* Arka plana pürüzlü doku (Noise / Grain efekti) */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 0);
-            background-size: 20px 20px;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 0);
+            background-size: 22px 22px;
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Arka plandaki gerçek alfabeler ve kıvrımlı stil */
+        /* Arka plandaki stilize alfabeler */
         .bg-floating-words {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -49,7 +49,7 @@
 
         .word {
             position: absolute;
-            color: rgba(255, 255, 255, 0.14);
+            color: rgba(255, 255, 255, 0.12);
             font-family: 'Caveat', cursive;
             font-style: italic;
             font-weight: 600;
@@ -64,22 +64,22 @@
         .w7 { top: 30%; left: 42%; font-size: 3.2rem; transform: rotate(4deg); }
         .w8 { bottom: 32%; left: 15%; font-size: 2.7rem; transform: rotate(-10deg); }
 
-        /* Navbar: İki tık küçültülmüş, yeşil, mavi ve mor renk geçişli blurlu yapı + doku */
+        /* Navbar: Kompakt (iki tık küçük), yeşil, mavi ve mor renk geçişli blurlu yapı */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 20px; /* Daha kompakt/küçük */
-            background: linear-gradient(90deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 8px 20px;
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.22), rgba(59, 130, 246, 0.22), rgba(147, 51, 234, 0.22));
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             z-index: 10;
         }
 
         .logo-text {
-            font-size: 0.95rem; /* Küçültüldü */
+            font-size: 0.95rem;
             font-weight: 600;
             color: #fff;
             display: flex;
@@ -87,6 +87,7 @@
             gap: 6px;
         }
 
+        /* Ana İçerik / Giriş Kartı */
         .main-container {
             position: relative;
             z-index: 2;
@@ -94,14 +95,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 35px;
         }
 
         .login-card {
             width: 100%;
             max-width: 380px;
-            background: rgba(65, 5, 45, 0.85);
-            backdrop-filter: blur(14px);
+            background: rgba(43, 0, 79, 0.85);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.22);
             border-radius: 18px;
             padding: 30px;
@@ -112,12 +113,12 @@
             font-size: 1.9rem;
             font-weight: 700;
             margin-bottom: 4px;
-            color: #fce7f3;
+            color: #f3c6ff;
         }
 
         .subtitle {
             font-size: 0.85rem;
-            color: #fbcfe8;
+            color: #d8b4fe;
             margin-bottom: 22px;
         }
 
@@ -130,12 +131,12 @@
             display: block;
             font-size: 0.85rem;
             margin-bottom: 5px;
-            color: #fbcfe8;
+            color: #e9d5ff;
         }
 
         .optional {
             font-size: 0.75rem;
-            color: #f472b6;
+            color: #c084fc;
             font-weight: normal;
         }
 
@@ -148,7 +149,7 @@
         .suggest-btn {
             background: none;
             border: none;
-            color: #f472b6;
+            color: #c77dff;
             font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
@@ -156,7 +157,7 @@
         }
 
         .suggest-btn:hover {
-            color: #fbcfe8;
+            color: #e0aaff;
         }
 
         .password-wrapper {
@@ -188,7 +189,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            color: #fbcfe8;
+            color: #d8b4fe;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -207,12 +208,12 @@
         }
 
         .input-group input:focus {
-            border-color: #f472b6;
+            border-color: #c084fc;
         }
 
         .error-msg {
             display: none;
-            color: #fda4af;
+            color: #ff8fa3;
             font-size: 0.75rem;
             margin-top: 4px;
         }
@@ -220,7 +221,7 @@
         .btn-primary {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #db2777, #9333ea);
+            background: linear-gradient(135deg, #9333ea, #7e22ce);
             border: none;
             border-radius: 9px;
             color: white;
@@ -239,7 +240,7 @@
             text-align: center;
             margin: 14px 0;
             font-size: 0.8rem;
-            color: #f472b6;
+            color: #c084fc;
         }
 
         .btn-google {
@@ -281,7 +282,7 @@
         }
 
         .google-modal-content {
-            background: #4a044e;
+            background: #2d004d;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 14px;
             width: 90%;
@@ -324,7 +325,7 @@
 
         .account-avatar {
             width: 32px; height: 32px;
-            background: #db2777;
+            background: #9333ea;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -342,7 +343,7 @@
 
         .account-info .email {
             font-size: 0.7rem;
-            color: #fbcfe8;
+            color: #d8b4fe;
         }
 
         .add-account-section {
@@ -354,7 +355,7 @@
         .add-toggle-btn {
             background: none;
             border: none;
-            color: #f472b6;
+            color: #c084fc;
             font-size: 0.8rem;
             cursor: pointer;
             font-weight: 600;
@@ -364,7 +365,7 @@
         }
 
         .add-toggle-btn:hover {
-            color: #fbcfe8;
+            color: #e0aaff;
         }
 
         .new-account-form {
@@ -387,7 +388,7 @@
         .btn-add-submit {
             width: 100%;
             padding: 7px;
-            background: #db2777;
+            background: #9333ea;
             border: none;
             border-radius: 6px;
             color: white;
@@ -404,7 +405,7 @@
             background: transparent;
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 6px;
-            color: #fbcfe8;
+            color: #d8b4fe;
             cursor: pointer;
             font-size: 0.8rem;
         }
@@ -415,7 +416,7 @@
 </head>
 <body>
 
-    <!-- Arka Plan Gerçek Alfabeler ve Kıvrımlı Stil -->
+    <!-- Arka Plan Gerçek Alfabeler -->
     <div class="bg-floating-words">
         <span class="word w1">한국어</span>
         <span class="word w2">Español</span>
@@ -427,7 +428,7 @@
         <span class="word w8">Français</span>
     </div>
 
-    <!-- Üst Navbar: İki tık küçültülmüş, yeşil, mavi, mor karışımlı -->
+    <!-- Üst Navbar: Kompakt, Yeşil, Mavi, Mor karışımlı -->
     <header class="navbar">
         <div class="logo-text">
             <span>🌐</span> Global<strong>Script</strong>
@@ -549,6 +550,7 @@
             const num = Math.floor(100 + Math.random() * 900);
             
             const passField = document.getElementById('pass');
+            const eyeIcon = document.getElementById('eyeIcon');
             if (passField) {
                 passField.type = 'text';
                 eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
@@ -577,7 +579,4 @@
 
             if (!valid) return;
 
-            alert("Başarılı! Form doğrulandı ve geçiş yapılıyor.");
-        }
-
-        // 
+            alert("Başarılı! Form doğrulandı 
