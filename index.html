@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -15,7 +14,6 @@
         }
 
         body {
-            /* Mor, lila, lacivert ve koyu pembe tonlarında derin geçiş */
             background: linear-gradient(135deg, #18032c, #3b075e, #63144c, #1e1b4b);
             color: #ffffff;
             min-height: 100vh;
@@ -28,19 +26,19 @@
             overflow-x: hidden;
         }
 
-        /* Yoğun ve belirgin pürüzlü doku (Noise / Film Grain Overlay) */
+        /* Pürüzlü kumlu doku (Noise / Grain) */
         body::before {
             content: "";
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="5" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.18"/></svg>');
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.11'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Arka plandaki döküm alfabeler - Gölgesiz ve dağınık */
+        /* Arka plandaki döküm alfabeler */
         .bg-floating-words {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             overflow: hidden;
@@ -49,22 +47,23 @@
 
         .word {
             position: absolute;
-            color: rgba(255, 255, 255, 0.22);
+            color: rgba(255, 255, 255, 0.20);
             font-family: 'Caveat', cursive;
             font-style: italic;
             font-weight: 600;
+            user-select: none;
         }
 
-        .w1 { top: 8%; left: 5%; font-size: 2.8rem; transform: rotate(-12deg); }
-        .w2 { top: 22%; right: 7%; font-size: 2.5rem; transform: rotate(14deg); }
-        .w3 { bottom: 12%; left: 8%; font-size: 2.3rem; transform: rotate(-8deg); }
-        .w4 { bottom: 16%; right: 9%; font-size: 2.6rem; transform: rotate(7deg); }
-        .w5 { top: 44%; left: 18%; font-size: 2.1rem; transform: rotate(-16deg); }
-        .w6 { top: 55%; right: 15%; font-size: 2.2rem; transform: rotate(12deg); }
-        .w7 { top: 25%; left: 42%; font-size: 3.1rem; transform: rotate(3deg); }
-        .w8 { bottom: 28%; left: 22%; font-size: 2.7rem; transform: rotate(-13deg); }
+        .w1 { top: 9%; left: 5%; font-size: 2.8rem; transform: rotate(-12deg); }
+        .w2 { top: 20%; right: 7%; font-size: 2.5rem; transform: rotate(14deg); }
+        .w3 { bottom: 13%; left: 8%; font-size: 2.3rem; transform: rotate(-8deg); }
+        .w4 { bottom: 15%; right: 9%; font-size: 2.6rem; transform: rotate(7deg); }
+        .w5 { top: 44%; left: 16%; font-size: 2.1rem; transform: rotate(-16deg); }
+        .w6 { top: 55%; right: 14%; font-size: 2.2rem; transform: rotate(12deg); }
+        .w7 { top: 24%; left: 40%; font-size: 3.1rem; transform: rotate(3deg); }
+        .w8 { bottom: 29%; left: 20%; font-size: 2.7rem; transform: rotate(-13deg); }
 
-        /* Navbar: Kompakt, yeşil, mavi, mor geçişli ve dokulu */
+        /* Navbar: Kompakt, yeşil-mavi-mor geçişli ve dokulu */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -72,7 +71,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 8px 20px;
-            background: linear-gradient(90deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.3), rgba(147, 51, 234, 0.3));
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.28), rgba(59, 130, 246, 0.28), rgba(147, 51, 234, 0.28));
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.18);
             z-index: 10;
@@ -82,7 +81,7 @@
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="5" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.12"/></svg>');
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.11'/%3E%3C/svg%3E");
             pointer-events: none;
         }
 
@@ -100,7 +99,7 @@
         /* Ana İçerik ve Kompakt Giriş Kartı */
         .main-container {
             position: relative;
-            z-index: 2;
+            z-index: 5;
             width: 100%;
             display: flex;
             align-items: center;
@@ -154,6 +153,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .label-with-action label {
+            margin-bottom: 0;
         }
 
         .suggest-btn {
@@ -164,6 +168,7 @@
             font-weight: 600;
             cursor: pointer;
             text-decoration: underline;
+            padding: 2px;
         }
 
         .suggest-btn:hover {
@@ -193,7 +198,7 @@
 
         .toggle-password {
             position: absolute;
-            right: 10px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
@@ -203,13 +208,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2px;
+            padding: 4px;
+            z-index: 3;
         }
 
         .toggle-password svg {
             width: 18px;
             height: 18px;
             fill: currentColor;
+            pointer-events: none;
         }
 
         .toggle-password:hover {
@@ -223,8 +230,8 @@
         .error-msg {
             display: none;
             color: #ff8fa3;
-            font-size: 0.72rem;
-            margin-top: 3px;
+            font-size: 0.73rem;
+            margin-top: 4px;
             font-weight: 600;
         }
 
@@ -426,7 +433,7 @@
 </head>
 <body>
 
-    <!-- Arka Planda İstediğin Tüm Alfabeler -->
+    <!-- Arka Planda Dağınık Alfabeler -->
     <div class="bg-floating-words">
         <span class="word w1">한국어</span>
         <span class="word w2">Español</span>
@@ -450,27 +457,26 @@
             <h1 class="welcome-title">Hoş Geldiniz</h1>
             <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
             
-            <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
+            <form id="loginForm" novalidate>
                 <div class="input-group">
-                    <label>Adınız</label>
-                    <input type="text" id="fname" placeholder="Örn: Melike" oninput="hideError('nameError')">
+                    <label for="fname">Adınız</label>
+                    <input type="text" id="fname" placeholder="Örn: Melike" autocomplete="given-name">
                     <span id="nameError" class="error-msg">Lütfen adınızı girin</span>
                 </div>
                 
                 <div class="input-group">
-                    <label>Soyadınız <span class="optional">(isteğe bağlı)</span></label>
-                    <input type="text" id="lname" placeholder="Örn: Yılmaz">
+                    <label for="lname">Soyadınız <span class="optional">(isteğe bağlı)</span></label>
+                    <input type="text" id="lname" placeholder="Örn: Yılmaz" autocomplete="family-name">
                 </div>
 
                 <div class="input-group">
                     <div class="label-with-action">
-                        <label>Şifre</label>
-                        <button type="button" class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</button>
+                        <label for="pass">Şifre</label>
+                        <button type="button" id="suggestPassBtn" class="suggest-btn">Akıllı Şifre Öner</button>
                     </div>
                     <div class="password-wrapper">
-                        <input type="password" id="pass" placeholder="Şifrenizi girin" oninput="hideError('passError')">
-                        <!-- Vektörel Göz İkonu -->
-                        <button type="button" class="toggle-password" id="togglePassBtn" onclick="togglePasswordVisibility()">
+                        <input type="password" id="pass" placeholder="Şifrenizi girin" autocomplete="current-password">
+                        <button type="button" id="togglePassBtn" class="toggle-password" aria-label="Şifreyi Göster/Gizle">
                             <svg id="eyeIcon" viewBox="0 0 24 24">
                                 <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2z"/>
                             </svg>
@@ -479,24 +485,24 @@
                     <span id="passError" class="error-msg">Lütfen şifre belirleyin</span>
                 </div>
 
-                <button type="submit" class="btn-primary">Devam Et</button>
+                <button type="submit" id="submitBtn" class="btn-primary">Devam Et</button>
             </form>
 
             <div class="divider">veya</div>
 
-            <button type="button" class="btn-google" onclick="openGoogleModal()">
+            <button type="button" id="googleLoginBtn" class="btn-google">
                 <span class="google-icon">G</span> Google ile Giriş Yap
             </button>
         </div>
     </main>
 
     <!-- GOOGLE HESAP SEÇİM PENCERESİ (MODAL) -->
-    <div id="googleModal" class="google-modal">
+    <div id="googleModal" class="google-modal" role="dialog" aria-modal="true">
         <div class="google-modal-content">
             <div class="google-modal-header">Google ile Devam Et</div>
             
             <div class="account-list" id="accountList">
-                <div class="account-item" onclick="selectGoogleAccount('Melike', 'Yılmaz', 'melike.yilmaz@gmail.com')">
+                <div class="account-item" data-name="Melike" data-surname="Yılmaz" data-email="melike.yilmaz@gmail.com">
                     <div class="account-avatar">M</div>
                     <div class="account-info">
                         <div class="name">Melike Yılmaz</div>
@@ -504,7 +510,7 @@
                     </div>
                 </div>
 
-                <div class="account-item" onclick="selectGoogleAccount('Global', 'Kullanıcı', 'global.script35@gmail.com')">
+                <div class="account-item" data-name="Global" data-surname="Kullanıcı" data-email="global.script35@gmail.com">
                     <div class="account-avatar">G</div>
                     <div class="account-info">
                         <div class="name">Global Kullanıcı</div>
@@ -515,55 +521,47 @@
 
             <!-- Yeni Hesap Ekleme Alanı -->
             <div class="add-account-section">
-                <button type="button" class="add-toggle-btn" onclick="toggleNewAccountForm()">+ Başka bir hesap ekle</button>
+                <button type="button" id="toggleNewAccBtn" class="add-toggle-btn">+ Başka bir hesap ekle</button>
                 <div id="newAccountForm" class="new-account-form">
                     <input type="text" id="newFirstName" placeholder="Adınız">
                     <input type="text" id="newLastName" placeholder="Soyadınız">
                     <input type="email" id="newEmail" placeholder="E-posta adresiniz">
-                    <button type="button" class="btn-add-submit" onclick="addNewAccountAndLogin()">Hesabı Ekle ve Giriş Yap</button>
+                    <button type="button" id="addNewAccSubmitBtn" class="btn-add-submit">Hesabı Ekle ve Giriş Yap</button>
                 </div>
             </div>
 
-            <button type="button" class="modal-close" onclick="closeGoogleModal()">İptal</button>
+            <button type="button" id="closeModalBtn" class="modal-close">İptal</button>
         </div>
     </div>
 
     <script>
-        function hideError(id) {
-            const err = document.getElementById(id);
-            if (err) err.style.display = 'none';
-        }
+        // Global Hata Koruma Mekanizması (Unhandled Exception Interceptor)
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            console.warn("Global Hata Yakalandı: ", msg, "Satır: ", lineNo);
+            return true; // Tarayıcının standart hata çökmesini engeller
+        };
 
-        // Vektörel Göz İkonu ile Şifreyi Göster / Gizle
-        function togglePasswordVisibility() {
-            const passField = document.getElementById('pass');
-            const eyeIcon = document.getElementById('eyeIcon');
-            
-            if (!passField || !eyeIcon) return;
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                const loginForm = document.getElementById('loginForm');
+                const fnameInput = document.getElementById('fname');
+                const lnameInput = document.getElementById('lname');
+                const passInput = document.getElementById('pass');
+                const nameError = document.getElementById('nameError');
+                const passError = document.getElementById('passError');
+                const suggestPassBtn = document.getElementById('suggestPassBtn');
+                const togglePassBtn = document.getElementById('togglePassBtn');
+                const eyeIcon = document.getElementById('eyeIcon');
+                
+                const googleLoginBtn = document.getElementById('googleLoginBtn');
+                const googleModal = document.getElementById('googleModal');
+                const closeModalBtn = document.getElementById('closeModalBtn');
+                const accountList = document.getElementById('accountList');
+                const toggleNewAccBtn = document.getElementById('toggleNewAccBtn');
+                const newAccountForm = document.getElementById('newAccountForm');
+                const addNewAccSubmitBtn = document.getElementById('addNewAccSubmitBtn');
 
-            if (passField.type === 'password') {
-                passField.type = 'text';
-                // Açık göz SVG yolu
-                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
-            } else {
-                passField.type = 'password';
-                // Kapalı göz SVG yolu
-                eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2z"/>';
-            }
-        }
+                const EYE_OPEN_PATH = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+                const EYE_CLOSED_PATH = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2z"/>';
 
-        // AKILLI ŞİFRE ÖNERİCİ
-        function suggestPassword() {
-            const fnameInput = document.getElementById('fname');
-            let fname = fnameInput ? fnameInput.value.trim() : "Global";
-            if (!fname) fname = "Global";
-            
-            const clean = fname.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
-            const num = Math.floor(100 + Math.random() * 900);
-            
-            const passField = document.getElementById('pass');
-            const eyeIcon = document.getElementById('eyeIcon');
-            if (passField && eyeIcon) {
-                passField.type = 'text';
-                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
-                passField.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowe
+    
