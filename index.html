@@ -42,32 +42,27 @@
 <!-- 1. SAYFA: KÜÇÜLTÜLMÜŞ GİRİŞ EKRANI -->
 <section id="page1" class="page-section active">
     <div class="login-card">
-        <h1 class="welcome-title">Hoş Geldiniz</h1>
-        <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
+    <h1 class="welcome-title">Hoş Geldiniz</h1>
+    <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
+    
+    <!-- onsubmit içine event.preventDefault() ekleyerek sayfanın yenilenmesini engelliyoruz -->
+    <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
+        <div class="input-group">
+            <label>Adınız</label>
+            <input type="text" id="fname" placeholder="Örn: Melike" oninput="hideError('nameError')">
+            <span id="nameError" class="error-msg" style="display: none; color: #ff8fa3; font-size: 0.74rem; margin-top: 2px;">Lütfen adınızı girin</span>
+        </div>
         
-        <form onsubmit="event.preventDefault(); validateAndProceed();">
-            <div class="input-group">
-                <label>Adınız</label>
-                <input type="text" id="fname" placeholder="Örn: Melike" oninput="hideError('nameError')">
-                <span id="nameError" class="error-msg">Lütfen adınızı girin</span>
-            </div>
-            
-            <div class="input-group">
-                <label>Soyadınız <span class="optional">(isteğe bağlı)</span></label>
-                <input type="text" id="lname" placeholder="Örn: Yılmaz">
-            </div>
-            
-            <div class="input-group">
-                <div class="label-with-action">
-                    <label>Şifre</label>
-                    <span class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</span>
-                </div>
-                <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
-                <span id="passError" class="error-msg">Lütfen şifre belirleyin</span>
-            </div>
+        <div class="input-group">
+            <label>Şifre</label>
+            <input type="password" id="pass" placeholder="Şifrenizi girin" oninput="hideError('passError')">
+            <span id="passError" class="error-msg" style="display: none; color: #ff8fa3; font-size: 0.74rem; margin-top: 2px;">Lütfen şifre belirleyin</span>
+        </div>
 
-            <button type="submit" class="btn-primary">Devam Et</button>
-        </form>
+        <button type="submit" class="btn-primary">Devam Et</button>
+    </form>
+    </div>
+    
 
         <div class="divider">veya</div>
 
