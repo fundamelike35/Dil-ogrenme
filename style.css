@@ -203,57 +203,56 @@ body.dark-workspace .bg-floating-words {
     justify-content: center;
     align-items: center;
 }
-
-/* KÜÇÜLTÜLMÜŞ GİRİŞ KARTI */
+/* DAHA DA KÜÇÜLTÜLMÜŞ ZARİF GİRİŞ KARTI */
 .login-card {
-    width: 90%;
-    max-width: 360px;
-    background: rgba(43, 0, 79, 0.72);
+    width: 88%;
+    max-width: 320px;
+    background: rgba(43, 0, 79, 0.75);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    padding: 22px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .welcome-title {
     font-family: 'Caveat', cursive;
-    font-size: 2.8rem;
+    font-size: 2.3rem;
     font-weight: 700;
     color: #ffffff !important;
     line-height: 1;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .subtitle {
     color: #e9d5ff;
-    font-size: 0.8rem;
-    margin-bottom: 16px;
+    font-size: 0.75rem;
+    margin-bottom: 12px;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    margin-bottom: 12px;
+    gap: 3px;
+    margin-bottom: 10px;
 }
 
 .input-group label {
-    font-size: 0.76rem;
+    font-size: 0.72rem;
     color: #ffffff;
     font-weight: 500;
 }
 
-.optional { color: #cbd5e1; font-size: 0.7rem; }
+.optional { color: #cbd5e1; font-size: 0.65rem; }
 
 .input-group input {
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 9px 12px;
-    border-radius: 8px;
+    padding: 8px 10px;
+    border-radius: 7px;
     color: #ffffff;
-    font-size: 0.86rem;
+    font-size: 0.82rem;
     outline: none;
 }
 
@@ -264,7 +263,7 @@ body.dark-workspace .bg-floating-words {
 }
 
 .suggest-btn {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     color: #c77dff;
     cursor: pointer;
     font-weight: 600;
@@ -272,9 +271,9 @@ body.dark-workspace .bg-floating-words {
 
 .error-msg {
     display: none;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     color: #ff8fa3;
-    margin-top: 2px;
+    margin-top: 1px;
 }
 
 .btn-primary {
@@ -282,53 +281,47 @@ body.dark-workspace .bg-floating-words {
     background: linear-gradient(135deg, #7b2cbf 0%, #5a189a 100%);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.35);
-    padding: 10px 16px;
-    border-radius: 8px;
+    padding: 9px 14px;
+    border-radius: 7px;
     font-weight: 600;
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     cursor: pointer;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
-.btn-primary:hover {
-    background: linear-gradient(135deg, #8c32d4 0%, #681fb0 100%);
-}
-
-/* GOOGLE İLE GİRİŞ YAP BUTONU */
 .divider {
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 12px 0;
+    margin: 8px 0;
     color: #cbd5e1;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
 }
 .divider::before, .divider::after {
     content: '';
     flex: 1;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-.divider::before { margin-right: .5em; }
-.divider::after { margin-left: .5em; }
+.divider::before { margin-right: .4em; }
+.divider::after { margin-left: .4em; }
 
 .btn-google {
     width: 100%;
     background: #ffffff;
     color: #1f2937;
     border: 1px solid #d1d5db;
-    padding: 9px 14px;
-    border-radius: 8px;
+    padding: 8px 12px;
+    border-radius: 7px;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    transition: background 0.2s;
+    gap: 6px;
 }
-.btn-google:hover {
-    background: #f3f4f6;
+.google-icon { color: #ea4335; font-weight: bold; }
+
 }
 .google-icon {
     font-weight: bold;
