@@ -256,6 +256,14 @@ document.addEventListener('click', function(e) {
     }
 });
 
+ = 'none';
+}
+
+function hideError(id) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+}
+
 // AKILLI ŞİFRE ÖNERİCİ
 function suggestPassword() {
     const fnameInput = document.getElementById('fname');
@@ -286,27 +294,24 @@ function loginWithGoogle() {
     });
 
     let choice = prompt(promptText + "\nLütfen 1, 2 veya 3 seçin:");
-    if (choice === null) return; // İptal edilirse çık
+    if (choice === null) return;
 
     let selectedAcc = accounts[0];
     if (choice === "2") selectedAcc = accounts[1];
     if (choice === "3") selectedAcc = accounts[2];
 
     const fnameInput = document.getElementById('fname');
+    const lnameInput = document.getElementById('lname');
     const passInput = document.getElementById('pass');
     
-    if (fnameInput) fnameInput.value = selectedAcc.name;
+    const nameParts = selectedAcc.name.split(' ');
+    if (fnameInput) fnameInput.value = nameParts[0] || selectedAcc.name;
+    if (lnameInput) lnameInput.value = nameParts.slice(1).join(' ') || '';
     if (passInput) passInput.value = "GoogleAuth_" + Math.floor(1000 + Math.random() * 9000) + "!";
     
     hideError('nameError');
     hideError('passError');
     validateAndProceed();
-}
-
-
-function hideError(id) {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
 }
 
 // FORM KONTROLÜ VE UYARILAR
@@ -333,6 +338,17 @@ function validateAndProceed() {
     } else {
         hideError('passError');
     }
+
+    if (!valid) return;
+
+    // Her şey doluysa 2. sayfaya geçiş
+    if (typeof showPage === 'function') {
+        showPage('page2');
+    } else {
+        alert("Giriş başarılı!");
+    }
+}
+
     if (!valid) return;
 
     const badge = document.getElementById('navUserBadge');
