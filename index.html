@@ -14,8 +14,8 @@
         }
 
         body {
-            /* Arka plan: Mor, lila, lacivert ve dozunda koyu pembe harmanı */
-            background: linear-gradient(135deg, #150529, #350c5c, #591646, #1e1b4b);
+            /* Mor, lila, lacivert ve dozunda koyu pembe tonlarında derin geçiş */
+            background: linear-gradient(135deg, #18032c, #3b075e, #63144c, #1e1b4b);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -27,17 +27,18 @@
             overflow-x: hidden;
         }
 
-        /* Arka plana ve sayfanın tamamına gerçek pürüzlü doku hissi (Noise Overlay) */
+        /* İstediğin o belirgin pürüzlü doku (Noise Overlay) */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/></svg>');
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1.2px, transparent 1.2px);
+            background-size: 18px 18px;
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Arka plandaki tüm diller ve alfabeler (Kıvrımlı font stiliyle) */
+        /* Arka plandaki tüm alfabeler ve diller (Kıvrımlı stilize font) */
         .bg-floating-words {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -48,20 +49,21 @@
 
         .word {
             position: absolute;
-            color: rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.22); /* Daha net görünürlük */
             font-family: 'Caveat', cursive;
             font-style: italic;
             font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .w1 { top: 12%; left: 8%; font-size: 2.6rem; transform: rotate(-6deg); }
-        .w2 { top: 22%; right: 10%; font-size: 2.4rem; transform: rotate(8deg); }
-        .w3 { bottom: 16%; left: 12%; font-size: 2.2rem; transform: rotate(-8deg); }
-        .w4 { bottom: 14%; right: 12%; font-size: 2.5rem; transform: rotate(6deg); }
-        .w5 { top: 48%; left: 25%; font-size: 2rem; transform: rotate(-12deg); }
-        .w6 { top: 54%; right: 22%; font-size: 2.1rem; transform: rotate(10deg); }
-        .w7 { top: 28%; left: 40%; font-size: 3rem; transform: rotate(3deg); }
-        .w8 { bottom: 35% ; left: 18%; font-size: 2.5rem; transform: rotate(-10deg); }
+        .w1 { top: 10%; left: 6%; font-size: 2.8rem; transform: rotate(-7deg); }
+        .w2 { top: 18%; right: 8%; font-size: 2.6rem; transform: rotate(9deg); }
+        .w3 { bottom: 15%; left: 8%; font-size: 2.4rem; transform: rotate(-9deg); }
+        .w4 { bottom: 12%; right: 10%; font-size: 2.7rem; transform: rotate(6deg); }
+        .w5 { top: 45%; left: 20%; font-size: 2.2rem; transform: rotate(-14deg); }
+        .w6 { top: 52%; right: 18%; font-size: 2.3rem; transform: rotate(11deg); }
+        .w7 { top: 28%; left: 38%; font-size: 3.2rem; transform: rotate(4deg); }
+        .w8 { bottom: 30%; left: 14%; font-size: 2.8rem; transform: rotate(-11deg); }
 
         /* Navbar: İki tık küçük, yeşil, mavi, mor geçişli ve dokulu yapı */
         .navbar {
@@ -71,18 +73,10 @@
             align-items: center;
             justify-content: space-between;
             padding: 8px 20px;
-            background: linear-gradient(90deg, rgba(16, 185, 129, 0.25), rgba(59, 130, 246, 0.25), rgba(147, 51, 234, 0.25));
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.3), rgba(147, 51, 234, 0.3));
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
             z-index: 10;
-        }
-
-        .navbar::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.06"/></svg>');
-            pointer-events: none;
         }
 
         .logo-text {
@@ -96,7 +90,7 @@
             z-index: 2;
         }
 
-        /* Ana İçerik ve İdeal Boyuta Küçültülmüş Giriş Kartı */
+        /* Ana İçerik ve Kompakt Giriş Kartı */
         .main-container {
             position: relative;
             z-index: 2;
@@ -109,10 +103,10 @@
 
         .login-card {
             width: 100%;
-            max-width: 340px; /* İdeal kompakt boyut */
-            background: rgba(43, 0, 79, 0.85);
+            max-width: 340px; /* Kompakt ideal boyut */
+            background: rgba(43, 0, 79, 0.88);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 16px;
             padding: 24px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
@@ -223,8 +217,9 @@
         .error-msg {
             display: none;
             color: #ff8fa3;
-            font-size: 0.72rem;
-            margin-top: 3px;
+            font-size: 0.75rem;
+            margin-top: 4px;
+            font-weight: 600;
         }
 
         .btn-primary {
@@ -283,21 +278,21 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(6px);
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 9999;
         }
 
         .google-modal-content {
             background: #2d004d;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 14px;
             width: 90%;
             max-width: 330px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             text-align: left;
             max-height: 90vh;
             overflow-y: auto;
@@ -425,7 +420,7 @@
 </head>
 <body>
 
-    <!-- Arka Plan Zengin Alfabeler -->
+    <!-- Arka Planda İstediğin Tüm Alfabeler -->
     <div class="bg-floating-words">
         <span class="word w1">한국어</span>
         <span class="word w2">Español</span>
@@ -528,6 +523,7 @@
     </div>
 
     <script>
+        // Hata mesajını gizleme fonksiyonu
         function hideError(id) {
             const err = document.getElementById(id);
             if (err) err.style.display = 'none';
@@ -538,6 +534,8 @@
             const passField = document.getElementById('pass');
             const eyeIcon = document.getElementById('eyeIcon');
             
+            if (!passField || !eyeIcon) return;
+
             if (passField.type === 'password') {
                 passField.type = 'text';
                 // Açık göz SVG yolu
@@ -545,5 +543,34 @@
             } else {
                 passField.type = 'password';
                 // Kapalı göz SVG yolu
-                eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .
-                        
+                eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2z"/>';
+            }
+        }
+
+        // AKILLI ŞİFRE ÖNERİCİ
+        function suggestPassword() {
+            const fnameInput = document.getElementById('fname');
+            let fname = fnameInput ? fnameInput.value.trim() : "Global";
+            if (!fname) fname = "Global";
+            
+            const clean = fname.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
+            const num = Math.floor(100 + Math.random() * 900);
+            
+            const passField = document.getElementById('pass');
+            const eyeIcon = document.getElementById('eyeIcon');
+            if (passField && eyeIcon) {
+                passField.type = 'text';
+                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+                passField.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
+            }
+            hideError('passError');
+        }
+
+        // FORM VALIDASYONU (Uyarıların kesin görünmesi sağlandı)
+        function validateAndProceed() {
+            const fnameInput = document.getElementById('fname');
+            const passInput = document.getElementById('pass');
+            const nameError = document.getElementById('nameError');
+            const passError = document.getElementById('passError');
+            
+            const fname = fnameInput ?
