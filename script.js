@@ -393,4 +393,27 @@ function openHistoryPage() {
     document.getElementById('historyTitle').innerText = data.title;
     document.getElementById('historyText').innerText = data.history;
     document.getElementById('historySubText').innerText = data.subText;
+    // Butonların tıklama olaylarını garantiye alalım
+document.addEventListener("DOMContentLoaded", function() {
+    renderLanguageGrid();
+    showPage('page1');
+
+    // Akıllı şifre öner butonu dinleyicisi
+    const suggestBtn = document.getElementById('suggestBtn');
+    if (suggestBtn) {
+        suggestBtn.addEventListener('click', suggestPassword);
+    }
+
+    // Devam et butonu dinleyicisi
+    const proceedBtn = document.getElementById('proceedBtn');
+    if (proceedBtn) {
+        proceedBtn.addEventListener('click', validateAndProceed);
+    }
+
+    // Google ile giriş butonu dinleyicisi
+    const googleBtn = document.getElementById('googleBtn');
+    if (googleBtn) {
+        googleBtn.addEventListener('click', loginWithGoogle);
+    }
+});
     
