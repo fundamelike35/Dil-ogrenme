@@ -134,30 +134,6 @@ const langData = {
 document.addEventListener("DOMContentLoaded", function() {
     renderLanguageGrid();
     showPage('page1');
-
-    // Akıllı şifre öner butonu olay dinleyicisi
-    const suggestBtn = document.getElementById('suggestBtn');
-    if (suggestBtn) {
-        suggestBtn.onclick = function() {
-            suggestPassword();
-        };
-    }
-
-    // Devam et butonu olay dinleyicisi
-    const proceedBtn = document.getElementById('proceedBtn');
-    if (proceedBtn) {
-        proceedBtn.onclick = function() {
-            validateAndProceed();
-        };
-    }
-
-    // Google ile giriş butonu olay dinleyicisi
-    const googleBtn = document.getElementById('googleBtn');
-    if (googleBtn) {
-        googleBtn.onclick = function() {
-            loginWithGoogle();
-        };
-    }
 });
 
 function renderLanguageGrid() {
@@ -310,8 +286,9 @@ function loginWithGoogle() {
     });
 
     let choice = prompt(promptText + "\nLütfen 1, 2 veya 3 seçin:");
-    let selectedAcc = accounts[0];
+    if (choice === null) return; // İptal edilirse çık
 
+    let selectedAcc = accounts[0];
     if (choice === "2") selectedAcc = accounts[1];
     if (choice === "3") selectedAcc = accounts[2];
 
@@ -404,4 +381,20 @@ function showPage(pageId) {
         if (logoutBtn) logoutBtn.style.display = 'inline-block';
         document.querySelectorAll('.step-tag').forEach(t => t.classList.remove('active'));
         if (pageId === 'page2') document.getElementById('step-lang').classList.add('active');
-        if (pageId === 'page3') document.getElementById('step-history').classList.add
+        if (pageId === 'page3') document.getElementById('step-history').classList.add('active');
+        if (pageId === 'page4') document.getElementById('step-class').classList.add('active');
+    }
+    window.scrollTo(0, 0);
+}
+
+function selectLang(cardElement, langKey) {
+    document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
+    cardElement.classList.add('selected');
+    currentLang = langKey;
+    const info = document.getElementById('selectedLangInfo');
+    if (info) info.innerText = `Seçili Dil: ${langData[langKey].name}`;
+}
+
+function openHistoryPage() {
+    const data = langData[currentLang];
+    document.getElementById('historyCodeBadge').inner
