@@ -2,19 +2,21 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Script</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=1280">
+    <title>Global Script - Dünya Alfabeleri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #18002e 0%, #30035c 50%, #120022 100%);
+            background: linear-gradient(135deg, #1b0233 0%, #2f0452 50%, #120022 100%);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -23,48 +25,8 @@
             position: relative;
         }
 
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
-            background-size: 24px 24px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* ÜST BAR (NAVBAR) */
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 20px;
-            background: rgba(20, 2, 38, 0.7);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-            z-index: 10;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-        }
-
-        .brand-badge {
-            background: linear-gradient(135deg, #a855f7, #6b21a8);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        /* ARKA PLAN ALFABELERİ */
-        .bg-alphabets {
+        /* ARKA PLAN NAİF BEYAZ-DOKULU YAZILAR */
+        .bg-floating-words {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
@@ -72,23 +34,86 @@
             z-index: 1;
         }
 
-        .alphabet-text {
+        .word {
             position: absolute;
-            color: rgba(255, 255, 255, 0.13);
+            color: rgba(255, 255, 255, 0.08);
             font-weight: 300;
             font-style: italic;
         }
 
-        .lang-hangeul { top: 12%; left: 8%; font-size: 2.2rem; transform: rotate(-5deg); }
-        .lang-espanol { top: 22%; right: 10%; font-size: 1.8rem; transform: rotate(8deg); }
-        .lang-jp { top: 32%; left: 42%; font-size: 2.5rem; }
-        .lang-hiragana { top: 52%; left: 35%; font-size: 1.6rem; transform: rotate(-12deg); }
-        .lang-alphabet { top: 56%; left: 48%; font-size: 1.5rem; transform: rotate(15deg); }
-        .lang-korean { top: 62%; left: 18%; font-size: 2rem; }
-        .lang-russian { bottom: 18%; left: 8%; font-size: 1.7rem; transform: rotate(-8deg); }
-        .lang-gokturk { bottom: 16%; right: 12%; font-size: 1.8rem; transform: rotate(6deg); }
+        .w1 { top: 12%; left: 8%; font-size: 2.4rem; transform: rotate(-5deg); }
+        .w2 { top: 22%; right: 10%; font-size: 2rem; transform: rotate(8deg); }
+        .w3 { bottom: 18%; left: 8%; font-size: 1.8rem; transform: rotate(-8deg); }
+        .w4 { bottom: 16%; right: 12%; font-size: 2rem; transform: rotate(6deg); }
+        .w5 { top: 52%; left: 35%; font-size: 1.7rem; transform: rotate(-12deg); }
+        .w6 { top: 56%; left: 48%; font-size: 1.6rem; transform: rotate(15deg); }
+        .w7 { top: 32%; left: 42%; font-size: 2.6rem; }
+        .w8 { top: 62%; left: 18%; font-size: 2.2rem; }
 
-        /* ANA İÇERİK VE KART ALANI */
+        /* ÜST KISIM NAVBAR */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 25px;
+            background: rgba(20, 2, 38, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .logo-icon {
+            font-size: 1.2rem;
+        }
+
+        .nav-steps {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+
+        .step-tag {
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #d8b4fe;
+        }
+
+        .step-tag.active {
+            background: rgba(147, 51, 234, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
         .main-container {
             flex: 1;
             display: flex;
@@ -98,20 +123,32 @@
             z-index: 2;
         }
 
+        .page-section {
+            display: none;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .page-section.active {
+            display: flex;
+        }
+
+        /* GİRİŞ KARTI */
         .login-card {
             width: 100%;
-            max-width: 360px;
-            background: rgba(35, 4, 61, 0.78);
+            max-width: 400px;
+            background: rgba(35, 4, 61, 0.82);
             backdrop-filter: blur(18px);
             border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 20px;
-            padding: 28px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+            padding: 35px 30px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+            text-align: left;
         }
 
         .welcome-title {
             font-family: 'Caveat', cursive;
-            font-size: 3.2rem;
+            font-size: 3.4rem;
             font-weight: 600;
             color: #ffffff;
             margin-bottom: 2px;
@@ -119,28 +156,22 @@
         }
 
         .subtitle {
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             color: #d8b4fe;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
             line-height: 1.4;
         }
 
         .input-group {
-            margin-bottom: 14px;
-            text-align: left;
-        }
-
-        .input-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 16px;
         }
 
         .input-group label {
-            font-size: 0.82rem;
+            display: block;
+            font-size: 0.85rem;
             color: #f3e8ff;
             font-weight: 500;
+            margin-bottom: 6px;
         }
 
         .optional {
@@ -149,11 +180,22 @@
             font-size: 0.75rem;
         }
 
+        .label-with-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .label-with-action label {
+            margin-bottom: 0;
+        }
+
         .suggest-btn {
             background: none;
             border: none;
             color: #d8b4fe;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
             text-decoration: underline;
@@ -163,26 +205,31 @@
             color: #ffffff;
         }
 
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(18, 2, 33, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.35);
+        }
+
+        /* Şifre Alanı ve Vektörel Göz İkonu */
         .password-wrapper {
             position: relative;
             width: 100%;
         }
 
-        .input-group input {
-            width: 100%;
-            padding: 11px 14px;
-            background: rgba(18, 2, 33, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 0.88rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        /* Şifre alanındaki göz simgesi için padding ayarı */
         .password-wrapper input {
-            padding-right: 40px;
+            padding-right: 44px;
         }
 
         .toggle-password {
@@ -194,46 +241,44 @@
             border: none;
             cursor: pointer;
             color: #d8b4fe;
-            font-size: 1.1rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 4px;
+        }
+
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: color 0.2s;
         }
 
         .toggle-password:hover {
             color: #ffffff;
         }
 
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.35);
-        }
-
-        .input-group input:focus {
-            border-color: #a855f7;
-            box-shadow: 0 0 12px rgba(168, 85, 247, 0.35);
-        }
-
         .error-msg {
             display: none;
             color: #fda4af;
-            font-size: 0.73rem;
-            margin-top: 4px;
+            font-size: 0.75rem;
+            margin-top: 5px;
             font-weight: 500;
         }
 
         .btn-primary {
             width: 100%;
-            padding: 12px;
+            padding: 13px;
             background: linear-gradient(135deg, #9333ea, #7e22ce);
             border: none;
             border-radius: 10px;
             color: white;
             font-weight: 600;
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            margin-top: 6px;
+            margin-top: 8px;
             transition: opacity 0.2s, transform 0.1s;
-            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
         }
 
         .btn-primary:hover {
@@ -243,20 +288,20 @@
 
         .divider {
             text-align: center;
-            margin: 14px 0;
-            font-size: 0.78rem;
+            margin: 16px 0;
+            font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
         .btn-google {
             width: 100%;
-            padding: 11px;
+            padding: 12px;
             background: #ffffff;
             border: none;
             border-radius: 10px;
             color: #1f2937;
             font-weight: 600;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -273,10 +318,25 @@
         .google-icon {
             color: #ea4335;
             font-weight: bold;
-            font-size: 1rem;
         }
 
-        /* GOOGLE HESAP SEÇİM PENCERESİ (MODAL) */
+        /* DİĞER SAYFALAR İÇİN KARTLAR */
+        .content-card {
+            background: rgba(35, 4, 61, 0.82);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            padding: 35px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        .wide-card {
+            max-width: 750px;
+        }
+
+        /* GOOGLE HESAP SEÇİM MODALI */
         .google-modal {
             display: none;
             position: fixed;
@@ -425,191 +485,115 @@
 </head>
 <body>
 
-    <!-- ÜST BAR -->
+    <!-- ARKA PLAN NAİF BEYAZ-DOKULU YAZILAR -->
+    <div class="bg-floating-words" id="bgWords">
+        <span class="word w1">Hangeul</span>
+        <span class="word w2">Español</span>
+        <span class="word w3">Russian</span>
+        <span class="word w4">Göktürk</span>
+        <span class="word w5">Hiragana</span>
+        <span class="word w6">Alphabet</span>
+        <span class="word w7">日本語</span>
+        <span class="word w8">한국어</span>
+    </div>
+
+    <!-- ÜST KISIM NAVBAR -->
     <header class="navbar">
-        <div class="nav-brand">
-            <span class="brand-badge">GS</span> GlobalScript
+        <div class="logo">
+            <span class="logo-icon">🌐</span>
+            <span class="logo-text">Global<strong>Script</strong></span>
+        </div>
+        <div class="nav-steps">
+            <span class="step-tag active" id="step1-tag">1. Giriş</span>
+            <span class="step-tag" id="step2-tag" style="opacity: 0.5;">2. Dil Seçimi & Çalışma Alanı</span>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn">⚙️ Ayarlar</button>
+            <button class="nav-btn profile-btn">👤 Profil</button>
         </div>
     </header>
 
-    <!-- ARKA PLAN ALFABELERİ -->
-    <div class="bg-alphabets">
-        <div class="alphabet-text lang-hangeul">Hangeul</div>
-        <div class="alphabet-text lang-espanol">Español</div>
-        <div class="alphabet-text lang-jp">日本語</div>
-        <div class="alphabet-text lang-hiragana">Hiragana</div>
-        <div class="alphabet-text lang-alphabet">Alphabet</div>
-        <div class="alphabet-text lang-korean">한국어</div>
-        <div class="alphabet-text lang-russian">Russian</div>
-        <div class="alphabet-text lang-gokturk">Göktürk</div>
-    </div>
-
-    <!-- ANA GİRİŞ KARTI -->
     <main class="main-container">
-        <div class="login-card">
-            <h1 class="welcome-title">Hoş Geldiniz</h1>
-            <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
-            
-            <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
-                <div class="input-group">
-                    <label>Adınız</label>
-                    <input type="text" id="fname" placeholder="Örn: Melike" oninput="hideError('nameError')">
-                    <span id="nameError" class="error-msg">Lütfen adınızı girin</span>
-                </div>
+
+        <!-- 1. SAYFA: GİRİŞ EKRANI -->
+        <section id="page1" class="page-section active">
+            <div class="login-card">
+                <h2 class="welcome-title">Hoş Geldiniz</h2>
+                <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
                 
-                <div class="input-group">
-                    <label>Soyadınız <span class="optional">(isteğe bağlı)</span></label>
-                    <input type="text" id="lname" placeholder="Örn: Yılmaz">
-                </div>
-
-                <div class="input-group">
-                    <div class="input-header">
-                        <label>Şifre</label>
-                        <button type="button" class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</button>
+                <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
+                    <div class="input-group">
+                        <label>Adınız</label>
+                        <input type="text" id="fname" placeholder="Örn: Melike" oninput="generatePasswordSuggestion(); hideError('nameError')">
+                        <span id="nameError" class="error-msg">Lütfen burayı doldurun</span>
                     </div>
-                    <div class="password-wrapper">
-                        <input type="password" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
-                        <button type="button" class="toggle-password" id="togglePassBtn" onclick="togglePasswordVisibility()">👁️</button>
+                    
+                    <div class="input-group">
+                        <label>Soyadınız <span class="optional">(isteğe bağlı)</span></label>
+                        <input type="text" id="lname" placeholder="Örn: Yılmaz" oninput="generatePasswordSuggestion()">
                     </div>
-                    <span id="passError" class="error-msg">Lütfen şifre belirleyin</span>
-                </div>
-
-                <button type="submit" class="btn-primary">Devam Et</button>
-            </form>
-
-            <div class="divider">veya</div>
-
-            <button type="button" class="btn-google" onclick="openGoogleModal()">
-                <span class="google-icon">G</span> Google ile Giriş Yap
-            </button>
-        </div>
-    </main>
-
-    <!-- GOOGLE HESAP SEÇİM PENCERESİ (MODAL) -->
-    <div id="googleModal" class="google-modal">
-        <div class="google-modal-content">
-            <div class="google-modal-header">Google ile Devam Et</div>
-            
-            <div class="account-list" id="accountList">
-                <div class="account-item" onclick="selectGoogleAccount('Melike', 'Yılmaz', 'melike.yilmaz@gmail.com')">
-                    <div class="account-avatar">M</div>
-                    <div class="account-info">
-                        <div class="name">Melike Yılmaz</div>
-                        <div class="email">melike.yilmaz@gmail.com</div>
+                    
+                    <div class="input-group">
+                        <div class="label-with-action">
+                            <label>Şifre</label>
+                            <span class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</span>
+                        </div>
+                        <div class="password-wrapper">
+                            <input type="password" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
+                            <!-- Vektörel Göz İkonu (Varsayılan: Kapalı Göz / Çizgili) -->
+                            <button type="button" class="toggle-password" id="togglePassBtn" onclick="togglePasswordVisibility()">
+                                <svg id="eyeIcon" viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <span id="passError" class="error-msg">Lütfen burayı doldurun</span>
                     </div>
-                </div>
 
-                <div class="account-item" onclick="selectGoogleAccount('Global', 'Kullanıcı', 'global.script35@gmail.com')">
-                    <div class="account-avatar">G</div>
-                    <div class="account-info">
-                        <div class="name">Global Kullanıcı</div>
-                        <div class="email">global.script35@gmail.com</div>
-                    </div>
-                </div>
+                    <button type="submit" class="btn-primary">Devam Et ➔</button>
+                </form>
+
+                <div class="divider">veya</div>
+
+                <button type="button" class="btn-google" onclick="openGoogleModal()">
+                    <span class="google-icon">G</span> Google ile Giriş Yap
+                </button>
             </div>
+        </section>
 
-            <!-- Yeni Hesap Ekleme Alanı -->
-            <div class="add-account-section">
-                <button type="button" class="add-toggle-btn" onclick="toggleNewAccountForm()">+ Başka bir hesap ekle</button>
-                <div id="newAccountForm" class="new-account-form">
-                    <input type="text" id="newFirstName" placeholder="Adınız">
-                    <input type="text" id="newLastName" placeholder="Soyadınız">
-                    <input type="email" id="newEmail" placeholder="E-posta adresiniz">
-                    <button type="button" class="btn-add-submit" onclick="addNewAccountAndLogin()">Hesabı Ekle ve Giriş Yap</button>
+        <!-- 2. SAYFA: DİL SEÇİMİ VE ÇALIŞMA ALANI -->
+        <section id="page2" class="page-section">
+            <div class="content-card">
+                <div class="header-block">
+                    <h2>Hangi Dili Öğrenmek İstiyorsun?</h2>
+                    <p style="color: #d8b4fe; font-size: 0.85rem; margin-top: 5px;">Aşağıdaki arama çubuğundan dilleri filtreleyebilir, hedefini belirleyebilirsin.</p>
                 </div>
-            </div>
 
-            <button type="button" class="modal-close" onclick="closeGoogleModal()">İptal</button>
-        </div>
-    </div>
+                <div class="search-box" style="margin: 20px 0;">
+                    <div style="position: relative;">
+                        <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);">🔍</span>
+                        <input type="text" id="searchInput" onkeyup="filterLanguages()" placeholder="Dil veya alfabe ara... (Örn: Korece, Göktürk)" style="width: 100%; padding: 12px 14px 12px 40px; background: rgba(18, 2, 33, 0.7); border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 10px; color: #fff; outline: none;">
+                    </div>
+                </div>
 
-    <script>
-        function hideError(id) {
-            const err = document.getElementById(id);
-            if (err) err.style.display = 'none';
-        }
+                <div class="lang-grid" id="langGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                    <div class="lang-card selected" onclick="selectLang(this, 'korean')" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(168, 85, 247, 0.5); border-radius: 12px; padding: 15px; cursor: pointer;">
+                        <div style="font-size: 1.5rem; margin-bottom: 5px;">🇰🇷</div>
+                        <h3 style="font-size: 1rem; margin-bottom: 4px;">Korece (Hangeul)</h3>
+                        <p style="font-size: 0.78rem; color: #d8b4fe;">1443'te tasarlanan, fonetik ve mantıksal alfabe.</p>
+                    </div>
 
-        // ŞİFREYİ GÖSTER / GİZLE (GÖZ SİMGESİ)
-        function togglePasswordVisibility() {
-            const passField = document.getElementById('pass');
-            const toggleBtn = document.getElementById('togglePassBtn');
-            if (passField.type === 'password') {
-                passField.type = 'text';
-                toggleBtn.textContent = '🙈'; // Açık göz / gizle simgesi alternatifi
-            } else {
-                passField.type = 'password';
-                toggleBtn.textContent = '👁️';
-            }
-        }
+                    <div class="lang-card" onclick="selectLang(this, 'gokturk')" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; cursor: pointer;">
+                        <div style="font-size: 1.5rem; margin-bottom: 5px;">🏹</div>
+                        <h3 style="font-size: 1rem; margin-bottom: 4px;">Göktürk Alfabesi</h3>
+                        <p style="font-size: 0.78rem; color: #d8b4fe;">Türkçenin bilinen en eski yazılı alfabesi (Orhun).</p>
+                    </div>
 
-        // AKILLI ŞİFRE ÖNERİCİ
-        function suggestPassword() {
-            const fnameInput = document.getElementById('fname');
-            let fname = fnameInput ? fnameInput.value.trim() : "Global";
-            if (!fname) fname = "Global";
-            
-            const clean = fname.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
-            const num = Math.floor(100 + Math.random() * 900);
-            
-            const passField = document.getElementById('pass');
-            if (passField) {
-                passField.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
-            }
-            hideError('passError');
-        }
+                    <div class="lang-card" onclick="selectLang(this, 'japanese')" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; cursor: pointer;">
+                        <div style="font-size: 1.5rem; margin-bottom: 5px;">🇯🇵</div>
+                        <h3 style="font-size: 1rem; margin-bottom: 4px;">Japonca (Hiragana)</h3>
+                        <p style="font-size: 0.78rem; color: #d8b4fe;">Temel kelime ve ekler için kullanılan hece alfabesi.</p>
+                    </div>
 
-        // FORM VALIDASYONU
-        function validateAndProceed() {
-            const fnameInput = document.getElementById('fname');
-            const passInput = document.getElementById('pass');
-            
-            const fname = fnameInput ? fnameInput.value.trim() : "";
-            const pass = passInput ? passInput.value.trim() : "";
-            let valid = true;
-
-            if (!fname) {
-                document.getElementById('nameError').style.display = 'block';
-                valid = false;
-            }
-
-            if (!pass) {
-                document.getElementById('passError').style.display = 'block';
-                valid = false;
-            }
-
-            if (!valid) return;
-
-            alert("Başarılı! Form doğrulandı ve geçiş yapılıyor.");
-        }
-
-        // GOOGLE MODAL İŞLEMLERİ
-        function openGoogleModal() {
-            document.getElementById('googleModal').style.display = 'flex';
-        }
-
-        function closeGoogleModal() {
-            document.getElementById('googleModal').style.display = 'none';
-            document.getElementById('newAccountForm').style.display = 'none';
-        }
-
-        function selectGoogleAccount(name, surname, email) {
-            document.getElementById('fname').value = name;
-            document.getElementById('lname').value = surname;
-            document.getElementById('pass').value = "GoogleAuth_" + Math.floor(1000 + Math.random() * 9000) + "!";
-            
-            hideError('nameError');
-            hideError('passError');
-            closeGoogleModal();
-            
-            alert(name + " " + surname + " (" + email + ") hesabı ile başarıyla giriş yapıldı!");
-        }
-
-        function toggleNewAccountForm() {
-            const form = document.getElementById('newAccountForm');
-            form.style.display = form.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function addNewAccountAndLogin() {
-            const name = document.getElementById('newFirstName').value.trim();
-            const surname = document.getElementById('newLastName').value.trim();
-            const email = document.getEle
+                    <div class="lang-card" onclick="selectLang(this, 'cyrillic')" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; cursor: pointer;">
+              
