@@ -39,15 +39,13 @@
     </header>
 
     <main class="main-container">
-
-        <!-- 1. SAYFA: KÜÇÜLTÜLMÜŞ GİRİŞ EKRANI -->
 <!-- 1. SAYFA: KÜÇÜLTÜLMÜŞ GİRİŞ EKRANI -->
 <section id="page1" class="page-section active">
     <div class="login-card">
         <h1 class="welcome-title">Hoş Geldiniz</h1>
         <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
         
-        <form id="loginForm" onsubmit="return false;">
+        <form onsubmit="event.preventDefault(); validateAndProceed();">
             <div class="input-group">
                 <label>Adınız</label>
                 <input type="text" id="fname" placeholder="Örn: Melike" oninput="hideError('nameError')">
@@ -62,18 +60,18 @@
             <div class="input-group">
                 <div class="label-with-action">
                     <label>Şifre</label>
-                    <span class="suggest-btn" id="suggestBtn">Akıllı Şifre Öner</span>
+                    <span class="suggest-btn" onclick="suggestPassword()">Akıllı Şifre Öner</span>
                 </div>
                 <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
                 <span id="passError" class="error-msg">Lütfen şifre belirleyin</span>
             </div>
 
-            <button type="button" id="proceedBtn" class="btn-primary">Devam Et</button>
+            <button type="submit" class="btn-primary">Devam Et</button>
         </form>
 
         <div class="divider">veya</div>
 
-        <button type="button" id="googleBtn" class="btn-google">
+        <button type="button" class="btn-google" onclick="loginWithGoogle()">
             <span class="google-icon">G</span> Google ile Giriş Yap
         </button>
     </div>
@@ -200,6 +198,6 @@
 
     </main>
 
-    <script src="script.js?v=2026.10"></script>
+    <script src="script.js?v=2026.11"></script>
 </body>
 </html>
