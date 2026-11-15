@@ -134,6 +134,30 @@ const langData = {
 document.addEventListener("DOMContentLoaded", function() {
     renderLanguageGrid();
     showPage('page1');
+
+    // Akıllı şifre öner butonu olay dinleyicisi
+    const suggestBtn = document.getElementById('suggestBtn');
+    if (suggestBtn) {
+        suggestBtn.onclick = function() {
+            suggestPassword();
+        };
+    }
+
+    // Devam et butonu olay dinleyicisi
+    const proceedBtn = document.getElementById('proceedBtn');
+    if (proceedBtn) {
+        proceedBtn.onclick = function() {
+            validateAndProceed();
+        };
+    }
+
+    // Google ile giriş butonu olay dinleyicisi
+    const googleBtn = document.getElementById('googleBtn');
+    if (googleBtn) {
+        googleBtn.onclick = function() {
+            loginWithGoogle();
+        };
+    }
 });
 
 function renderLanguageGrid() {
@@ -291,8 +315,11 @@ function loginWithGoogle() {
     if (choice === "2") selectedAcc = accounts[1];
     if (choice === "3") selectedAcc = accounts[2];
 
-    document.getElementById('fname').value = selectedAcc.name;
-    document.getElementById('pass').value = "GoogleAuth_" + Math.floor(1000 + Math.random() * 9000) + "!";
+    const fnameInput = document.getElementById('fname');
+    const passInput = document.getElementById('pass');
+    
+    if (fnameInput) fnameInput.value = selectedAcc.name;
+    if (passInput) passInput.value = "GoogleAuth_" + Math.floor(1000 + Math.random() * 9000) + "!";
     
     hideError('nameError');
     hideError('passError');
@@ -345,9 +372,14 @@ function validateAndProceed() {
 }
 
 function logoutToPage1() {
-    document.getElementById('fname').value = '';
-    document.getElementById('lname').value = '';
-    document.getElementById('pass').value = '';
+    const fnameInput = document.getElementById('fname');
+    const lnameInput = document.getElementById('lname');
+    const passInput = document.getElementById('pass');
+    
+    if (fnameInput) fnameInput.value = '';
+    if (lnameInput) lnameInput.value = '';
+    if (passInput) passInput.value = '';
+    
     showPage('page1');
 }
 
@@ -372,48 +404,4 @@ function showPage(pageId) {
         if (logoutBtn) logoutBtn.style.display = 'inline-block';
         document.querySelectorAll('.step-tag').forEach(t => t.classList.remove('active'));
         if (pageId === 'page2') document.getElementById('step-lang').classList.add('active');
-        if (pageId === 'page3') document.getElementById('step-history').classList.add('active');
-        if (pageId === 'page4') document.getElementById('step-class').classList.add('active');
-    }
-    window.scrollTo(0, 0);
-}
-
-function selectLang(cardElement, langKey) {
-    document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
-    cardElement.classList.add('selected');
-    currentLang = langKey;
-    const info = document.getElementById('selectedLangInfo');
-    if (info) info.innerText = `Seçili Dil: ${langData[langKey].name}`;
-}
-
-function openHistoryPage() {
-    const data = langData[currentLang];
-    document.getElementById('historyCodeBadge').innerText = data.code;
-    document.getElementById('historyHeaderTitle').innerText = `${data.name} Tarihçesi`;
-    document.getElementById('historyTitle').innerText = data.title;
-    document.getElementById('historyText').innerText = data.history;
-    document.getElementById('historySubText').innerText = data.subText;
-    // Butonların tıklama olaylarını garantiye alalım
-document.addEventListener("DOMContentLoaded", function() {
-    renderLanguageGrid();
-    showPage('page1');
-
-    // Akıllı şifre öner butonu dinleyicisi
-    const suggestBtn = document.getElementById('suggestBtn');
-    if (suggestBtn) {
-        suggestBtn.addEventListener('click', suggestPassword);
-    }
-
-    // Devam et butonu dinleyicisi
-    const proceedBtn = document.getElementById('proceedBtn');
-    if (proceedBtn) {
-        proceedBtn.addEventListener('click', validateAndProceed);
-    }
-
-    // Google ile giriş butonu dinleyicisi
-    const googleBtn = document.getElementById('googleBtn');
-    if (googleBtn) {
-        googleBtn.addEventListener('click', loginWithGoogle);
-    }
-});
-    
+        if (pageId === 'page3') document.getElementById('step-history').classList.add
