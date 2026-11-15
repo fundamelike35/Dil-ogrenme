@@ -202,8 +202,8 @@ body.dark-workspace .bg-floating-words {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 70px);
-    padding: 15px;
+    min-height: 100vh;
+    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -216,8 +216,15 @@ body.dark-workspace .bg-floating-words {
     border-radius: 14px;
     padding: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    margin: auto; /* Dikey ve yatayda kusursuz ortalama sağlar */
+    margin: auto;
 }
+
+.label-with-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 
 .welcome-title {
