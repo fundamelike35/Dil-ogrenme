@@ -15,7 +15,7 @@
 
         body {
             /* Arka plan: Mor, lila, lacivert ve dozunda koyu pembe harmanı */
-            background: linear-gradient(135deg, #0f051d, #2e0854, #4a044e, #1e1b4b);
+            background: linear-gradient(135deg, #150529, #350c5c, #591646, #1e1b4b);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -27,18 +27,17 @@
             overflow-x: hidden;
         }
 
-        /* Arka plana pürüzlü doku (Noise / Grain efekti) */
+        /* Arka plana ve sayfanın tamamına gerçek pürüzlü doku hissi (Noise Overlay) */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 0);
-            background-size: 22px 22px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/></svg>');
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Arka plandaki stilize alfabeler */
+        /* Arka plandaki tüm diller ve alfabeler (Kıvrımlı font stiliyle) */
         .bg-floating-words {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -55,16 +54,16 @@
             font-weight: 600;
         }
 
-        .w1 { top: 10%; left: 7%; font-size: 2.8rem; transform: rotate(-8deg); }
-        .w2 { top: 20%; right: 8%; font-size: 2.5rem; transform: rotate(10deg); }
-        .w3 { bottom: 15%; left: 10%; font-size: 2.3rem; transform: rotate(-6deg); }
-        .w4 { bottom: 12%; right: 10%; font-size: 2.6rem; transform: rotate(8deg); }
-        .w5 { top: 46%; left: 28%; font-size: 2.1rem; transform: rotate(-14deg); }
-        .w6 { top: 52%; right: 25%; font-size: 2.2rem; transform: rotate(12deg); }
-        .w7 { top: 30%; left: 42%; font-size: 3.2rem; transform: rotate(4deg); }
-        .w8 { bottom: 32%; left: 15%; font-size: 2.7rem; transform: rotate(-10deg); }
+        .w1 { top: 12%; left: 8%; font-size: 2.6rem; transform: rotate(-6deg); }
+        .w2 { top: 22%; right: 10%; font-size: 2.4rem; transform: rotate(8deg); }
+        .w3 { bottom: 16%; left: 12%; font-size: 2.2rem; transform: rotate(-8deg); }
+        .w4 { bottom: 14%; right: 12%; font-size: 2.5rem; transform: rotate(6deg); }
+        .w5 { top: 48%; left: 25%; font-size: 2rem; transform: rotate(-12deg); }
+        .w6 { top: 54%; right: 22%; font-size: 2.1rem; transform: rotate(10deg); }
+        .w7 { top: 28%; left: 40%; font-size: 3rem; transform: rotate(3deg); }
+        .w8 { bottom: 35% ; left: 18%; font-size: 2.5rem; transform: rotate(-10deg); }
 
-        /* Navbar: Kompakt (iki tık küçük), yeşil, mavi ve mor renk geçişli blurlu yapı */
+        /* Navbar: İki tık küçük, yeşil, mavi, mor geçişli ve dokulu yapı */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -72,10 +71,18 @@
             align-items: center;
             justify-content: space-between;
             padding: 8px 20px;
-            background: linear-gradient(90deg, rgba(16, 185, 129, 0.22), rgba(59, 130, 246, 0.22), rgba(147, 51, 234, 0.22));
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.25), rgba(59, 130, 246, 0.25), rgba(147, 51, 234, 0.25));
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             z-index: 10;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.06"/></svg>');
+            pointer-events: none;
         }
 
         .logo-text {
@@ -85,9 +92,11 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Ana İçerik / Giriş Kartı */
+        /* Ana İçerik ve İdeal Boyuta Küçültülmüş Giriş Kartı */
         .main-container {
             position: relative;
             z-index: 2;
@@ -95,47 +104,47 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 35px;
+            margin-top: 30px;
         }
 
         .login-card {
             width: 100%;
-            max-width: 380px;
+            max-width: 340px; /* İdeal kompakt boyut */
             background: rgba(43, 0, 79, 0.85);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 18px;
-            padding: 30px;
+            border-radius: 16px;
+            padding: 24px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
         .welcome-title {
-            font-size: 1.9rem;
+            font-size: 1.7rem;
             font-weight: 700;
             margin-bottom: 4px;
             color: #f3c6ff;
         }
 
         .subtitle {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: #d8b4fe;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
 
         .input-group {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             text-align: left;
         }
 
         .input-group label {
             display: block;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
+            font-size: 0.82rem;
+            margin-bottom: 4px;
             color: #e9d5ff;
         }
 
         .optional {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #c084fc;
             font-weight: normal;
         }
@@ -150,7 +159,7 @@
             background: none;
             border: none;
             color: #c77dff;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
             cursor: pointer;
             text-decoration: underline;
@@ -167,18 +176,18 @@
 
         .input-group input {
             width: 100%;
-            padding: 10px 14px;
+            padding: 9px 12px;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 9px;
+            border-radius: 8px;
             color: #fff;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             outline: none;
             transition: border-color 0.3s;
         }
 
         .password-wrapper input {
-            padding-right: 42px;
+            padding-right: 38px;
         }
 
         .toggle-password {
@@ -193,12 +202,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4px;
+            padding: 2px;
         }
 
         .toggle-password svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
             transition: color 0.2s;
         }
@@ -214,19 +223,19 @@
         .error-msg {
             display: none;
             color: #ff8fa3;
-            font-size: 0.75rem;
-            margin-top: 4px;
+            font-size: 0.72rem;
+            margin-top: 3px;
         }
 
         .btn-primary {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             background: linear-gradient(135deg, #9333ea, #7e22ce);
             border: none;
-            border-radius: 9px;
+            border-radius: 8px;
             color: white;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             margin-top: 6px;
             transition: opacity 0.2s;
@@ -238,20 +247,20 @@
 
         .divider {
             text-align: center;
-            margin: 14px 0;
-            font-size: 0.8rem;
+            margin: 12px 0;
+            font-size: 0.78rem;
             color: #c084fc;
         }
 
         .btn-google {
             width: 100%;
-            padding: 11px;
+            padding: 10px;
             background: #ffffff;
             border: none;
-            border-radius: 9px;
+            border-radius: 8px;
             color: #333;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -274,7 +283,7 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(6px);
             align-items: center;
             justify-content: center;
@@ -295,7 +304,7 @@
         }
 
         .google-modal-header {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: #fff;
             margin-bottom: 12px;
@@ -416,7 +425,7 @@
 </head>
 <body>
 
-    <!-- Arka Plan Gerçek Alfabeler -->
+    <!-- Arka Plan Zengin Alfabeler -->
     <div class="bg-floating-words">
         <span class="word w1">한국어</span>
         <span class="word w2">Español</span>
@@ -428,7 +437,7 @@
         <span class="word w8">Français</span>
     </div>
 
-    <!-- Üst Navbar: Kompakt, Yeşil, Mavi, Mor karışımlı -->
+    <!-- Üst Navbar -->
     <header class="navbar">
         <div class="logo-text">
             <span>🌐</span> Global<strong>Script</strong>
@@ -536,47 +545,5 @@
             } else {
                 passField.type = 'password';
                 // Kapalı göz SVG yolu
-                eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2z"/>';
-            }
-        }
-
-        // AKILLI ŞİFRE ÖNERİCİ
-        function suggestPassword() {
-            const fnameInput = document.getElementById('fname');
-            let fname = fnameInput ? fnameInput.value.trim() : "Global";
-            if (!fname) fname = "Global";
-            
-            const clean = fname.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
-            const num = Math.floor(100 + Math.random() * 900);
-            
-            const passField = document.getElementById('pass');
-            const eyeIcon = document.getElementById('eyeIcon');
-            if (passField) {
-                passField.type = 'text';
-                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
-                passField.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
-            }
-            hideError('passError');
-        }
-
-        function validateAndProceed() {
-            const fnameInput = document.getElementById('fname');
-            const passInput = document.getElementById('pass');
-            
-            const fname = fnameInput ? fnameInput.value.trim() : "";
-            const pass = passInput ? passInput.value.trim() : "";
-            let valid = true;
-
-            if (!fname) {
-                document.getElementById('nameError').style.display = 'block';
-                valid = false;
-            }
-
-            if (!pass) {
-                document.getElementById('passError').style.display = 'block';
-                valid = false;
-            }
-
-            if (!valid) return;
-
-            alert("Başarılı! Form doğrulandı 
+                eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .
+                        
