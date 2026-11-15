@@ -1,416 +1,193 @@
-let currentLang = 'korean';
-let learnedItems = [];
-let progressPercent = 0;
-
-const langData = {
-    korean: {
-        code: "KR", speechCode: "ko-KR", name: "Korece (Hangeul)", popular: true,
-        desc: "1443'te tasarlanan bilimsel ve fonetik alfabe.",
-        title: "Korece (Hangeul) Tarihçesi",
-        history: "Hangeul, 1443 yılında Joseon Hanedanlığı'nın 4. kralı Kral Sejong tarafından halkın okuma-yazmayı kolayca öğrenebilmesi için bilimsel temellerle tasarlanmıştır.",
-        subText: "Dilin ses ve ağız yapısına birebir uyum sağlayan benzersiz bir kökene sahiptir.",
-        type: "Fonetik / Bilimsel Alfabe", direction: "Soldan Sağa (Yatay)",
-        letters: [
-            { char: "ㄱ", pronoun: "G / K", word: "가 (Ga)" },
-            { char: "ㄴ", pronoun: "N", word: "나 (Na)" },
-            { char: "ㄷ", pronoun: "D / T", word: "다 (Da)" },
-            { char: "ㅏ", pronoun: "A", word: "아 (A)" }
-        ]
-    },
-    gokturk: {
-        code: "OTK", speechCode: "tr-TR", name: "Göktürk Alfabesi", popular: true,
-        desc: "Türkçenin bilinen en eski yazılı alfabesi.",
-        title: "Göktürk Alfabesi Tarihçesi",
-        history: "Orhun Yazıtları'nda kullanılan Göktürk alfabesi, 38 harften oluşur ve sağdan sola doğru yazılır.",
-        subText: "Taş ve ahşap üzerine kazımaya uygun köşeli ve keskin hatlı runik karakterler barındırır.",
-        type: "Runik Kökenli Alfabe", direction: "Sağdan Sola (Dikey / Yatay)",
-        letters: [
-            { char: "𐰀", pronoun: "A / E", word: "𐰏 (Eg)" },
-            { char: "𐰁", pronoun: "B", word: "𐰋 (Eb)" },
-            { char: "𐰉", pronoun: "Ba", word: "𐰉𐰺 (Bar)" }
-        ]
-    },
-    japanese: {
-        code: "JP", speechCode: "ja-JP", name: "Japonca", popular: true,
-        desc: "Hiragana, Katakana ve Kanji yazı sistemi.",
-        title: "Japonca Yazı Sistemi Tarihçesi",
-        history: "Japonca; Hiragana, Katakana hece alfabeleri ve Çin kökenli Kanji karakterlerinin birleşiminden oluşur.",
-        subText: "Hece tabanlı iki ayrı alfabe ve binlerce logografik karakterin harmoni içinde kullanıldığı sistemdir.",
-        type: "Karma Hece ve Logografik", direction: "Soldan Sağa / Yukarıdan Aşağıya",
-        letters: [
-            { char: "あ", pronoun: "A", word: "あめ (Yağmur)" },
-            { char: "い", pronoun: "İ", word: "いぬ (Köpek)" },
-            { char: "う", pronoun: "U", word: "うみ (Deniz)" }
-        ]
-    },
-    chinese: {
-        code: "ZH", speechCode: "zh-CN", name: "Çince (Hanzi)", popular: false,
-        desc: "Logografik karakter tabanlı köklü yazı sistemi.",
-        title: "Çince (Hanzi) Tarihçesi",
-        history: "Dünyanın kesintisiz olarak en uzun süredir kullanılan logografik yazı sistemidir.",
-        subText: "Her karakter tek başına bir fikir veya kelime kökünü temsil eder.",
-        type: "Logografik Karakterler", direction: "Yukarıdan Aşağıya / Soldan Sağa",
-        letters: [
-            { char: "你", pronoun: "Nǐ", word: "Sen" },
-            { char: "好", pronoun: "Hǎo", word: "İyi" },
-            { char: "水", pronoun: "Shuǐ", word: "Su" }
-        ]
-    },
-    cyrillic: {
-        code: "RU", speechCode: "ru-RU", name: "Kiril Alfabesi (Rusça)", popular: false,
-        desc: "Doğu Avrupa ve Avrasya'da yaygın alfabe.",
-        title: "Kiril Alfabesi Tarihçesi",
-        history: "9. yüzyılda Slav halkları için Yunan alfabesi temel alınarak geliştirilmiştir.",
-        subText: "Doğu Avrupa ve Asya coğrafyasında pek çok dilin temelini oluşturan köklü sistemdir.",
-        type: "Yunan Esaslı Fonetik", direction: "Soldan Sağa (Yatay)",
-        letters: [
-            { char: "А", pronoun: "A", word: "Анна" },
-            { char: "Б", pronoun: "B", word: "Брат" },
-            { char: "Д", pronoun: "D", word: "Дом" }
-        ]
-    },
-    ancientGreek: {
-        code: "GRC", speechCode: "el-GR", name: "Antik Yunanca", popular: false,
-        desc: "Felsefe, bilim ve klasik dönem dili.",
-        title: "Antik Yunanca Tarihçesi",
-        history: "Fenike alfabesinden uyarlanarak sesli harflerin eklendiği ilk tam alfabetik sistemdir.",
-        subText: "Batı felsefesinin ve biliminin temel metinlerinin kaleme alındığı tarihi dildir.",
-        type: "Klasik Alfabe", direction: "Soldan Sağa (Yatay)",
-        letters: [
-            { char: "Α", pronoun: "Alfa", word: "Αρχή" },
-            { char: "Ω", pronoun: "Omega", word: "Ωκεανός" }
-        ]
-    },
-    modernGreek: {
-        code: "EL", speechCode: "el-GR", name: "Modern Yunanca", popular: false,
-        desc: "Günümüz Yunanistan'ının resmi dili.",
-        title: "Modern Yunanca Tarihçesi",
-        history: "Antik Yunancanın doğal evrimiyle günümüze ulaşan modern Avrupa dilidir.",
-        subText: "24 harften oluşan günümüz Yunanistan resmi dilidir.",
-        type: "Modern Fonetik", direction: "Soldan Sağa (Yatay)",
-        letters: [
-            { char: "Α", pronoun: "Alfa", word: "Αθήνα" },
-            { char: "Β", pronoun: "Vita", word: "Βιβλίο" }
-        ]
-    },
-    portuguese: {
-        code: "PT", speechCode: "pt-PT", name: "Portekizce", popular: false,
-        desc: "Geniş coğrafyaya yayılmış Latin kökenli dil.",
-        title: "Portekizce Alfabesi",
-        history: "Latin alfabesini temel alan ve özel aksan işaretleriyle zenginleştirilmiş dildir.",
-        subText: "Avrupa ve Güney Amerika'da milyonlarca kişi tarafından konuşulan küresel dildir.",
-        type: "Latin Esaslı", direction: "Soldan Sağa (Yatay)",
-        letters: [
-            { char: "Ç", pronoun: "Se-cedilha", word: "Coração" },
-            { char: "Ã", pronoun: "Genizsi A", word: "Maçã" }
-        ]
-    },
-    arabic: {
-        code: "AR", speechCode: "ar-SA", name: "Arapça", popular: true,
-        desc: "Sağdan sola yazılan köklü Sami alfabesi.",
-        title: "Arapça Alfabesi Tarihçesi",
-        history: "28 temel harften oluşan, sağdan sola doğru yazılan estetik yazı sistemidir.",
-        subText: "Harflerin kelime içindeki konumlarına göre şekil değiştirdiği zengin hat sanatı geleneğine sahiptir.",
-        type: "Sami Abced Sistemi", direction: "Sağdan Sola (Yatay)",
-        letters: [
-            { char: "ا", pronoun: "Elif", word: "أسد" },
-            { char: "ب", pronoun: "Be", word: "باب" }
-        ]
-    },
-    ukrainian: { code: "UK", speechCode: "uk-UA", name: "Ukraynaca", popular: false, desc: "Özel Kiril sürümü.", title: "Ukraynaca Tarihçesi", history: "Ukrayna'nın resmi dilidir.", subText: "İ, Ї ve Є karakterleriyle özelleşmiştir.", type: "Slav Kiril", direction: "Soldan Sağa", letters: [{ char: "Ї", pronoun: "Yi", word: "Україна" }] },
-    belarusian: { code: "BE", speechCode: "be-BY", name: "Beyaz Rusça", popular: false, desc: "Kısa Ў harfli Kiril.", title: "Beyaz Rusça Tarihçesi", history: "Belarus'un resmi dilidir.", subText: "Ў harfiyle fonetik ayrışma gösterir.", type: "Slav Kiril", direction: "Soldan Sağa", letters: [{ char: "Ў", pronoun: "Kısa U", word: "Возера" }] },
-    bulgarian: { code: "BG", speechCode: "bg-BG", name: "Bulgarca", popular: false, desc: "Tarihi Kiril dili.", title: "Bulgarca Tarihçesi", history: "Kiril alfabesinin doğduğu topraklarda gelişmiştir.", subText: "Zengin kökenli güney Slav dilidir.", type: "Slav Kiril", direction: "Soldan Sağa", letters: [{ char: "Ъ", pronoun: "Er Golyam", word: "България" }] },
-    serbian: { code: "SR", speechCode: "sr-RS", name: "Sırpça", popular: false, desc: "Fonetik Kiril.", title: "Sırpça Tarihçesi", history: "Vuk Karadžić reformuyla şekillenmiştir.", subText: "Yazıldığı gibi okunan fonetik yapı.", type: "Fonetik Kiril", direction: "Soldan Sağa", letters: [{ char: "Љ", pronoun: "Ly", word: "Љубав" }] },
-    macedonian: { code: "MK", speechCode: "mk-MK", name: "Makedonca", popular: false, desc: "Güney Slav Kiril.", title: "Makedonca Tarihçesi", history: "Makedonya'nın resmi dilidir.", subText: "31 harfli modern Slav alfabesidir.", type: "Slav Kiril", direction: "Soldan Sağa", letters: [{ char: "Ѕ", pronoun: "Dz", word: "Ѕвезда" }] },
-    kazakh: { code: "KK", speechCode: "kk-KZ", name: "Kazakça", popular: false, desc: "Türkçe sesli Kiril.", title: "Kazakça Tarihçesi", history: "Türk ses uyumuna göre uyarlanmıştır.", subText: "Özel sesli harf eklemeleri barındırır.", type: "Türk Kiril Adaptasyonu", direction: "Soldan Sağa", letters: [{ char: "Ә", pronoun: "Açık E", word: "Әке" }] },
-    tatar: { code: "TT", speechCode: "tt-RU", name: "Tatarca", popular: false, desc: "İdil-Ural Kiril dili.", title: "Tatarca Tarihçesi", history: "Tataristan coğrafyasında kullanılır.", subText: "İdil-Ural ses özelliklerini yansıtır.", type: "Türk Kiril", direction: "Soldan Sağa", letters: [{ char: "Җ", pronoun: "C", word: "Җыр" }] },
-    bashkir: { code: "BA", speechCode: "ba-RU", name: "Başkırca", popular: false, desc: "Peltik sesli Kiril.", title: "Başkırca Tarihçesi", history: "Başkurdistan'ın resmi dilidir.", subText: "Peltik ses karakterleri içerir.", type: "Türk Kiril", direction: "Soldan Sağa", letters: [{ char: "Ҙ", pronoun: "Peltik Z", word: "Ҡаҙ" }] },
-    mongolian: { code: "MN", speechCode: "mn-MN", name: "Moğolca", popular: false, desc: "Moğol Kiril dili.", title: "Moğolca Tarihçesi", history: "Moğolistan'da kullanılan sistemdir.", subText: "1940'tan beri Kiril tabanlıdır.", type: "Moğol Kiril", direction: "Soldan Sağa", letters: [{ char: "Ө", pronoun: "Ö", word: "Өглөө" }] },
-    abkhaz: { code: "AB", speechCode: "ru-RU", name: "Abhazca", popular: false, desc: "Kafkas Kiril dili.", title: "Abhazca Tarihçesi", history: "Kafkas dil ailesine aittir.", subText: "Zengin ünsüz yapısına sahiptir.", type: "Kafkas Kiril", direction: "Soldan Sağa", letters: [{ char: "Ҟ", pronoun: "Gırtlak K", word: "Ҟабз" }] },
-    abaza: { code: "ABQ", speechCode: "ru-RU", name: "Abazaca", popular: false, desc: "Kafkas ünsüz dili.", title: "Abazaca Tarihçesi", history: "Abazalar tarafından konuşulur.", subText: "Gırtlak vurguları yoğundur.", type: "Kafkas Kiril", direction: "Soldan Sağa", letters: [{ char: "Гъ", pronoun: "Ğ", word: "Гъаза" }] },
-    avar: { code: "AV", speechCode: "ru-RU", name: "Avarca", popular: false, desc: "Dağıstan dili.", title: "Avarca Tarihçesi", history: "Dağıstan'ın köklü dillerindendir.", subText: "Özel lateral sesler barındırır.", type: "Kafkas Kiril", direction: "Soldan Sağa", letters: [{ char: "Ӏ", pronoun: "Palochka", word: "ГӀаракь" }] }
+// Global Hata Koruma Mekanizması
+window.onerror = function (msg, url, lineNo) {
+    console.warn("Global Hata Yakalandı: ", msg, "Satır: ", lineNo);
+    return true;
 };
 
-document.addEventListener("DOMContentLoaded", function() {
-    renderLanguageGrid();
-    showPage('page1');
+document.addEventListener('DOMContentLoaded', function () {
+    try {
+        const loginForm = document.getElementById('loginForm');
+        const fnameInput = document.getElementById('fname');
+        const lnameInput = document.getElementById('lname');
+        const passInput = document.getElementById('pass');
+        const nameError = document.getElementById('nameError');
+        const passError = document.getElementById('passError');
+        const suggestPassBtn = document.getElementById('suggestPassBtn');
+        const togglePassBtn = document.getElementById('togglePassBtn');
+        const eyeIcon = document.getElementById('eyeIcon');
+        
+        const googleLoginBtn = document.getElementById('googleLoginBtn');
+        const googleModal = document.getElementById('googleModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const accountList = document.getElementById('accountList');
+        const toggleNewAccBtn = document.getElementById('toggleNewAccBtn');
+        const newAccountForm = document.getElementById('newAccountForm');
+        const addNewAccSubmitBtn = document.getElementById('addNewAccSubmitBtn');
+
+        const EYE_OPEN_PATH = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+        const EYE_CLOSED_PATH = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2z"/>';
+
+        // 1. Dinamik Validasyon Temizleme
+        if (fnameInput && nameError) {
+            fnameInput.addEventListener('input', function () {
+                nameError.style.display = 'none';
+            });
+        }
+
+        if (passInput && passError) {
+            passInput.addEventListener('input', function () {
+                passError.style.display = 'none';
+            });
+        }
+
+        // 2. Göz Simgesi (Şifre Göster / Gizle)
+        if (togglePassBtn && passInput && eyeIcon) {
+            togglePassBtn.addEventListener('click', function () {
+                if (passInput.type === 'password') {
+                    passInput.type = 'text';
+                    eyeIcon.innerHTML = EYE_OPEN_PATH;
+                } else {
+                    passInput.type = 'password';
+                    eyeIcon.innerHTML = EYE_CLOSED_PATH;
+                }
+            });
+        }
+
+        // 3. Akıllı Şifre Önerici
+        if (suggestPassBtn && fnameInput && passInput && eyeIcon) {
+            suggestPassBtn.addEventListener('click', function () {
+                let fname = fnameInput.value ? fnameInput.value.trim() : "Global";
+                if (!fname) fname = "Global";
+                
+                const clean = fname
+                    .replace(/ı/g, 'i').replace(/İ/g, 'I')
+                    .replace(/ö/g, 'o').replace(/Ö/g, 'O')
+                    .replace(/ü/g, 'u').replace(/Ü/g, 'U')
+                    .replace(/ş/g, 's').replace(/Ş/g, 'S')
+                    .replace(/ç/g, 'c').replace(/Ç/g, 'C')
+                    .replace(/ğ/g, 'g').replace(/Ğ/g, 'G');
+                
+                const num = Math.floor(100 + Math.random() * 900);
+                passInput.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
+                passInput.type = 'text';
+                eyeIcon.innerHTML = EYE_OPEN_PATH;
+                if (passError) passError.style.display = 'none';
+            });
+        }
+
+        // 4. Form Validasyonu (Uyarılar)
+        if (loginForm && fnameInput && passInput) {
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                let isValid = true;
+
+                if (!fnameInput.value || !fnameInput.value.trim()) {
+                    if (nameError) nameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    if (nameError) nameError.style.display = 'none';
+                }
+
+                if (!passInput.value || !passInput.value.trim()) {
+                    if (passError) passError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    if (passError) passError.style.display = 'none';
+                }
+
+                if (isValid) {
+                    alert("Başarılı! Hoş geldin " + fnameInput.value.trim() + ", giriş yapılıyor...");
+                }
+            });
+        }
+
+        // 5. Google Modal Yönetimi ve Hesap Seçimi
+        function selectAccount(name, surname, email) {
+            if (fnameInput) fnameInput.value = name || "";
+            if (lnameInput) lnameInput.value = surname || "";
+            if (passInput) {
+                passInput.value = "GoogleAuth_" + Math.floor(1000 + Math.random() * 9000) + "!";
+                passInput.type = 'text';
+            }
+            if (eyeIcon) eyeIcon.innerHTML = EYE_OPEN_PATH;
+            
+            if (nameError) nameError.style.display = 'none';
+            if (passError) passError.style.display = 'none';
+            if (googleModal) googleModal.style.display = 'none';
+            if (newAccountForm) newAccountForm.style.display = 'none';
+            
+            alert(name + " " + surname + " (" + email + ") hesabı ile başarıyla giriş yapıldı!");
+        }
+
+        if (googleLoginBtn && googleModal) {
+            googleLoginBtn.addEventListener('click', function () {
+                googleModal.style.display = 'flex';
+            });
+        }
+
+        if (closeModalBtn && googleModal && newAccountForm) {
+            closeModalBtn.addEventListener('click', function () {
+                googleModal.style.display = 'none';
+                newAccountForm.style.display = 'none';
+            });
+        }
+
+        if (accountList) {
+            accountList.addEventListener('click', function (e) {
+                const item = e.target.closest('.account-item');
+                if (item) {
+                    const name = item.getAttribute('data-name');
+                    const surname = item.getAttribute('data-surname');
+                    const email = item.getAttribute('data-email');
+                    selectAccount(name, surname, email);
+                }
+            });
+        }
+
+        if (toggleNewAccBtn && newAccountForm) {
+            toggleNewAccBtn.addEventListener('click', function () {
+                newAccountForm.style.display = newAccountForm.style.display === 'block' ? 'none' : 'block';
+            });
+        }
+
+        if (addNewAccSubmitBtn && accountList) {
+            addNewAccSubmitBtn.addEventListener('click', function () {
+                const newNameEl = document.getElementById('newFirstName');
+                const newSurnameEl = document.getElementById('newLastName');
+                const newEmailEl = document.getElementById('newEmail');
+
+                const newName = newNameEl ? newNameEl.value.trim() : "";
+                const newSurname = newSurnameEl ? newSurnameEl.value.trim() : "";
+                const newEmail = newEmailEl ? newEmailEl.value.trim() : "";
+
+                if (!newName || !newEmail) {
+                    alert("Lütfen adınızı ve e-posta adresinizi girin.");
+                    return;
+                }
+
+                const newDiv = document.createElement('div');
+                newDiv.className = 'account-item';
+                newDiv.setAttribute('data-name', newName);
+                newDiv.setAttribute('data-surname', newSurname);
+                newDiv.setAttribute('data-email', newEmail);
+                newDiv.innerHTML = `
+                    <div class="account-avatar">${newName.charAt(0).toUpperCase()}</div>
+                    <div class="account-info">
+                        <div class="name">${newName} ${newSurname}</div>
+                        <div class="email">${newEmail}</div>
+                    </div>
+                `;
+                accountList.appendChild(newDiv);
+
+                if (newNameEl) newNameEl.value = '';
+                if (newSurnameEl) newSurnameEl.value = '';
+                if (newEmailEl) newEmailEl.value = '';
+
+                selectAccount(newName, newSurname, newEmail);
+            });
+        }
+
+    } catch (initErr) {
+        console.error("Uygulama başlatılırken kritik hata yakalandı:", initErr);
+    }
 });
-
-function renderLanguageGrid() {
-    const grid = document.getElementById('langGrid');
-    if (!grid) return;
-    grid.innerHTML = '';
-
-    const sortedKeys = Object.keys(langData).sort((a, b) => 
-        langData[a].name.localeCompare(langData[b].name, 'tr')
-    );
-
-    sortedKeys.forEach(key => {
-        const lang = langData[key];
-        const card = document.createElement('div');
-        card.className = 'lang-card' + (key === currentLang ? ' selected' : '');
-        card.setAttribute('data-key', key);
-        card.onclick = function() { selectLang(card, key); };
-        card.innerHTML = `
-            <span class="mono-badge">${lang.code}</span>
-            <h3>${lang.name}</h3>
-            <p>${lang.desc}</p>
-        `;
-        grid.appendChild(card);
-    });
-}
-
-function handleSearchFocus() {
-    const inputVal = document.getElementById('searchInput').value.trim();
-    if (inputVal === "") {
-        showPopularDropdown();
-    } else {
-        handleSearchInput();
-    }
-}
-
-function handleSearchInput() {
-    const rawVal = document.getElementById('searchInput').value.trim();
-    const inputVal = rawVal.toLocaleLowerCase('tr');
-    const dropdown = document.getElementById('searchDropdown');
-    const cards = document.querySelectorAll('.lang-card');
-
-    if (inputVal === "") {
-        showPopularDropdown();
-        cards.forEach(card => card.style.display = '');
-        return;
-    }
-
-    const matchedKeys = Object.keys(langData).filter(key => {
-        const item = langData[key];
-        const nameLower = item.name.toLocaleLowerCase('tr');
-        const codeLower = item.code.toLocaleLowerCase('tr');
-        const descLower = item.desc.toLocaleLowerCase('tr');
-        return nameLower.includes(inputVal) || codeLower.includes(inputVal) || descLower.includes(inputVal);
-    }).sort((a, b) => {
-        const nameA = langData[a].name.toLocaleLowerCase('tr');
-        const nameB = langData[b].name.toLocaleLowerCase('tr');
-        const aStarts = nameA.startsWith(inputVal) ? 0 : 1;
-        const bStarts = nameB.startsWith(inputVal) ? 0 : 1;
-        if (aStarts !== bStarts) return aStarts - bStarts;
-        return langData[a].name.localeCompare(langData[b].name, 'tr');
-    });
-
-    if (matchedKeys.length === 0) {
-        dropdown.innerHTML = `<div class="dropdown-item" style="color: #a1a1aa;">"${rawVal}" için sonuç bulunamadı</div>`;
-        dropdown.style.display = 'block';
-    } else {
-        let html = `<div class="dropdown-header">Eşleşen Diller (${matchedKeys.length})</div>`;
-        matchedKeys.forEach(key => {
-            html += `
-                <div class="dropdown-item" onclick="selectLangFromDropdown('${key}')">
-                    <span>${langData[key].name}</span>
-                    <span class="dropdown-code">${langData[key].code}</span>
-                </div>`;
-        });
-        dropdown.innerHTML = html;
-        dropdown.style.display = 'block';
-    }
-
-    cards.forEach(card => {
-        const cardKey = card.getAttribute('data-key');
-        card.style.display = matchedKeys.includes(cardKey) ? '' : 'none';
-    });
-}
-
-function showPopularDropdown() {
-    const dropdown = document.getElementById('searchDropdown');
-    let html = `<div class="dropdown-header">Popüler Aramalar</div>`;
-
-    Object.keys(langData)
-        .filter(k => langData[k].popular)
-        .sort((a, b) => langData[a].name.localeCompare(langData[b].name, 'tr'))
-        .forEach(key => {
-            html += `
-                <div class="dropdown-item" onclick="selectLangFromDropdown('${key}')">
-                    <span>${langData[key].name}</span>
-                    <span class="dropdown-code">${langData[key].code}</span>
-                </div>`;
-        });
-
-    dropdown.innerHTML = html;
-    dropdown.style.display = 'block';
-}
-
-function selectLangFromDropdown(langKey) {
-    document.getElementById('searchInput').value = langData[langKey].name;
-    document.getElementById('searchDropdown').style.display = 'none';
-
-    const targetCard = document.querySelector(`.lang-card[data-key="${langKey}"]`);
-    if (targetCard) {
-        document.querySelectorAll('.lang-card').forEach(c => c.style.display = '');
-        selectLang(targetCard, langKey);
-    }
-}
-
-document.addEventListener('click', function(e) {
-    const container = document.querySelector('.search-container');
-    if (container && !container.contains(e.target)) {
-        const dropdown = document.getElementById('searchDropdown');
-        if (dropdown) dropdown.style.display = 'none';
-    }
-});
-
- = 'none';
-}
-
-function hideError(id) {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-}
-
-// AKILLI ŞİFRE ÖNERİCİ
-function suggestPassword() {
-    const fnameInput = document.getElementById('fname');
-    let fname = fnameInput ? fnameInput.value.trim() : "Global";
-    if (!fname) fname = "Global";
-    
-    const clean = fname.replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g');
-    const num = Math.floor(100 + Math.random() * 900);
-    
-    const passField = document.getElementById('pass');
-    if (passField) {
-        passField.value = `${clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase()}_Script${num}!`;
-    }
-    hideError('passError');
-}
-
-// GOOGLE İLE GİRİŞ YAP SİMÜLASYONU
-function loginWithGoogle() {
-    const accounts = [
-        { name: "Melike Yılmaz", email: "melike.yilmaz@gmail.com" },
-        { name: "Global Kullanıcı", email: "global.script35@gmail.com" },
-        { name: "Öğrenci Hesabı", email: "ogrenci.global@gmail.com" }
-    ];
-
-    let promptText = "Google Hesabı Seçin:\n\n";
-    accounts.forEach((acc, index) => {
-        promptText += `${index + 1}. ${acc.name} (${acc.email})\n`;
-    });
-
-    let choice = prompt(promptText + "\nLütfen 1, 2 veya 3 seçin:");
-    if (choice === null) return;
-
-    let selectedAcc = accounts[0];
-    if (choice === "2") selectedAcc = accounts[1];
-    if (choice === "3") selectedAcc = accounts[2];
-
-    const fnameInput = document.getElementById('fname');
-    const lnameInput = document.getElementById('lname');
-    const passInput = document.getElementById('pass');
-    
-    const nameParts = selectedAcc.name.split(' ');
-    if (fnameInput) fnameInput.value = nameParts[0] || selectedAcc.name;
-    if (lnameInput) lnameInput.value = nameParts.slice(1).join(' ') || '';
-    if (passInput) passInput.value = "GoogleAuth_" + Math.floor(1000 + Math.random() * 9000) + "!";
-    
-    hideError('nameError');
-    hideError('passError');
-    validateAndProceed();
-}
-
-// FORM KONTROLÜ VE UYARILAR
-function validateAndProceed() {
-    const fnameInput = document.getElementById('fname');
-    const passInput = document.getElementById('pass');
-    
-    const fname = fnameInput ? fnameInput.value.trim() : "";
-    const pass = passInput ? passInput.value.trim() : "";
-    let valid = true;
-
-    if (!fname) { 
-        const err = document.getElementById('nameError');
-        if (err) err.style.display = 'block'; 
-        valid = false; 
-    } else {
-        hideError('nameError');
-    }
-
-    if (!pass) { 
-        const err = document.getElementById('passError');
-        if (err) err.style.display = 'block'; 
-        valid = false; 
-    } else {
-        hideError('passError');
-    }
-
-    if (!valid) return;
-
-    // Her şey doluysa 2. sayfaya geçiş
-    if (typeof showPage === 'function') {
-        showPage('page2');
-    } else {
-        alert("Giriş başarılı!");
-    }
-}
-
-    if (!valid) return;
-
-    const badge = document.getElementById('navUserBadge');
-    const logoutBtn = document.getElementById('navLogoutBtn');
-    if (badge) {
-        badge.innerText = fname;
-        badge.style.display = 'inline-block';
-    }
-    if (logoutBtn) {
-        logoutBtn.style.display = 'inline-block';
-    }
-
-    showPage('page2');
-}
-
-function logoutToPage1() {
-    const fnameInput = document.getElementById('fname');
-    const lnameInput = document.getElementById('lname');
-    const passInput = document.getElementById('pass');
-    
-    if (fnameInput) fnameInput.value = '';
-    if (lnameInput) lnameInput.value = '';
-    if (passInput) passInput.value = '';
-    
-    showPage('page1');
-}
-
-function showPage(pageId) {
-    document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-    const target = document.getElementById(pageId);
-    if (target) target.classList.add('active');
-
-    const navSteps = document.getElementById('navSteps');
-    const userBadge = document.getElementById('navUserBadge');
-    const logoutBtn = document.getElementById('navLogoutBtn');
-    
-    if (pageId === 'page1') {
-        document.body.classList.remove('dark-workspace');
-        if (navSteps) navSteps.style.display = 'none';
-        if (userBadge) userBadge.style.display = 'none';
-        if (logoutBtn) logoutBtn.style.display = 'none';
-    } else {
-        document.body.classList.add('dark-workspace');
-        if (navSteps) navSteps.style.display = 'flex';
-        if (userBadge) userBadge.style.display = 'inline-block';
-        if (logoutBtn) logoutBtn.style.display = 'inline-block';
-        document.querySelectorAll('.step-tag').forEach(t => t.classList.remove('active'));
-        if (pageId === 'page2') document.getElementById('step-lang').classList.add('active');
-        if (pageId === 'page3') document.getElementById('step-history').classList.add('active');
-        if (pageId === 'page4') document.getElementById('step-class').classList.add('active');
-    }
-    window.scrollTo(0, 0);
-}
-
-function selectLang(cardElement, langKey) {
-    document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
-    cardElement.classList.add('selected');
-    currentLang = langKey;
-    const info = document.getElementById('selectedLangInfo');
-    if (info) info.innerText = `Seçili Dil: ${langData[langKey].name}`;
-}
-
-function openHistoryPage() {
-    const data = langData[currentLang];
-    document.getElementById('historyCodeBadge').inner
