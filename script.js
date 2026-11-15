@@ -303,6 +303,7 @@ function loginWithGoogle() {
     validateAndProceed();
 }
 
+
 function hideError(id) {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
@@ -332,7 +333,6 @@ function validateAndProceed() {
     } else {
         hideError('passError');
     }
-
     if (!valid) return;
 
     const badge = document.getElementById('navUserBadge');
