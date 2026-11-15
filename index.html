@@ -40,13 +40,11 @@
 
     <main class="main-container">
 <!-- 1. SAYFA: KÜÇÜLTÜLMÜŞ GİRİŞ EKRANI -->
-<section id="page1" class="page-section active">
-    <div class="login-card">
+<div class="login-card">
     <h1 class="welcome-title">Hoş Geldiniz</h1>
     <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
     
-    <!-- onsubmit içine event.preventDefault() ekleyerek sayfanın yenilenmesini engelliyoruz -->
-    <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
+    <form onsubmit="event.preventDefault(); validateAndProceed();">
         <div class="input-group">
             <label>Adınız</label>
             <input type="text" id="fname" placeholder="Örn: Melike" oninput="hideError('nameError')">
@@ -61,16 +59,14 @@
 
         <button type="submit" class="btn-primary">Devam Et</button>
     </form>
-    </div>
-    
 
-        <div class="divider">veya</div>
+    <div class="divider">veya</div>
 
-        <button type="button" class="btn-google" onclick="loginWithGoogle()">
-            <span class="google-icon">G</span> Google ile Giriş Yap
-        </button>
-    </div>
-</section>
+    <button type="button" class="btn-google" onclick="loginWithGoogle()">
+        <span class="google-icon">G</span> Google ile Giriş Yap
+    </button>
+</div>
+        
         
 
         <!-- 2. SAYFA: DİL SEÇİMİ (ÇIKIŞ BUTONU PANEL BAŞLIĞINA TAŞINDI) -->
@@ -193,6 +189,6 @@
 
     </main>
 
-    <script src="script.js?v=2026.99"></script>
+    <script src="script.js?v=2026.x"></script>
 </body>
 </html>
