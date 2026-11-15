@@ -3,67 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Script - Dünya Alfabeleri</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2026.5">
+    <title>Global Script - Giriş</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a0033, #3b0066);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 340px;
+            background: rgba(43, 0, 79, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #f3c6ff;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #d8b4fe;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: #e9d5ff;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #c084fc;
+        }
+
+        .error-msg {
+            display: none;
+            color: #ff8fa3;
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 11px;
+            background: linear-gradient(135deg, #9333ea, #7e22ce);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 0.8rem;
+            color: #c084fc;
+            position: relative;
+        }
+
+        .btn-google {
+            width: 100%;
+            padding: 10px;
+            background: #ffffff;
+            border: none;
+            border-radius: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-google:hover {
+            background: #f1f1f1;
+        }
+
+        .google-icon {
+            color: #ea4335;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="bg-floating-words">
-        <span class="word w1">Hangeul</span>
-        <span class="word w2">Español</span>
-        <span class="word w3">Russian</span>
-        <span class="word w4">Göktürk</span>
-        <span class="word w5">Hiragana</span>
-        <span class="word w6">Alphabet</span>
-        <span class="word w7">日本語</span>
-        <span class="word w8">한국어</span>
-    </div>
-
-    <header class="navbar">
-        <div class="logo" onclick="showPage('page1')">
-            <span class="logo-badge">GS</span>
-            <span class="logo-text">Global<strong>Script</strong></span>
-        </div>
-        <div class="nav-steps" id="navSteps">
-            <span class="step-tag" id="step-lang">1. Dil Seçimi</span>
-            <span class="step-tag" id="step-history">2. Tarihçe</span>
-            <span class="step-tag" id="step-class">3. Derslik</span>
-        </div>
-        <div class="nav-right">
-            <span class="user-badge" id="navUserBadge" style="display: none;"></span>
-            <button class="nav-logout-btn" id="navLogoutBtn" style="display: none;" onclick="logoutToPage1()">Çıkış</button>
-        </div>
-    </header>
-
-    <main class="main-container">
-
-        <section id="page1" class="page-section active">
     <div class="login-card">
         <h1 class="welcome-title">Hoş Geldiniz</h1>
         <p class="subtitle">Dünya alfabelerini keşfetmek için giriş yapın.</p>
         
-        <form onsubmit="event.preventDefault(); validateAndProceed();">
+        <form id="loginForm" onsubmit="event.preventDefault(); validateAndProceed();">
             <div class="input-group">
                 <label>Adınız</label>
                 <input type="text" id="fname" placeholder="Örn: Melike" oninput="hideError('nameError')">
-                <span id="nameError" class="error-msg" style="display: none; color: #ff8fa3; font-size: 0.74rem; margin-top: 2px;">Lütfen adınızı girin</span>
+                <span id="nameError" class="error-msg">Lütfen adınızı girin</span>
             </div>
             
             <div class="input-group">
-                <label>Soyadınız <span class="optional">(isteğe bağlı)</span></label>
-                <input type="text" id="lname" placeholder="Örn: Yılmaz">
-            </div>
-            
-            <div class="input-group">
-                <div class="label-with-action">
-                    <label>Şifre</label>
-                    <span class="suggest-btn" style="cursor: pointer; color: #c77dff; font-weight: 600;" onclick="suggestPassword()">Akıllı Şifre Öner</span>
-                </div>
-                <input type="text" id="pass" placeholder="Şifrenizi girin veya önerin" oninput="hideError('passError')">
-                <span id="passError" class="error-msg" style="display: none; color: #ff8fa3; font-size: 0.74rem; margin-top: 2px;">Lütfen şifre belirleyin</span>
+                <label>Şifre</label>
+                <input type="password" id="pass" placeholder="Şifrenizi girin" oninput="hideError('passError')">
+                <span id="passError" class="error-msg">Lütfen şifre belirleyin</span>
             </div>
 
             <button type="submit" class="btn-primary">Devam Et</button>
@@ -75,130 +162,61 @@
             <span class="google-icon">G</span> Google ile Giriş Yap
         </button>
     </div>
-        </section>
-        
-        
 
-        <!-- 2. SAYFA: DİL SEÇİMİ (ÇIKIŞ BUTONU PANEL BAŞLIĞINA TAŞINDI) -->
-        <section id="page2" class="page-section">
-            <div class="fullscreen-panel">
-                <div class="panel-header">
-                    <div>
-                        <h2>Hangi Dili Öğrenmek İstiyorsun?</h2>
-                        <p>Arama çubuğuna yazarak veya popüler dillerden seçim yapabilirsin.</p>
-                    </div>
-                    <button class="btn-secondary" onclick="logoutToPage1()">Çıkış Yap</button>
-                </div>
+    <script>
+        function hideError(id) {
+            const err = document.getElementById(id);
+            if (err) err.style.display = 'none';
+        }
 
-                <div class="search-container">
-                    <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Dil, alfabe veya özellik ara... (Örn: Hangeul)" onfocus="handleSearchFocus()" oninput="handleSearchInput()" autocomplete="off">
-                    </div>
-                    <div class="search-dropdown" id="searchDropdown"></div>
-                </div>
+        function validateAndProceed() {
+            const fnameInput = document.getElementById('fname');
+            const passInput = document.getElementById('pass');
+            
+            const fname = fnameInput ? fnameInput.value.trim() : "";
+            const pass = passInput ? passInput.value.trim() : "";
+            let valid = true;
 
-                <div class="lang-grid" id="langGrid"></div>
+            if (!fname) {
+                document.getElementById('nameError').style.display = 'block';
+                valid = false;
+            }
 
-                <div class="panel-footer">
-                    <span class="selected-info" id="selectedLangInfo">Seçili Dil: Korece (Hangeul)</span>
-                    <button class="btn-primary auto-width" onclick="openHistoryPage()">Tarihçeyi ve Dersliği Aç</button>
-                </div>
-            </div>
-        </section>
+            if (!pass) {
+                document.getElementById('passError').style.display = 'block';
+                valid = false;
+            }
 
-        <!-- 3. SAYFA: ZENGİNLEŞTİRİLMİŞ TARİHÇE VE KÖKEN ALANI -->
-        <section id="page3" class="page-section">
-            <div class="fullscreen-panel">
-                <div class="panel-header">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span class="mono-badge" id="historyCodeBadge">KR</span>
-                        <h2 id="historyHeaderTitle" style="font-size: 1.2rem; margin:0;">Dil Tarihçesi</h2>
-                    </div>
-                    <button class="btn-secondary" onclick="showPage('page2')">Dil Seçimine Dön</button>
-                </div>
+            if (!valid) return;
 
-                <div class="history-layout">
-                    <div class="history-main-box">
-                        <h2 id="historyTitle">Korece (Hangeul) Tarihçesi</h2>
-                        <p id="historyText">Hangeul, 1443 yılında Joseon Hanedanlığı'nın 4. kralı Kral Sejong tarafından tasarlanmıştır.</p>
-                        <div style="margin-top: 10px;">
-                            <h4 style="color: #c084fc; font-size: 0.85rem; margin-bottom: 6px;">Dilin Köken Yapısı</h4>
-                            <p id="historySubText" style="font-size: 0.85rem; color: #a1a1aa;">Bu yazı sistemi, fonetik özellikleri ve insan ses organlarının şekli baz alınarak oluşturulmuş dünyadaki nadir alfabelerden biridir.</p>
-                        </div>
-                    </div>
+            alert("Başarılı! Validasyon geçti.");
+        }
 
-                    <div class="history-sidebar">
-                        <div class="history-meta-card">
-                            <h4>Alfabe Tipi</h4>
-                            <p id="historyTypeInfo">Fonetik / Bilimsel Alfabe</p>
-                        </div>
-                        <div class="history-meta-card">
-                            <h4>Yazı Yönü</h4>
-                            <p id="historyDirectionInfo">Soldan Sağa (Yatay)</p>
-                        </div>
-                        <div class="module-preview-box">
-                            <h3>Derslik Modülleri Hazır</h3>
-                            <p>Sesli harf stüdyosu ve pekiştirme testleri seni bekliyor.</p>
-                            <button class="btn-primary auto-width" onclick="openClassroom()">Dersliğe Giriş Yap</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        function loginWithGoogle() {
+            const accounts = [
+                { name: "Melike Yılmaz", email: "melike.yilmaz@gmail.com" },
+                { name: "Global Kullanıcı", email: "global.script@gmail.com" }
+            ];
 
-        <!-- 4. SAYFA: DERSLİK VE İLERLEME -->
-        <section id="page4" class="page-section">
-            <div class="fullscreen-panel">
-                <div class="panel-header">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span class="mono-badge" id="classCodeBadge">KR</span>
-                        <h2 id="classTitle" style="font-size: 1.3rem; margin:0;">Derslik</h2>
-                    </div>
-                    <button class="btn-secondary" onclick="showPage('page3')">Tarihçeye Dön</button>
-                </div>
+            let promptText = "Google Hesabı Seçin:\n\n";
+            accounts.forEach((acc, index) => {
+                promptText += `${index + 1}. ${acc.name} (${acc.email})\n`;
+            });
 
-                <div class="stats-bar">
-                    <div class="progress-ring-card">
-                        <div class="circular-progress" id="circularProgress">
-                            <span class="progress-value" id="progressValue">0%</span>
-                        </div>
-                        <div class="progress-info">
-                            <h4>Öğrenme Yüzdesi</h4>
-                            <p>Alıştırmaları tamamladıkça halka dolar.</p>
-                        </div>
-                    </div>
+            let choice = prompt(promptText + "\nLütfen 1 veya 2 seçin:");
+            if (choice === null) return;
 
-                    <div class="word-counter-card">
-                        <div class="counter-number" id="learnedCount">0</div>
-                        <div class="counter-details">
-                            <h4>Öğrenilen Karakter / Kelime</h4>
-                            <div class="learned-tags" id="learnedTagsList">Henüz kelime öğrenilmedi.</div>
-                        </div>
-                    </div>
-                </div>
+            let selected = accounts[0];
+            if (choice === "2") selected = accounts[1];
 
-                <div class="classroom-grid">
-                    <div class="class-box">
-                        <h3>1. Sesli Harf ve Karakter Stüdyosu</h3>
-                        <p class="box-desc">Harflere tıklayarak okunuşunu sesli dinle ve öğrendiklerine ekle.</p>
-                        <div class="letters-grid" id="lettersContainer"></div>
-                    </div>
-
-                    <div class="class-box">
-                        <h3>2. Pekiştirme Alıştırması</h3>
-                        <p class="box-desc">Karakterin doğru okunuşunu seçerek ilerleme yüzdesini artır.</p>
-                        <div class="quiz-area" id="quizArea">
-                            <div class="quiz-char" id="quizChar">ㄱ</div>
-                            <div class="quiz-options" id="quizOptions"></div>
-                            <div class="quiz-feedback" id="quizFeedback"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-    </main>
-
-    <script src="script.js?v=2026.x"></script>
+            document.getElementById('fname').value = selected.name.split(' ')[0];
+            document.getElementById('pass').value = "GoogleAuth123!";
+            
+            hideError('nameError');
+            hideError('passError');
+            
+            alert(selected.name + " ile giriş yapıldı!");
+        }
+    </script>
 </body>
 </html>
